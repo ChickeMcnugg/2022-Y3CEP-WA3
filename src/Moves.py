@@ -1,7 +1,6 @@
 class Moves:
-    def __init__(self, moveName, moveAttribute):
+    def __init__(self, moveName):
         self.moveName = moveName
-        self.moveAttribute = moveAttribute
     
-    def setup():
-        
+    def attack(otherPokemon):
+        otherPokemon.setHealth(otherPokemon.getPokemonHealth)
