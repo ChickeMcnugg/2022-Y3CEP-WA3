@@ -1,25 +1,7 @@
-class Map():
-    def __init__(self, mapName, mapLocationsList={}):
-        self.mapName = mapName
-        self.mapLocationsList = mapLocationsList
-    
-    def __repr__(self):
-        return "This is the map of " + self.mapName + "."
-    
-    def getMapName(self):
-        return self.mapName
-    
-    def getMapLocationsList(self):
-        return self.mapLocationsList
-
 class Location():
-    def __init__(self, locationName, locationNeighbourNorth, locationNeighbourSouth, locationNeighbourEast, locationNeighbourWest):
+    def __init__(self, locationName):
         self.locationName = locationName
-        self.locationNeighboursList = { "north" : locationNeighbourNorth
-                                        "south" : locationNeighbourSouth
-                                        "east" : locationNeighbourEast
-                                        "west" : locationNeighbourWest
-                                        }
+        self.locationNeighboursList = {}
     
     def __repr__(self):
         return "This is the " + self.locationName + "."
@@ -30,8 +12,20 @@ class Location():
     def getLocationNeighboursList(self):
         return self.locationNeighboursList
     
-    def setLocationNeighboursList(self, newLocationNorth, newLocationSouth, newLocationEast, newLocationWest):
-        self.locationNeighboursList[north] = newLocationsNorth
-        self.locationNeighboursList[south] = newLocationsSouth
-        self.locationNeighboursList[east] = newLocationsEast
-        self.locationNeighboursList[west] = newLocationsWest
+    def setOneWayLocationNeighbours(self, newLocation, direction):
+        if direction in self.locationNeighboursList:
+            print("There is already a location there.")
+        else:
+            self.locationNeighboursList[direction] = newLocation
+    
+    def setTwoWayLocationNeighbour(self, newLocation, direction):
+        self.setOneWayLocationNeighbours(newLocation, direction)
+
+        if direction == "North":
+            newLocation.setOneWayLocationNeighbours(self, "South")
+        if direction == "South":
+            newLocation.setOneWayLocationNeighbours(self, "North")
+        if direction == "East":
+            newLocation.setOneWayLocationNeighbours(self, "West")
+        if direction == "West":
+            newLocation.setOneWayLocationNeighbours(self, "East")

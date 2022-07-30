@@ -1,11 +1,9 @@
-from mimetypes import init
-
-
 class Trainer:
     def __init__(self, trainerName, trainerPokemonsList, trainerItemsList):
         self.trainerName = trainerName
         self.trainerPokemonsList = trainerPokemonsList
         self.trainerItemsList = trainerItemsList
+        self.trainerLocation = "0"
     
     def __repr__(self):
         output = self.trainerName + " the trainer has "
@@ -38,3 +36,13 @@ class Trainer:
     
     def getTrainerItemsList(self):
         return self.trainerItemsList
+
+    def placeInLocation(self, location):
+        self.trainerLocation = location
+
+    def moveToLocation(self, direction):
+        if direction in self.trainerLocation.getLocationNeighboursList():
+            self.trainerLocation = self.trainerLocation.getLocationNeighboursList()[direction]
+            print(self.trainerName + " is now in " + self.trainerLocation.getLocationName() + ".")
+        else:
+            print("It is a dead end. Please try again.")
