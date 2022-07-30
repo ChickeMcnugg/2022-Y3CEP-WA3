@@ -4,6 +4,8 @@ class Trainer:
         self.trainerPokemonsList = trainerPokemonsList
         self.trainerItemsList = trainerItemsList
         self.trainerLocation = "0"
+        self.trainerActivePokemon = trainerPokemonsList[0]
+        self.trainerFaintedPokemon = []
     
     def __repr__(self):
         output = self.trainerName + " the trainer has "
@@ -36,6 +38,9 @@ class Trainer:
     
     def getTrainerItemsList(self):
         return self.trainerItemsList
+    
+    def getTrainerActivePokemon(self):
+        return self.trainerActivePokemon
 
     def placeInLocation(self, location):
         self.trainerLocation = location

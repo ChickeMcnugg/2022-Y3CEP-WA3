@@ -1,10 +1,10 @@
 class Pokemon:
-    def __init__(self, pokemonName, pokemonType, pokemonLevel, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonSpeed, pokemonEvasion, pokemonAccuracy):
+    def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonSpeed, pokemonEvasion, pokemonAccuracy):
         self.pokemonName = pokemonName
         self.pokemonType = pokemonType
-        self.pokemonLevel = pokemonLevel
+        self.pokemonLevel = 0
         self.pokemonMaxHealth = pokemonMaxHealth
-        self.pokemonHealth = pokemonMaxHealth
+        self.pokemonHealth = self.pokemonMaxHealth
         self.pokemonEXP = 0
         self.pokemonAttack = pokemonAttack
         self.pokemonDefense = pokemonDefense
@@ -45,3 +45,13 @@ class Pokemon:
     
     def getPokemonEXP(self):
         return self.pokemonEXP
+    
+    def getPokemonMovesList(self):
+        return self.pokemonMovesList
+    
+    def addMove(self, newMove):
+        if newMove.getMoveType() == self.pokemonType:
+            self.pokemonMovesList.append(newMove)
+            print(self.pokemonName + " learnt the move, " + newMove.getMoveName() + ".")
+        else:
+            print(self.pokemonName + " cannot learn the move " + newMove.getMoveName() + ".")
