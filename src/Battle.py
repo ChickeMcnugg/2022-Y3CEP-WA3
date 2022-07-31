@@ -1,6 +1,4 @@
 from random import randint
-from Moves import Moves
-
 
 class Battle:
     def __init__(self, trainerProtagonist, trainerOpponent):

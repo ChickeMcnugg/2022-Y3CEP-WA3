@@ -55,8 +55,36 @@
 >     -   Moves: Include more moves
 
 > - 31/7
->   -   Found bug of initiating random encounter regardless of whetehr protagonist actually changes locations
->   -   Moves seem to be out of the question as each move has its own special cases taht need to be individually implemented. So each mvoe would hgave to be its own class, or at least have its own method under the Moves class
+>   -   Found bug of initiating random encounter regardless of whether protagonist actually changes locations. Fixed.
+>   -   Moves seem to be out of the question as each move has its own special cases taht need to be individually implemented. So each mvoe would have to be its own class, or at least have its own method under the Moves class. Might tackle towards teh end when fully developing the game
+>   -   Turn based battles have been fully implemented functionally. It took much longer than expected because of my indecisiveness on which file to put commands in, and how to implements Moves
+>   -   UI for everything has yet to be done
+>   -   I do not know how I am going to implement wild pokemon and trainer pokemons
+>       -   Maybe I can cretae a base pokemon then for every variant I create a temporary copy
+>   -   Trainer class
+>       -   Location is now kept track of for completionist's sake (Location has reference to Trainer and Trainer has reference to Location)
+>       -   Fainted Pokemon hve been mvoed to separate a list to not reference during battles (Only "live" pokemon can be used)
+>   -   Moves class
+>       -   Houses damage() method to reference during battles (Pokemon moves based on inflicting damage)
+>   -   Location class
+>       -   Created pokemon list, planning to use for random encounters
+>   -   Pokemon Class
+>       -   Implemented EXP and Levels, but they do not interact with pokemon stats yet
+>       -   Created owner attribute for completionist's sake (Trainer references Pokemon and Pokemon references Trainer) although wild pokemon hasve not been implemented
+>   -   Battle class
+        -   Whose turn it is determined by a boolean isProtagonistTurn
+        -   Procedure:
+            -   Provide list of available moves player can choose, for player to choose
+            -   execute move (Currently only attacks)
+            -   Check if opponent pokemon has fainted (Currently battle ends when active pokemon faints)
+        -   Could probably simplify by making the procedure its own command
+> -   TODO
+>     -   Trainer: Switch active pokemon
+>     -   Battles: Checkpoint battles and boss battles
+>     -   Pokemon: Wild pokemon and random encounters
+>     -   Moves: Include more moves
+>     -   UI in general
+>     -   Full rewrite of code to make it more efficient (way later towards the end)
 
 ## Week 6 (2 Aug - 8 Aug)
 
