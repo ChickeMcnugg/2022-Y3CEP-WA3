@@ -2,6 +2,8 @@ class Trainer:
     def __init__(self, trainerName, trainerPokemonsList, trainerItemsList):
         self.trainerName = trainerName
         self.trainerPokemonsList = trainerPokemonsList
+        for pokemon in self.trainerPokemonsList:
+            pokemon.setPokemonOwner(self)
         self.trainerItemsList = trainerItemsList
         self.trainerLocation = None
         self.trainerActivePokemon = trainerPokemonsList[0]

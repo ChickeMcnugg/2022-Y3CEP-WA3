@@ -414,14 +414,13 @@ def setupPokemon():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", [snorlax, ivysaur], [])
+    protagonist = Trainer("Ace", [snorlax], [])
     protagonist.placeInLocation(palletTown)
 
     global botanist
     
-    botanist = Trainer("Botanist", [bulbasaur, venusaur], [])
+    botanist = Trainer("Botanist", [chansey], [])
     botanist.placeInLocation(route1)
-
 
 def setup():
     setupMap()

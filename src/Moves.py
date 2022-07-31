@@ -27,13 +27,20 @@ class Moves:
     def getMoveAccuracy(self):
         return self.moveAccuracy
     
-    def damage(self, pokemonProtagonist, pokemonOpponent):
+    def damage(self, battle, pokemonProtagonist, pokemonOpponent):
         if randint(1, 100) > 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
             damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 50)
             defense = pokemonOpponent.getPokemonDefense()
             netDamage = max(damage - defense, 0)
+            newHealth = max(pokemonOpponent.getPokemonHealth() - netDamage, 0)
             
-            pokemonOpponent.setPokemonHealth(pokemonOpponent.getPokemonHealth() - netDamage)
-            print(pokemonOpponent.getPokemonName() + " took " + str(netDamage) + " damage, and has " + str(pokemonOpponent.getPokemonHealth() - netDamage) + " health.")
+            pokemonOpponent.setPokemonHealth(newHealth)
+            print(pokemonOpponent.getPokemonName() + " took " + str(netDamage) + " damage, and has " + str(newHealth) + " health.")
+
+            if newHealth == 0:
+                pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
+                battle.setIsEnded(True)
+                print(pokemonOpponent.getPokemonName() + " has fainted.")
+                print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
         else:
             print(pokemonProtagonist.getPokemonName() + " missed.")

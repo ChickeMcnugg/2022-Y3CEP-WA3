@@ -12,9 +12,10 @@ class Pokemon:
         self.pokemonEvasion = pokemonEvasion
         self.pokemonAccuracy = pokemonAccuracy
         self.pokemonMovesList = {}
+        self.pokemonOwner = None
     
     def __repr__(self):
-        return "This is a " + self.pokemonType + ", Level " + str(self.pokemonLevel) + " " + self.pokemonName + "."
+        return "This is a " + self.pokemonType.getTypeName() + ", Level " + str(self.pokemonLevel) + " " + self.pokemonName + "."
     
     def getPokemonName(self):
         return self.pokemonName
@@ -29,7 +30,7 @@ class Pokemon:
         return self.pokemonHealth
     
     def setPokemonHealth(self, newHealth):
-        self.pokemonHealth = max(newHealth, self.pokemonMaxHealth)
+        self.pokemonHealth = min(newHealth, self.pokemonMaxHealth)
     
     def getPokemonAttack(self):
         return self.pokemonAttack
@@ -51,6 +52,12 @@ class Pokemon:
     
     def getPokemonMovesList(self):
         return self.pokemonMovesList
+    
+    def getPokemonOwner(self):
+        return self.pokemonOwner
+    
+    def setPokemonOwner(self, newOwner):
+        self.pokemonOwner = newOwner
     
     def addMove(self, newMove):
         if newMove.getMoveType() == self.pokemonType:
