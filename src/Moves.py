@@ -39,8 +39,10 @@ class Moves:
 
             if newHealth == 0:
                 pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
+                pokemonProtagonist.addPokemonEXP(30)
                 battle.setIsEnded(True)
                 print(pokemonOpponent.getPokemonName() + " has fainted.")
                 print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
         else:
             print(pokemonProtagonist.getPokemonName() + " missed.")

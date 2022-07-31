@@ -47,6 +47,7 @@ class Trainer:
     def setFaintedPokemon(self, newPokemon):
         self.trainerFaintedPokemon.append(newPokemon)
         self.trainerPokemonsList.remove(newPokemon)
+        self.trainerActivePokemon = None
 
     def getTrainerLocation(self):
         return self.trainerLocation

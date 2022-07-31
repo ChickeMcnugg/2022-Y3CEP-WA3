@@ -1,3 +1,6 @@
+from math import floor
+
+
 class Pokemon:
     def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonSpeed, pokemonEvasion, pokemonAccuracy):
         self.pokemonName = pokemonName
@@ -49,6 +52,13 @@ class Pokemon:
     
     def getPokemonEXP(self):
         return self.pokemonEXP
+    
+    def addPokemonEXP(self, newEXP):
+        self.pokemonEXP += newEXP
+        tempLevel = self.pokemonLevel
+        self.pokemonLevel = floor(self.pokemonEXP ** (1/3))
+        if self.pokemonLevel > tempLevel:
+            print(self.pokemonName + " levelled up, and is now at Level " + str(self.pokemonLevel))
     
     def getPokemonMovesList(self):
         return self.pokemonMovesList
