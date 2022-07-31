@@ -11,7 +11,7 @@ class Pokemon:
         self.pokemonSpeed = pokemonSpeed
         self.pokemonEvasion = pokemonEvasion
         self.pokemonAccuracy = pokemonAccuracy
-        self.pokemonMovesList = []
+        self.pokemonMovesList = {}
     
     def __repr__(self):
         return "This is a " + self.pokemonType + ", Level " + str(self.pokemonLevel) + " " + self.pokemonName + "."
@@ -27,6 +27,9 @@ class Pokemon:
     
     def getPokemonHealth(self):
         return self.pokemonHealth
+    
+    def setPokemonHealth(self, newHealth):
+        self.pokemonHealth = max(newHealth, self.pokemonMaxHealth)
     
     def getPokemonAttack(self):
         return self.pokemonAttack
@@ -51,7 +54,7 @@ class Pokemon:
     
     def addMove(self, newMove):
         if newMove.getMoveType() == self.pokemonType:
-            self.pokemonMovesList.append(newMove)
+            self.pokemonMovesList[newMove.getMoveName()] = newMove
             print(self.pokemonName + " learnt the move, " + newMove.getMoveName() + ".")
         else:
             print(self.pokemonName + " cannot learn the move " + newMove.getMoveName() + ".")

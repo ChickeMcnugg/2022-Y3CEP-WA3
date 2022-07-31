@@ -190,7 +190,7 @@ def setupTypes():
 def setupMoves():
     global tackle
 
-    tackle = Moves("Tackle", normalType, 40, 100)
+    tackle = Moves("Tackle", normalType, "Attack", 40, 100)
 
     global bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves
     
@@ -215,6 +215,32 @@ def setupMoves():
     for move in moves:
         if move.getMoveType() == normalType:
             normalMoves.append(move)
+        elif move.getMoveType() == bugType:
+            bugMoves.append(move)
+        elif move.getMoveType() == dragonType:
+            dragonMoves.append(move)
+        elif move.getMoveType() == electricType:
+            electricMoves.append(move)
+        elif move.getMoveType() == fightingType:
+            fightingMoves.append(move)
+        elif move.getMoveType() == fireType:
+            fireMoves.append(move)
+        elif move.getMoveType() == flyingType:
+            flyingMoves.append(move)
+        elif move.getMoveType() == ghostType:
+            ghostMoves.append(move)
+        elif move.getMoveType() == grassType:
+            grassMoves.append(move)
+        elif move.getMoveType() == groundType:
+            groundMoves.append(move)
+        elif move.getMoveType() == poisonType:
+            poisonMoves.append(move)
+        elif move.getMoveType() == psychicType:
+            psychicMoves.append(move)
+        elif move.getMoveType() == rockType:
+            rockMoves.append(move)
+        else:
+            waterMoves.append(move)
 
 def setupPokemon():
     global bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot
@@ -385,24 +411,38 @@ def setupPokemon():
             for move in normalMoves:
                 pokemon.addMove(move)
 
+def setupTrainers():
+    global protagonist
+
+    protagonist = Trainer("Ace", [snorlax, ivysaur], [])
+    protagonist.placeInLocation(palletTown)
+
+    global botanist
+    
+    botanist = Trainer("Botanist", [bulbasaur, venusaur], [])
+    botanist.placeInLocation(route1)
+
+
 def setup():
     setupMap()
     setupTypes()
     setupMoves()
     setupPokemon()
+    setupTrainers()
     
-
-    global protagonist
-
-    protagonist = Trainer("Ace", [bulbasaur, ivysaur], [])
-    protagonist.placeInLocation(palletTown)
-
 setup()
-print(snorlax.getPokemonMovesList())
 
 while True:
     direction = input("Direction to move: ")
-    protagonist.moveToLocation(direction)
+    while direction not in ["North", "South", "East", "West"]:
+        direction = input("Direction to move: ")
+    else:
+        protagonist.moveToLocation(direction)
 
-    if randint(1, 100) > 80:
-        Battle.startBattle()
+        if randint(1, 100) > 0:
+            trainers = protagonist.getTrainerLocation().getLocationTrainersList()
+            trainers.remove(protagonist)
+            
+            if len(trainers) != 0:
+                opponent = trainers[randint(0, len(trainers) - 1)]
+                Battle.startBattle(protagonist, opponent)

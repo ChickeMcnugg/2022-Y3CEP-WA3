@@ -3,7 +3,7 @@ class Trainer:
         self.trainerName = trainerName
         self.trainerPokemonsList = trainerPokemonsList
         self.trainerItemsList = trainerItemsList
-        self.trainerLocation = "0"
+        self.trainerLocation = None
         self.trainerActivePokemon = trainerPokemonsList[0]
         self.trainerFaintedPokemon = []
     
@@ -41,13 +41,22 @@ class Trainer:
     
     def getTrainerActivePokemon(self):
         return self.trainerActivePokemon
+    
+    def setFaintedPokemon(self, newPokemon):
+        self.trainerFaintedPokemon.append(newPokemon)
+        self.trainerPokemonsList.remove(newPokemon)
+
+    def getTrainerLocation(self):
+        return self.trainerLocation
 
     def placeInLocation(self, location):
         self.trainerLocation = location
+        location.addLocationTrainer(self)
 
     def moveToLocation(self, direction):
         if direction in self.trainerLocation.getLocationNeighboursList():
             self.trainerLocation = self.trainerLocation.getLocationNeighboursList()[direction]
+            self.trainerLocation.addLocationTrainer(self)
             print(self.trainerName + " is now in " + self.trainerLocation.getLocationName() + ".")
         else:
             print("It is a dead end. Please try again.")
