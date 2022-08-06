@@ -70,8 +70,5 @@ class Pokemon:
         self.pokemonOwner = newOwner
     
     def addMove(self, newMove):
-        if newMove.getMoveType() == self.pokemonType:
-            self.pokemonMovesList[newMove.getMoveName()] = newMove
-            print(self.pokemonName + " learnt the move, " + newMove.getMoveName() + ".")
-        else:
-            print(self.pokemonName + " cannot learn the move " + newMove.getMoveName() + ".")
+        self.pokemonMovesList[newMove.getMoveName()] = newMove
+        print(self.pokemonName + " learnt the move, " + newMove.getMoveName() + ".")

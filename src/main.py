@@ -191,6 +191,7 @@ def setupMoves():
     global tackle
 
     tackle = Moves("Tackle", normalType, "Attack", 40, 100)
+    switch = Moves("Switch", normalType, "Switch", 0, 0)
 
     global bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves
     
@@ -210,12 +211,11 @@ def setupMoves():
     rockMoves = []
     waterMoves = []
     
-    moves = [tackle]
+    moves = [tackle, switch]
+    moveCategories = [bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves]
 
     for move in moves:
-        if move.getMoveType() == normalType:
-            normalMoves.append(move)
-        elif move.getMoveType() == bugType:
+        if move.getMoveType() == bugType:
             bugMoves.append(move)
         elif move.getMoveType() == dragonType:
             dragonMoves.append(move)
@@ -239,8 +239,11 @@ def setupMoves():
             psychicMoves.append(move)
         elif move.getMoveType() == rockType:
             rockMoves.append(move)
-        else:
+        elif move.getMoveType() == waterType:
             waterMoves.append(move)
+        else:
+            for category in moveCategories:
+                category.append(move)
 
 def setupPokemon():
     global bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot
@@ -407,19 +410,59 @@ def setupPokemon():
     pokemons = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranFemale, nidorina, nidoqueen, nidoranMale, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu, starmie, mrmime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyrados, lapras, ditto, eevee, vaporean, jolteon, flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew]
 
     for pokemon in pokemons:
-        if pokemon.getPokemonType() == normalType:
+        if pokemon.getPokemonType() == bugType:
+            for move in bugMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == dragonType:
+            for move in dragonMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == electricType:
+            for move in electricMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == fightingType:
+            for move in fightingMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == fireType:
+            for move in fireMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == flyingType:
+            for move in flyingMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == ghostType:
+            for move in ghostMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == grassType:
+            for move in grassMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == groundType:
+            for move in groundMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == normalType:
             for move in normalMoves:
                 pokemon.addMove(move)
+        elif pokemon.getPokemonType() == poisonType:
+            for move in poisonMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == psychicType:
+            for move in psychicMoves:
+                pokemon.addMove(move)
+        elif pokemon.getPokemonType() == rockType:
+            for move in rockMoves:
+                pokemon.addMove(move)
+        else:
+            for move in waterMoves:
+                pokemon.addMove(move)
+
 
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", [snorlax], [])
+    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Ivysaur": ivysaur}, {})
     protagonist.placeInLocation(palletTown)
 
     global botanist
     
-    botanist = Trainer("Botanist", [chansey], [])
+    botanist = Trainer("Botanist", {"Charmeleon": charmeleon}, {})
     botanist.placeInLocation(route1)
 
 def setup():

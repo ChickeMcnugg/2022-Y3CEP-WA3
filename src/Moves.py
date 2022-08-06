@@ -1,6 +1,5 @@
 from random import randint
 
-
 class Moves:
     def __init__(self, moveName, moveType, moveAttribute, movePower, moveAccuracy):
         self.moveName = moveName

@@ -2,12 +2,12 @@ class Trainer:
     def __init__(self, trainerName, trainerPokemonsList, trainerItemsList):
         self.trainerName = trainerName
         self.trainerPokemonsList = trainerPokemonsList
-        for pokemon in self.trainerPokemonsList:
-            pokemon.setPokemonOwner(self)
+        for pokemonKey in self.trainerPokemonsList:
+            self.trainerPokemonsList[pokemonKey].setPokemonOwner(self)
         self.trainerItemsList = trainerItemsList
         self.trainerLocation = None
-        self.trainerActivePokemon = trainerPokemonsList[0]
-        self.trainerFaintedPokemon = []
+        self.trainerActivePokemon = list(trainerPokemonsList.keys())[0]
+        self.trainerFaintedPokemon = {}
     
     def __repr__(self):
         output = self.trainerName + " the trainer has "
@@ -44,9 +44,12 @@ class Trainer:
     def getTrainerActivePokemon(self):
         return self.trainerActivePokemon
     
+    def setTrainerActivePokemon(self, newPokemon):
+        self.trainerActivePokemon = newPokemon.getPokemonName().capitalize()
+    
     def setFaintedPokemon(self, newPokemon):
-        self.trainerFaintedPokemon.append(newPokemon)
-        self.trainerPokemonsList.remove(newPokemon)
+        self.trainerFaintedPokemon[newPokemon.getPokemonName().capitalize()] = newPokemon
+        del(self.trainerPokemonsList[newPokemon.getPokemonName().capitalize()])
         self.trainerActivePokemon = None
 
     def getTrainerLocation(self):
