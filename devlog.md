@@ -88,6 +88,18 @@
 
 ## Week 6 (2 Aug - 8 Aug)
 
+>   -   6/8
+>       -   Implemented switching of Trainer's active pokemon
+>       -   During switching, old active pokemon disappears and is replaced by new active pokemon. When switching back from the new to old active pokemon, the key name does not appear
+>       -   Need to rethink how all lists will be implemented. Should be changed to dictionaries with keys to make it easier to reference any single element.
+>       -   TODO
+>           -   Trainer: Switch active pokemon
+>           -   Battles: Checkpoint battles and boss battles
+>           -   Pokemon: Wild pokemon and random encounters
+>           -   Moves: Include more moves
+>           -   UI in general
+>           -   Full rewrite of code to make it more efficient (way later towards the end)
+
 ## Week 7 (9 Aug - 15 Aug)
 
 ## Week 8 (16 Aug - 22 Aug)
