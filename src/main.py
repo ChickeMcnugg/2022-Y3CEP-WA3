@@ -484,6 +484,6 @@ while True:
             del(trainers[protagonist.getTrainerName()])
             
             if len(trainers) != 0:
-                opponent = trainers[randint(0, len(trainers) - 1)]
+                opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
                 battle = Battle(protagonist, opponent)
                 battle.startBattle()

@@ -41,45 +41,21 @@ class Battle:
 
         while not self.getIsEnded():
             if self.getIsProtagonistTurn():
-                moveMessage = "Choose your move ("
-                for move in list(protagonistActivePokemon.getPokemonMovesDict().keys()):
-                    moveMessage += move + ", "
-                moveMessage = moveMessage[:-2] + ") : "
-
-                moveInput = ""
-                
-                while moveInput not in list(protagonistActivePokemon.getPokemonMovesDict().keys()):
-                    moveInput = input(moveMessage)
-                else:
-                    move = protagonistActivePokemon.getPokemonMovesDict()[moveInput]
+                move = protagonistActivePokemon.chooseMove()
                     
-                    if move.getMoveAttribute() == "Attack":
-                        move.damage(self, protagonistActivePokemon, opponentActivePokemon)
-                        self.setIsProtagonistTurn(False)
-                    elif move.getMoveAttribute() == "Switch":
-                        pokemonMessage = "Choose a new Pokemon to switch in ("
-                        for pokemon in list(protagonist.getTrainerLivePokemonsDict().keys()):
-                            pokemonMessage += pokemon + ", "
-                        pokemonMessage = pokemonMessage[:-2] + ") : "
-
-                        pokemonInput = ""
-                        
-                        while pokemonInput not in list(protagonist.getTrainerLivePokemonsDict().keys()):
-                            pokemonInput = input(pokemonMessage)
-                        else:
-                            protagonist.setTrainerActivePokemon(protagonist.getTrainerPokemonsList()[pokemonInput])
+                if move.getMoveAttribute() == "Attack":
+                    move.damage(self, protagonistActivePokemon, opponentActivePokemon)
+                    self.setIsProtagonistTurn(False)
+                elif move.getMoveAttribute() == "Switch":
+                    protagonist.choosePokemon()
             else:
-                availableMoves = opponent.getTrainerPokemonsList()[opponent.getTrainerActivePokemon()].getPokemonMovesList()
-                availableMoveNames = []
+                availableMoves = opponentActivePokemon.getPokemonMovesDict()
 
-                for key in availableMoves.keys():
-                    availableMoveNames.append(key)
-
-                if len(availableMoveNames) < 1:
-                    move = availableMoves[availableMoveNames[0]]
+                if len(availableMoves) < 1:
+                    move = availableMoves[list(availableMoves.keys())[0]]
                 else:
-                    move = availableMoves[availableMoveNames[randint(0, len(availableMoveNames) - 1)]]
+                    move = availableMoves[list(availableMoves.keys())[randint(0, len(availableMoves) - 1)]]
 
                 if move.getMoveAttribute() == "Attack":
-                    move.damage(self, opponent.getTrainerPokemonsList()[opponent.getTrainerActivePokemon()], protagonist.getTrainerPokemonsList()[protagonist.getTrainerActivePokemon()])
+                    move.damage(self, opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()], protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()])
                     self.setIsProtagonistTurn(True)

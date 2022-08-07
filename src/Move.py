@@ -35,12 +35,24 @@ class Move:
             pokemonOpponent.addPokemonHealth(-netDamage)
 
             if pokemonOpponent.getPokemonHealth() == 0:
-                pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
-                pokemonProtagonist.addPokemonEXP(30)
-                battle.setIsEnded(True)
-                
                 print(pokemonOpponent.getPokemonName() + " has fainted.")
-                print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
                 print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
+                pokemonProtagonist.addPokemonEXP(30)
+                
+                if pokemonOpponent.checkFainted():
+                    battle.setIsEnded(True)
+                    print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                else:
+                    if battle.getTrainerOpponent() == pokemonOpponent.getPokemonOwner():
+                        availablePokemon = pokemonOpponent.getPokemonOwner().getTrainerLivePokemonsDict()
+                        if len(availablePokemon) > 1:
+                            pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[randint(0, len(availablePokemon.values()) - 1)])
+                        else:
+                            pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[0])
+
+                        print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon().getPokemonName() + ".")
+                    else:
+                        pokemonOpponent.choosePokemon()
         else:
             print(pokemonProtagonist.getPokemonName() + " missed.")

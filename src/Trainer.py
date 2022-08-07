@@ -6,8 +6,9 @@ class Trainer:
             self.trainerLivePokemonsDict[pokemonKey].setPokemonOwner(self)
         self.trainerActivePokemon = list(trainerLivePokemonsDict.keys())[0]
         self.trainerFaintedPokemonDict = {}
-        self.trainerItemsList = trainerItemsDict
+        self.trainerItemsDict = trainerItemsDict
         self.trainerLocation = trainerLocation
+        trainerLocation.addLocationTrainer(self)
     
     def __repr__(self):
         output = self.trainerName + " the trainer has "
@@ -15,7 +16,7 @@ class Trainer:
         if len(self.trainerLivePokemonsDict) == 0:
             output += "no pokemons "
         else:
-            for pokemonKey in self.trainerPokemonsDict:
+            for pokemonKey in self.trainerLivePokemonsDict:
                 output += "a " + pokemonKey + ", "
         
         output += "and "
@@ -44,7 +45,6 @@ class Trainer:
     def setFaintedPokemon(self, newPokemon):
         self.trainerFaintedPokemonDict[newPokemon.getPokemonName().capitalize()] = newPokemon
         del(self.trainerLivePokemonsDict[newPokemon.getPokemonName().capitalize()])
-        self.trainerActivePokemon = list(self.trainerLivePokemonsDict.keys())[0]
     
     def getTrainerActivePokemon(self):
         return self.trainerActivePokemon
@@ -68,3 +68,23 @@ class Trainer:
             print(self.trainerName + " is now in " + self.trainerLocation.getLocationName() + ".")
         else:
             print("It is a dead end. Please try again.")
+    
+    def checkFainted(self):
+        if len(self.trainerLivePokemonsDict) == 0:
+            print(self.trainerName + " has no more pokemon able to participate in battle.")
+            return True
+        else:
+            return False
+
+    def choosePokemon(self):    
+        pokemonMessage = "Choose a pokemon ("
+        for pokemon in list(self.trainerLivePokemonsDict.keys()):
+            pokemonMessage += pokemon + ", "
+        pokemonMessage = pokemonMessage[:-2] + ") : "
+
+        pokemonInput = ""
+        while pokemonInput not in self.trainerLivePokemonsDict:
+            pokemonInput = input(pokemonMessage)
+        else:
+            self.trainerActivePokemon = pokemonInput
+            print(self.trainerName + " chooses " + pokemonInput)

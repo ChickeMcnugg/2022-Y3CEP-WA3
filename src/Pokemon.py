@@ -44,7 +44,7 @@ class Pokemon:
         self.pokemonHealth = max(min(self.pokemonHealth, self.pokemonMaxHealth), 0)
 
         if newHealth <= 0:
-            print(self.pokemonName + " took " + str(newHealth) + " damage, and has " + self.pokemonHealth + " health.")
+            print(self.pokemonName + " took " + str(-newHealth) + " damage, and has " + str(self.pokemonHealth) + " health.")
         else:
             print(self.pokemonName + " gained " + str(newHealth) + " health, and has " + self.pokemonHealth + " health.")
 
@@ -71,3 +71,15 @@ class Pokemon:
     
     def setPokemonOwner(self, newOwner):
         self.pokemonOwner = newOwner
+    
+    def chooseMove(self):
+        moveMessage = "Choose your move ("
+        for move in list(self.pokemonMovesDict.keys()):
+            moveMessage += move + ", "
+        moveMessage = moveMessage[:-2] + ") : "
+
+        moveInput = ""
+        while moveInput not in self.pokemonMovesDict:
+            moveInput = input(moveMessage)
+        
+        return self.pokemonMovesDict[moveInput]
