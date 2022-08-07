@@ -1,32 +1,32 @@
 class Trainer:
-    def __init__(self, trainerName, trainerPokemonsList, trainerItemsList):
+    def __init__(self, trainerName, trainerLivePokemonsDict, trainerItemsDict, trainerLocation):
         self.trainerName = trainerName
-        self.trainerPokemonsList = trainerPokemonsList
-        for pokemonKey in self.trainerPokemonsList:
-            self.trainerPokemonsList[pokemonKey].setPokemonOwner(self)
-        self.trainerItemsList = trainerItemsList
-        self.trainerLocation = None
-        self.trainerActivePokemon = list(trainerPokemonsList.keys())[0]
-        self.trainerFaintedPokemon = {}
+        self.trainerLivePokemonsDict = trainerLivePokemonsDict
+        for pokemonKey in self.trainerLivePokemonsDict:
+            self.trainerLivePokemonsDict[pokemonKey].setPokemonOwner(self)
+        self.trainerActivePokemon = list(trainerLivePokemonsDict.keys())[0]
+        self.trainerFaintedPokemonDict = {}
+        self.trainerItemsList = trainerItemsDict
+        self.trainerLocation = trainerLocation
     
     def __repr__(self):
         output = self.trainerName + " the trainer has "
 
-        if len(self.trainerPokemonsList) == 0:
+        if len(self.trainerLivePokemonsDict) == 0:
             output += "no pokemons "
         else:
-            for pokemon in self.trainerPokemonsList:
-                output += "a " + pokemon.getPokemonName() + ", "
+            for pokemonKey in self.trainerPokemonsDict:
+                output += "a " + pokemonKey + ", "
         
         output += "and "
 
-        if len(self.trainerItemsList) == 0:
+        if len(self.trainerItemsDict) == 0:
             output += "no items"
         else:
-            for item in range(0, len(self.trainerItemsList) - 1):
-                output += "a " + self.trainerItemsList[item].getItemName() + ", "
+            for itemKey in range(0, len(self.trainerItemsDict) - 1):
+                output += "a " + itemKey + ", "
             
-            output += "and a " + self.trainerItemsList[-1].getItemName()
+            output += "and a " + self.trainerItemsDict[-1]
         
         output += "."
 
@@ -35,11 +35,16 @@ class Trainer:
     def getTrainerName(self):
         return self.trainerName
     
-    def getTrainerPokemonsList(self):
-        return self.trainerPokemonsList
+    def getTrainerLivePokemonsDict(self):
+        return self.trainerLivePokemonsDict
     
-    def getTrainerItemsList(self):
-        return self.trainerItemsList
+    def getTrainerFaintedPokemonsDict(self):
+        return self.trainerFaintedPokemonDict
+
+    def setFaintedPokemon(self, newPokemon):
+        self.trainerFaintedPokemonDict[newPokemon.getPokemonName().capitalize()] = newPokemon
+        del(self.trainerLivePokemonsDict[newPokemon.getPokemonName().capitalize()])
+        self.trainerActivePokemon = list(self.trainerLivePokemonsDict.keys())[0]
     
     def getTrainerActivePokemon(self):
         return self.trainerActivePokemon
@@ -47,22 +52,19 @@ class Trainer:
     def setTrainerActivePokemon(self, newPokemon):
         self.trainerActivePokemon = newPokemon.getPokemonName().capitalize()
     
-    def setFaintedPokemon(self, newPokemon):
-        self.trainerFaintedPokemon[newPokemon.getPokemonName().capitalize()] = newPokemon
-        del(self.trainerPokemonsList[newPokemon.getPokemonName().capitalize()])
-        self.trainerActivePokemon = None
+    def getTrainerItemsList(self):
+        return self.trainerItemsList
 
     def getTrainerLocation(self):
         return self.trainerLocation
 
-    def placeInLocation(self, location):
-        self.trainerLocation = location
-        location.addLocationTrainer(self)
+    def setTrainerLocation(self, newLocation):
+        self.trainerLocation = newLocation
+        newLocation.addLocationTrainer(self)
 
-    def moveToLocation(self, direction):
-        if direction in self.trainerLocation.getLocationNeighboursList():
-            self.trainerLocation = self.trainerLocation.getLocationNeighboursList()[direction]
-            self.trainerLocation.addLocationTrainer(self)
+    def moveToLocation(self, newDirection):
+        if newDirection in self.trainerLocation.getLocationNeighboursDict():
+            self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
             print(self.trainerName + " is now in " + self.trainerLocation.getLocationName() + ".")
         else:
             print("It is a dead end. Please try again.")

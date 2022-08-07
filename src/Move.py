@@ -1,6 +1,6 @@
 from random import randint
 
-class Moves:
+class Move:
     def __init__(self, moveName, moveType, moveAttribute, movePower, moveAccuracy):
         self.moveName = moveName
         self.moveType = moveType
@@ -30,16 +30,15 @@ class Moves:
         if randint(1, 100) > 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
             damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 50)
             defense = pokemonOpponent.getPokemonDefense()
-            netDamage = max(damage - defense, 0)
-            newHealth = max(pokemonOpponent.getPokemonHealth() - netDamage, 0)
+            netDamage = int(max(damage - defense, 0))
             
-            pokemonOpponent.setPokemonHealth(newHealth)
-            print(pokemonOpponent.getPokemonName() + " took " + str(netDamage) + " damage, and has " + str(newHealth) + " health.")
+            pokemonOpponent.addPokemonHealth(-netDamage)
 
-            if newHealth == 0:
+            if pokemonOpponent.getPokemonHealth() == 0:
                 pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
                 pokemonProtagonist.addPokemonEXP(30)
                 battle.setIsEnded(True)
+                
                 print(pokemonOpponent.getPokemonName() + " has fainted.")
                 print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
                 print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
