@@ -41,6 +41,9 @@ class Battle:
 
         while not self.getIsEnded():
             if self.getIsProtagonistTurn():
+                protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
+                opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
+
                 move = protagonistActivePokemon.chooseMove()
                     
                 if move.getMoveAttribute() == "Attack":
@@ -49,6 +52,9 @@ class Battle:
                 elif move.getMoveAttribute() == "Switch":
                     protagonist.choosePokemon()
             else:
+                protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
+                opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
+                
                 availableMoves = opponentActivePokemon.getPokemonMovesDict()
 
                 if len(availableMoves) < 1:

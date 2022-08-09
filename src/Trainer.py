@@ -45,6 +45,7 @@ class Trainer:
     def setFaintedPokemon(self, newPokemon):
         self.trainerFaintedPokemonDict[newPokemon.getPokemonName().capitalize()] = newPokemon
         del(self.trainerLivePokemonsDict[newPokemon.getPokemonName().capitalize()])
+        self.trainerActivePokemon = ""
     
     def getTrainerActivePokemon(self):
         return self.trainerActivePokemon

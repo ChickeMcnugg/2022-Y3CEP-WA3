@@ -17,7 +17,7 @@ class Type:
     def setTypeAdvantageList(self, newTypes):
         self.typeAdvantageList = newTypes
 
-    def getTypeDisadvantage(self):
+    def getTypeDisadvantageList(self):
         return self.typeDisadvantageList
 
     def setTypeDisadvantageList(self, newTypes):

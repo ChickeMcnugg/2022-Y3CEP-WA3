@@ -29,6 +29,13 @@ class Move:
     def damage(self, battle, pokemonProtagonist, pokemonOpponent):
         if randint(1, 100) > 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
             damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 50)
+            if pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeAdvantageList():
+                damage *= 2
+            elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeDisadvantageList():
+                damage *= 0.5
+            elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeImmuneList():
+                damage = 0
+            
             defense = pokemonOpponent.getPokemonDefense()
             netDamage = int(max(damage - defense, 0))
             
@@ -40,7 +47,7 @@ class Move:
                 print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
                 pokemonProtagonist.addPokemonEXP(30)
                 
-                if pokemonOpponent.checkFainted():
+                if pokemonOpponent.getPokemonOwner().checkFainted():
                     battle.setIsEnded(True)
                     print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
                 else:
@@ -53,6 +60,6 @@ class Move:
 
                         print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon().getPokemonName() + ".")
                     else:
-                        pokemonOpponent.choosePokemon()
+                        pokemonOpponent.getPokemonOwner().choosePokemon()
         else:
             print(pokemonProtagonist.getPokemonName() + " missed.")

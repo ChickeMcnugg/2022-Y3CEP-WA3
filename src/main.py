@@ -457,7 +457,7 @@ def setupPokemon():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Ivysaur": ivysaur}, {}, palletTown)
+    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {}, palletTown)
 
     global botanist
     
@@ -479,11 +479,16 @@ while True:
     else:
         protagonist.moveToLocation(direction)
 
-        if randint(1, 100) > 0:
-            trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
-            del(trainers[protagonist.getTrainerName()])
-            
-            if len(trainers) != 0:
-                opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
-                battle = Battle(protagonist, opponent)
-                battle.startBattle()
+        if len(protagonist.getTrainerLivePokemonsDict()) == 0:
+            print(protagonist.getTrainerName() + " has no pokemon to battle with.")
+        else:
+            if randint(1, 100) > 0:
+                trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
+                del(trainers[protagonist.getTrainerName()])
+                
+                if len(trainers) != 0:
+                    opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
+                    
+                    if opponent.getTrainerActivePokemon() != "":
+                        battle = Battle(protagonist, opponent)
+                        battle.startBattle()
