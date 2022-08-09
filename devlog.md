@@ -120,6 +120,17 @@
 >       -   Fixed minor bugs and typos
 >       -   Imeplemented type advantages during battle
 >           -   Having an advantage doubles the damage, having a disadvantage halves the damage, being immune cancels out the damage
+>       -   TODO
+>           -   Battles: Checkpoint battles and boss battles
+>           -   Pokemon: Wild pokemon and random encounters
+>           -   Moves: Include more moves
+>           -   UI in general
+
+prevent switching to same pokemon
+print pokemon info after switching to it
+allow player to run away from battles
+implement more trainers
+reset trainers after battles
 
 ## Week 8 (16 Aug - 22 Aug)
 
