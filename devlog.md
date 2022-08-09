@@ -118,19 +118,24 @@
 >       -   Fixed bug of starting battles even though the protagonist has no available pokemon
 >       -   Fixed bug of not updating active pokemon when player switches pokemon during battle
 >       -   Fixed minor bugs and typos
->       -   Imeplemented type advantages during battle
+>       -   Implemented type advantages during battle
 >           -   Having an advantage doubles the damage, having a disadvantage halves the damage, being immune cancels out the damage
+>       -   Added time delays between print messages for ease of reading and understanding sequence of events
+>           -   Actions taken during battle can still be clearer by signaling whose turn it is and providing to see the current condition of the battle
+>       -   Wrote appropriate comments for each function and steps in the function
+>           -   Can also write comments for each file describing the purpose of each file
 >       -   TODO
+>           -   Battles: Prevent player from switching to the same pokemon by removing the option
+>           -   Battles: Print pokemon information after switching to it
+>           -   Battles: Allow the player to run away
+>           -   Battles: Reset each trainer's stats adn pokemon after the battle to be reused again if encountered again
 >           -   Battles: Checkpoint battles and boss battles
+>           -   Battles: Print whose turn it is when switching turns
+>           -   Trainers: Create more trainers so that random encounters are more randomised
 >           -   Pokemon: Wild pokemon and random encounters
 >           -   Moves: Include more moves
 >           -   UI in general
-
-prevent switching to same pokemon
-print pokemon info after switching to it
-allow player to run away from battles
-implement more trainers
-reset trainers after battles
+>           -   Comment purpose of files
 
 ## Week 8 (16 Aug - 22 Aug)
 
