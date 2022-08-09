@@ -1,4 +1,5 @@
 from random import randint
+from time import sleep
 
 class Move:
     def __init__(self, moveName, moveType, moveAttribute, movePower, moveAccuracy):
@@ -44,12 +45,16 @@ class Move:
             if pokemonOpponent.getPokemonHealth() == 0:
                 print(pokemonOpponent.getPokemonName() + " has fainted.")
                 pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
+                sleep(1)
+
                 print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
                 pokemonProtagonist.addPokemonEXP(30)
+                sleep(1)
                 
                 if pokemonOpponent.getPokemonOwner().checkFainted():
                     battle.setIsEnded(True)
                     print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                    sleep(1)
                 else:
                     if battle.getTrainerOpponent() == pokemonOpponent.getPokemonOwner():
                         availablePokemon = pokemonOpponent.getPokemonOwner().getTrainerLivePokemonsDict()
@@ -59,7 +64,9 @@ class Move:
                             pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[0])
 
                         print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon().getPokemonName() + ".")
+                        sleep(1)
                     else:
                         pokemonOpponent.getPokemonOwner().choosePokemon()
         else:
             print(pokemonProtagonist.getPokemonName() + " missed.")
+            sleep(1)

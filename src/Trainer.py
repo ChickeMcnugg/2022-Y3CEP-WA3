@@ -1,3 +1,5 @@
+from time import sleep
+
 class Trainer:
     def __init__(self, trainerName, trainerLivePokemonsDict, trainerItemsDict, trainerLocation):
         self.trainerName = trainerName
@@ -64,15 +66,22 @@ class Trainer:
         newLocation.addLocationTrainer(self)
 
     def moveToLocation(self, newDirection):
+        sleep(1)
+
         if newDirection in self.trainerLocation.getLocationNeighboursDict():
             self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
             print(self.trainerName + " is now in " + self.trainerLocation.getLocationName() + ".")
+            sleep(1)
+            return True
         else:
             print("It is a dead end. Please try again.")
+            sleep(1)
+            return False
     
     def checkFainted(self):
         if len(self.trainerLivePokemonsDict) == 0:
             print(self.trainerName + " has no more pokemon able to participate in battle.")
+            sleep(1)
             return True
         else:
             return False
@@ -88,4 +97,5 @@ class Trainer:
             pokemonInput = input(pokemonMessage)
         else:
             self.trainerActivePokemon = pokemonInput
+            sleep(1)
             print(self.trainerName + " chooses " + pokemonInput)

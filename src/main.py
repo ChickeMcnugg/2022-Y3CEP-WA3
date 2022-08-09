@@ -477,18 +477,15 @@ while True:
     while direction not in ["North", "South", "East", "West"]:
         direction = input("Direction to move: ")
     else:
-        protagonist.moveToLocation(direction)
-
-        if len(protagonist.getTrainerLivePokemonsDict()) == 0:
-            print(protagonist.getTrainerName() + " has no pokemon to battle with.")
-        else:
-            if randint(1, 100) > 0:
-                trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
-                del(trainers[protagonist.getTrainerName()])
-                
-                if len(trainers) != 0:
-                    opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
+        if protagonist.moveToLocation(direction):
+            if len(protagonist.getTrainerLivePokemonsDict()) != 0:
+                if randint(1, 100) > 0:
+                    trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
+                    del(trainers[protagonist.getTrainerName()])
                     
-                    if opponent.getTrainerActivePokemon() != "":
-                        battle = Battle(protagonist, opponent)
-                        battle.startBattle()
+                    if len(trainers) != 0:
+                        opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
+                        
+                        if opponent.getTrainerActivePokemon() != "":
+                            battle = Battle(protagonist, opponent)
+                            battle.startBattle()

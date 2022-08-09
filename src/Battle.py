@@ -1,4 +1,5 @@
 from random import randint
+from time import sleep
 
 class Battle:
     def __init__(self, trainerProtagonist, trainerOpponent):
@@ -30,6 +31,7 @@ class Battle:
 
     def startBattle(self):
         print(self)
+        sleep(1)
 
         protagonist = self.getTrainerProtagonist()
         protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
@@ -37,7 +39,9 @@ class Battle:
         opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
 
         print(opponent.getTrainerName() + " chooses " + opponentActivePokemon.getPokemonName() + ".")
+        sleep(1)
         print(protagonist.getTrainerName() + " chooses " + protagonistActivePokemon.getPokemonName() + ".")
+        sleep(1)
 
         while not self.getIsEnded():
             if self.getIsProtagonistTurn():
@@ -45,7 +49,7 @@ class Battle:
                 opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
 
                 move = protagonistActivePokemon.chooseMove()
-                    
+                
                 if move.getMoveAttribute() == "Attack":
                     move.damage(self, protagonistActivePokemon, opponentActivePokemon)
                     self.setIsProtagonistTurn(False)
@@ -54,7 +58,7 @@ class Battle:
             else:
                 protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
                 opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
-                
+
                 availableMoves = opponentActivePokemon.getPokemonMovesDict()
 
                 if len(availableMoves) < 1:

@@ -1,5 +1,5 @@
 from math import floor
-
+from time import sleep
 
 class Pokemon:
     def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonEvasion, pokemonAccuracy):
@@ -45,8 +45,10 @@ class Pokemon:
 
         if newHealth <= 0:
             print(self.pokemonName + " took " + str(-newHealth) + " damage, and has " + str(self.pokemonHealth) + " health.")
+            sleep(1)
         else:
             print(self.pokemonName + " gained " + str(newHealth) + " health, and has " + self.pokemonHealth + " health.")
+            sleep(1)
 
     def getPokemonAttack(self):
         return self.pokemonAttack
@@ -82,4 +84,5 @@ class Pokemon:
         while moveInput not in self.pokemonMovesDict:
             moveInput = input(moveMessage)
         
+        sleep(1)
         return self.pokemonMovesDict[moveInput]
