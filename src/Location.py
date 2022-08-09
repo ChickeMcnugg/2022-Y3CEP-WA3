@@ -33,6 +33,7 @@ class Location():
         del(self.locationPokemonDict[oldPokemon.getPokemonName().capitalize()])
 
     def setOneWayLocationNeighbours(self, newLocation, direction):
+        #Check if input direction is valid and available
         if direction in self.locationNeighboursDict:
             print("There is already a location there.")
         else:
@@ -41,6 +42,7 @@ class Location():
     def setTwoWayLocationNeighbour(self, newLocation, direction):
         self.setOneWayLocationNeighbours(newLocation, direction)
 
+        #Sets opposite direction from the other location
         if direction == "North":
             newLocation.setOneWayLocationNeighbours(self, "South")
         elif direction == "South":

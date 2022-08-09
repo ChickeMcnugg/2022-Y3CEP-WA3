@@ -464,28 +464,45 @@ def setupTrainers():
     botanist = Trainer("Botanist", {"Charmeleon": charmeleon}, {}, route1)
 
 def setup():
+    #Creates and orders locations
     setupMap()
+
+    #Creates types and type advantages for use in battles
     setupTypes()
+
+    #Creates and assigns moves with the corresponding pokemon types for use in battles
     setupMoves()
+
+    #Creates pokemons to be referenced for random encounters and other battles
     setupPokemon()
+
+    #Creates trainers that can be played against, and the player protagonist
     setupTrainers()
     
 setup()
 
 while True:
     direction = input("Direction to move: ")
+    
+    #Wait until user's input is valid
     while direction not in ["North", "South", "East", "West"]:
         direction = input("Direction to move: ")
     else:
+        #Check if the player can move in the given direction
         if protagonist.moveToLocation(direction):
+            #Check if the player can fight any trainer
             if len(protagonist.getTrainerLivePokemonsDict()) != 0:
+                #Roll chance for random encounter
                 if randint(1, 100) > 0:
+                    #Randomly pick a trainer from those in the current location
                     trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
                     del(trainers[protagonist.getTrainerName()])
                     
                     if len(trainers) != 0:
                         opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
                         
+                        #Check if the opponent has available pokemon to fight
                         if opponent.getTrainerActivePokemon() != "":
+                            #Start battle
                             battle = Battle(protagonist, opponent)
                             battle.startBattle()

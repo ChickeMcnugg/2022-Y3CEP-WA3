@@ -28,8 +28,11 @@ class Move:
         return self.moveAccuracy
     
     def damage(self, battle, pokemonProtagonist, pokemonOpponent):
+        #Calculate if move hits pokemonOpponent based on accuracy
         if randint(1, 100) > 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
             damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 50)
+            
+            #Account for type advantages
             if pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeAdvantageList():
                 damage *= 2
             elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeDisadvantageList():
@@ -42,6 +45,7 @@ class Move:
             
             pokemonOpponent.addPokemonHealth(-netDamage)
 
+            #Check if opponent's active pokemon has fainted
             if pokemonOpponent.getPokemonHealth() == 0:
                 print(pokemonOpponent.getPokemonName() + " has fainted.")
                 pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
@@ -51,12 +55,15 @@ class Move:
                 pokemonProtagonist.addPokemonEXP(30)
                 sleep(1)
                 
+                #Check if opponent has other available pokemon
                 if pokemonOpponent.getPokemonOwner().checkFainted():
                     battle.setIsEnded(True)
                     print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
                     sleep(1)
                 else:
+                    #Check if opponent is the opponent, because the player can only input for the protagonist
                     if battle.getTrainerOpponent() == pokemonOpponent.getPokemonOwner():
+                        #Randomly choose new active pokemon from live pokemons
                         availablePokemon = pokemonOpponent.getPokemonOwner().getTrainerLivePokemonsDict()
                         if len(availablePokemon) > 1:
                             pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[randint(0, len(availablePokemon.values()) - 1)])

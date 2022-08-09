@@ -28,6 +28,7 @@ class Pokemon:
     def addPokemonEXP(self, newEXP):
         self.pokemonEXP += newEXP
 
+        #UI
         tempLevel = self.pokemonLevel
         self.pokemonLevel = floor(self.pokemonEXP ** (1/3))
         if self.pokemonLevel > tempLevel:
@@ -41,8 +42,11 @@ class Pokemon:
     
     def addPokemonHealth(self, newHealth):
         self.pokemonHealth += newHealth
+
+        #Bound pokemon's health from 0 to maxHealth
         self.pokemonHealth = max(min(self.pokemonHealth, self.pokemonMaxHealth), 0)
 
+        #UI
         if newHealth <= 0:
             print(self.pokemonName + " took " + str(-newHealth) + " damage, and has " + str(self.pokemonHealth) + " health.")
             sleep(1)
@@ -75,12 +79,15 @@ class Pokemon:
         self.pokemonOwner = newOwner
     
     def chooseMove(self):
+        #UI
         moveMessage = "Choose your move ("
         for move in list(self.pokemonMovesDict.keys()):
             moveMessage += move + ", "
         moveMessage = moveMessage[:-2] + ") : "
 
         moveInput = ""
+        
+        #Wait until user's input is valid
         while moveInput not in self.pokemonMovesDict:
             moveInput = input(moveMessage)
         

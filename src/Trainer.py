@@ -45,8 +45,11 @@ class Trainer:
         return self.trainerFaintedPokemonDict
 
     def setFaintedPokemon(self, newPokemon):
+        #Move the fainted pokemon from the live dictionary to fainted dictionary
         self.trainerFaintedPokemonDict[newPokemon.getPokemonName().capitalize()] = newPokemon
         del(self.trainerLivePokemonsDict[newPokemon.getPokemonName().capitalize()])
+
+        #Reset trainer's active pokemon
         self.trainerActivePokemon = ""
     
     def getTrainerActivePokemon(self):
@@ -54,6 +57,8 @@ class Trainer:
     
     def setTrainerActivePokemon(self, newPokemon):
         self.trainerActivePokemon = newPokemon.getPokemonName().capitalize()
+        print(self.trainerName + " chooses " + newPokemon.getPokemonName() + ".")
+        sleep(1)
     
     def getTrainerItemsList(self):
         return self.trainerItemsList
@@ -62,16 +67,18 @@ class Trainer:
         return self.trainerLocation
 
     def setTrainerLocation(self, newLocation):
+        #Reference location in Trainer, and trainer in Location
         self.trainerLocation = newLocation
         newLocation.addLocationTrainer(self)
+        print(self.trainerName + " is now in " + newLocation.getLocationName() + ".")
+        sleep(1)
 
     def moveToLocation(self, newDirection):
         sleep(1)
 
+        #Check if the input is valid
         if newDirection in self.trainerLocation.getLocationNeighboursDict():
             self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
-            print(self.trainerName + " is now in " + self.trainerLocation.getLocationName() + ".")
-            sleep(1)
             return True
         else:
             print("It is a dead end. Please try again.")
@@ -86,13 +93,16 @@ class Trainer:
         else:
             return False
 
-    def choosePokemon(self):    
+    def choosePokemon(self):
+        #UI    
         pokemonMessage = "Choose a pokemon ("
         for pokemon in list(self.trainerLivePokemonsDict.keys()):
             pokemonMessage += pokemon + ", "
         pokemonMessage = pokemonMessage[:-2] + ") : "
 
         pokemonInput = ""
+
+        #Wait until user's input is valid
         while pokemonInput not in self.trainerLivePokemonsDict:
             pokemonInput = input(pokemonMessage)
         else:

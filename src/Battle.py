@@ -30,37 +30,45 @@ class Battle:
         self.isEnded = isEnded
 
     def startBattle(self):
+        #UI
         print(self)
         sleep(1)
 
+        #defining variables for later use
         protagonist = self.getTrainerProtagonist()
         protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
         opponent = self.getTrainerOpponent()
         opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
 
+        #UI
         print(opponent.getTrainerName() + " chooses " + opponentActivePokemon.getPokemonName() + ".")
         sleep(1)
         print(protagonist.getTrainerName() + " chooses " + protagonistActivePokemon.getPokemonName() + ".")
         sleep(1)
 
+        #Check if one player has no available pokemon left to fight
         while not self.getIsEnded():
+            #Switches from manual if it is the player's turn, to AI if it is the opponent's turn
             if self.getIsProtagonistTurn():
                 protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
                 opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
 
                 move = protagonistActivePokemon.chooseMove()
                 
+                #Subsequent actions are found inside the functions
                 if move.getMoveAttribute() == "Attack":
                     move.damage(self, protagonistActivePokemon, opponentActivePokemon)
-                    self.setIsProtagonistTurn(False)
                 elif move.getMoveAttribute() == "Switch":
                     protagonist.choosePokemon()
+                
+                self.setIsProtagonistTurn(False)
             else:
                 protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
                 opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
 
                 availableMoves = opponentActivePokemon.getPokemonMovesDict()
 
+                #Checks for number of available moves, because randint() cannot work with only one element in a list
                 if len(availableMoves) < 1:
                     move = availableMoves[list(availableMoves.keys())[0]]
                 else:
@@ -68,4 +76,15 @@ class Battle:
 
                 if move.getMoveAttribute() == "Attack":
                     move.damage(self, opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()], protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()])
-                    self.setIsProtagonistTurn(True)
+                elif move.getMoveAttribute() == "Switch":
+                    availablePokemon = opponent.getTrainerLivePokemonsDict()
+
+                    #Checks for number of available mvoes, because randint() cannot work with only one element in a list
+                    if len(availablePokemon) < 1:
+                        newPokemon = list(availablePokemon.values())[0]
+                    else:
+                        newPokemon = list(availablePokemon.values())[randint(0, len(availablePokemon.values()) - 1)]
+                    
+                    opponent.setTrainerActivePokemon(newPokemon)
+
+                self.setIsProtagonistTurn(True)
