@@ -140,10 +140,10 @@
 >       -   TODO
 >           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
 >           -   Battles: Checkpoint battles and boss battles
+>           -   Items in general
 >           -   Trainers: Create more trainers so that random encounters are more randomised
 >           -   Moves: Include more moves
 >           -   UI in general
->           -   Comment purpose of files
 
 ## Week 8 (16 Aug - 22 Aug)
 
