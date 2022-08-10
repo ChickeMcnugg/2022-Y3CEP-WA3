@@ -70,6 +70,12 @@ class Trainer:
     
     def getTrainerItemsDict(self):
         return self.trainerItemsDict
+    
+    def useTrainerItem(self, newItem):
+        self.trainerItemsDict[newItem][1] -= 1
+
+        if self.trainerItemsDict[newItem][1] == 0:
+            del(self.trainerItemsDict[newItem])
 
     def getTrainerLocation(self):
         return self.trainerLocation
@@ -136,5 +142,7 @@ class Trainer:
         while itemInput not in availableItems:
             itemInput = input(itemMessage)
         
+        self.useTrainerItem(itemInput)
         print(self.trainerName + " used a " + itemInput + ".")
-        return self.trainerItemsDict()[itemInput]
+        sleep(1)
+        return self.trainerItemsDict[itemInput]
