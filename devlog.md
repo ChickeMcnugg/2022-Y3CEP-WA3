@@ -138,11 +138,9 @@
 >           -   Comment purpose of files
 >   -   10/8
 >       -   TODO
->           -   Battles: Print pokemon information after switching to it
 >           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
 >           -   Battles: Checkpoint battles and boss battles
 >           -   Trainers: Create more trainers so that random encounters are more randomised
->           -   Pokemon: Wild pokemon and random encounters
 >           -   Moves: Include more moves
 >           -   UI in general
 >           -   Comment purpose of files

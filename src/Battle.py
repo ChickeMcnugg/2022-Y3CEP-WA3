@@ -107,3 +107,90 @@ class Battle:
                     opponent.setTrainerActivePokemon(newPokemon)
 
                 self.setIsProtagonistTurn(True)
+
+class RandomEncounter:
+    def __init__(self, trainerProtagonist, pokemonOpponent):
+        self.trainerProtagonist = trainerProtagonist
+        self.pokemonOpponent = pokemonOpponent
+        self.isProtagonistTurn = True
+        self.isEnded = False
+    
+    def __repr__(self):
+        return "This is a battle between " + self.trainerProtagonist.getTrainerName() + " and " + self.pokemonOpponent.getPokemonName() + "."
+    
+    def getTrainerProtagonist(self):
+        return self.trainerProtagonist
+    
+    def getPokemonOpponent(self):
+        return self.pokemonOpponent
+    
+    def getIsProtagonistTurn(self):
+        return self.isProtagonistTurn
+    
+    def setIsProtagonistTurn(self, isTurn):
+        self.isProtagonistTurn = isTurn
+    
+    def getIsEnded(self):
+        return self.isEnded
+    
+    def setIsEnded(self, isEnded):
+        self.isEnded = isEnded
+
+    def startBattle(self):
+        #UI
+        print("A wild " + self.pokemonOpponent.getPokemonName() + " appeared.")
+        sleep(1)
+
+        #defining variables for later use
+        protagonist = self.trainerProtagonist
+        protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
+        opponent = self.pokemonOpponent
+
+        #UI
+        print(protagonist.getTrainerName() + " chooses " + protagonistActivePokemon.getPokemonName() + ".")
+        sleep(1)
+
+        #Check if one player has no available pokemon left to fight
+        while not self.getIsEnded():
+            #Switches from manual if it is the player's turn, to AI if it is the opponent's turn
+            if self.getIsProtagonistTurn():
+                #UI
+                print("It is " + protagonist.getTrainerName() + "'s turn.")
+                sleep(1)
+
+                protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
+                
+                move = protagonistActivePokemon.chooseMove()
+                
+                #Subsequent actions are found inside the functions
+                if move.getMoveAttribute() == "Attack":
+                    move.damage(self, protagonistActivePokemon, opponent)
+                elif move.getMoveAttribute() == "Switch":
+                    protagonist.choosePokemon()
+                elif move.getMoveAttribute() == "Run":
+                    print(protagonist.getTrainerName() + " has decided to run away.")
+                    sleep(1)
+                    self.setIsEnded(True)
+                
+                self.setIsProtagonistTurn(False)
+            else:
+                #UI
+                print("It is " + opponent.getPokemonName() + "'s turn.")
+                sleep(1)
+
+                protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
+                
+                availableMoves = list(opponent.getPokemonMovesDict().keys())
+                availableMoves.remove("Switch")
+                availableMoves.remove("Run")
+
+                #Checks for number of available moves, because randint() cannot work with only one element in a list
+                if len(availableMoves) < 1:
+                    move = opponent.getPokemonMovesDict()[availableMoves[0]]
+                else:
+                    move = opponent.getPokemonMovesDict()[availableMoves[randint(0, len(availableMoves) - 1)]]
+
+                if move.getMoveAttribute() == "Attack":
+                    move.damage(self, opponent, protagonistActivePokemon)
+                
+                self.setIsProtagonistTurn(True)

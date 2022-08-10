@@ -1,5 +1,5 @@
-from cProfile import run
 from random import randint
+from copy import deepcopy
 from Battle import *
 from Pokemon import *
 from Trainer import *
@@ -7,120 +7,6 @@ from Item import *
 from Type import *
 from Location import *
 from Move import *
-
-def setupMap():
-    global palletTown, viridianCity, pewterCity, ceruleanCity, saffronCity, vermilionCity, celadonCity, lavendarCity, fuschiaCity, cinnibarIsland
-    global victoryRoad, viridianForest, mountMoon, rockTunnel, powerPlant, radioTower, silphCo, seafoamIslands, tohjoFalls
-    global indigoPlateau, mountSilver, diglettCave, billHouse
-    global route1, route2, route3, route4, route5, route6, route7, route8, route9, route10, route11, route12, route13, route14, route15, route16, route17, route18, route19, route20, route21, route22, route24, route25, route26, route27, route28
-
-    palletTown = Location("Pallet Town")
-    viridianCity = Location("Viridian City")
-    pewterCity = Location("Pewter City")
-    ceruleanCity = Location("Cerulean City")
-    saffronCity = Location("Saffron City")
-    vermilionCity = Location("Vermilion City")
-    celadonCity = Location("Celandon City")
-    lavendarCity = Location("Lavendar City")
-    fuschiaCity  = Location("Fuschia City")
-    cinnibarIsland = Location("Cinnibar Island")
-
-    victoryRoad = Location("Victory Road")
-    viridianForest = Location("Viridian Forest")
-    mountMoon = Location("Mount Moon")
-    rockTunnel = Location("Rock Tunnel")
-    powerPlant = Location("Power Plant")
-    radioTower = Location("RadioTower")
-    silphCo = Location("Silph Co.")
-    seafoamIslands = Location("Seafoam Islands")
-    tohjoFalls = Location("Tohjo Falls")
-
-    indigoPlateau = Location("Indigo Plateau")
-    mountSilver = Location("Mount Silver")
-    diglettCave = Location("Diglett's Cave")
-    billHouse = Location("Bill's House")
-
-    route1 = Location("Route 1")
-    route2 = Location("Route 2")
-    route3 = Location("Route 3")
-    route4 = Location("Route 4")
-    route5 = Location("Route 5")
-    route6 = Location("Route 6")
-    route7 = Location("Route 7")
-    route8 = Location("Route 8")
-    route9 = Location("Route 9")
-    route10 = Location("Route 10")
-    route11 = Location("Route 11")
-    route12 = Location("Route 12")
-    route13 = Location("Route 13")
-    route14 = Location("Route 14")
-    route15 = Location("Route 15")
-    route16 = Location("Route 16")
-    route17 = Location("Route 17")
-    route18 = Location("Route 18")
-    route19 = Location("Route 19")
-    route20 = Location("Route 20")
-    route21 = Location("Route 21")
-    route22 = Location("Route 22")
-    route24 = Location("Route 24")
-    route25 = Location("Route 25")
-    route26 = Location("Route 26")
-    route27 = Location("Route 27")
-    route28 = Location("Route 28")
-
-    palletTown.setTwoWayLocationNeighbour(route1, "North")
-    palletTown.setTwoWayLocationNeighbour(route21, "South")
-    route1.setTwoWayLocationNeighbour(viridianCity, "North")
-    viridianCity.setTwoWayLocationNeighbour(viridianForest, "North")
-    viridianCity.setTwoWayLocationNeighbour(route22, "West")
-    viridianForest.setTwoWayLocationNeighbour(route2, "North")
-    route2.setTwoWayLocationNeighbour(diglettCave, "East")
-    route2.setTwoWayLocationNeighbour(pewterCity, "North")
-    pewterCity.setTwoWayLocationNeighbour(route3, "East")
-    route3.setTwoWayLocationNeighbour(mountMoon, "East")
-    mountMoon.setTwoWayLocationNeighbour(route4, "East")
-    route4.setTwoWayLocationNeighbour(ceruleanCity, "East")
-    ceruleanCity.setTwoWayLocationNeighbour(route24, "North")
-    route24.setTwoWayLocationNeighbour(route25, "East")
-    route25.setTwoWayLocationNeighbour(billHouse, "East")
-    ceruleanCity.setTwoWayLocationNeighbour(route9, "East")
-    route9.setTwoWayLocationNeighbour(rockTunnel, "East")
-    rockTunnel.setTwoWayLocationNeighbour(route10, "South")
-    route10.setTwoWayLocationNeighbour(powerPlant, "South")
-    powerPlant.setTwoWayLocationNeighbour(radioTower, "South")
-    radioTower.setTwoWayLocationNeighbour(lavendarCity, "South")
-    lavendarCity.setTwoWayLocationNeighbour(route8, "West")
-    route8.setTwoWayLocationNeighbour(saffronCity, "West")
-    saffronCity.setTwoWayLocationNeighbour(silphCo, "North")
-    silphCo.setTwoWayLocationNeighbour(route5, "North")
-    route5.setTwoWayLocationNeighbour(ceruleanCity, "North")
-    saffronCity.setTwoWayLocationNeighbour(route7, "West")
-    route7.setTwoWayLocationNeighbour(celadonCity, "West")
-    celadonCity.setTwoWayLocationNeighbour(route16, "West")
-    route16.setTwoWayLocationNeighbour(route17, "South")
-    route17.setTwoWayLocationNeighbour(route18, "South")
-    route18.setTwoWayLocationNeighbour(fuschiaCity, "East")
-    fuschiaCity.setTwoWayLocationNeighbour(route19, "South")
-    route19.setTwoWayLocationNeighbour(route20, "South")
-    route20.setTwoWayLocationNeighbour(seafoamIslands, "West")
-    seafoamIslands.setTwoWayLocationNeighbour(cinnibarIsland, "West")
-    cinnibarIsland.setTwoWayLocationNeighbour(route21, "North")
-    saffronCity.setTwoWayLocationNeighbour(route6, "South")
-    route6.setTwoWayLocationNeighbour(vermilionCity, "South")
-    vermilionCity.setTwoWayLocationNeighbour(route11, "East")
-    route11.setTwoWayLocationNeighbour(route12, "East")
-    route12.setTwoWayLocationNeighbour(lavendarCity, "North")
-    route12.setTwoWayLocationNeighbour(route13, "South")
-    route13.setTwoWayLocationNeighbour(route14, "West")
-    route14.setTwoWayLocationNeighbour(route15, "South")
-    route15.setTwoWayLocationNeighbour(fuschiaCity, "West")
-    route22.setTwoWayLocationNeighbour(victoryRoad, "West")
-    victoryRoad.setTwoWayLocationNeighbour(indigoPlateau, "North")
-    victoryRoad.setTwoWayLocationNeighbour(route28, "West")
-    route28.setTwoWayLocationNeighbour(mountSilver, "West")
-    victoryRoad.setTwoWayLocationNeighbour(route26, "South")
-    route26.setTwoWayLocationNeighbour(route27, "South")
-    route27.setTwoWayLocationNeighbour(tohjoFalls, "West")
 
 def setupTypes():
     global bugType, dragonType, electricType, fightingType, fireType, flyingType, ghostType, grassType, groundType, iceType, normalType, poisonType, psychicType, rockType, waterType
@@ -456,6 +342,161 @@ def setupPokemon():
             for move in waterMoves:
                 pokemon.addPokemonMoves(move)
 
+def setupMap():
+    global palletTown, viridianCity, pewterCity, ceruleanCity, saffronCity, vermilionCity, celadonCity, lavendarCity, fuschiaCity, cinnibarIsland
+    global victoryRoad, viridianForest, mountMoon, rockTunnel, powerPlant, radioTower, silphCo, seafoamIslands, tohjoFalls
+    global indigoPlateau, mountSilver, diglettCave, billHouse
+    global route1, route2, route3, route4, route5, route6, route7, route8, route9, route10, route11, route12, route13, route14, route15, route16, route17, route18, route19, route20, route21, route22, route24, route25, route26, route27, route28
+
+    palletTown = Location("Pallet Town")
+    viridianCity = Location("Viridian City")
+    pewterCity = Location("Pewter City")
+    ceruleanCity = Location("Cerulean City")
+    saffronCity = Location("Saffron City")
+    vermilionCity = Location("Vermilion City")
+    celadonCity = Location("Celandon City")
+    lavendarCity = Location("Lavendar City")
+    fuschiaCity  = Location("Fuschia City")
+    cinnibarIsland = Location("Cinnibar Island")
+
+    victoryRoad = Location("Victory Road")
+    viridianForest = Location("Viridian Forest")
+    mountMoon = Location("Mount Moon")
+    rockTunnel = Location("Rock Tunnel")
+    powerPlant = Location("Power Plant")
+    radioTower = Location("RadioTower")
+    silphCo = Location("Silph Co.")
+    seafoamIslands = Location("Seafoam Islands")
+    tohjoFalls = Location("Tohjo Falls")
+
+    indigoPlateau = Location("Indigo Plateau")
+    mountSilver = Location("Mount Silver")
+    diglettCave = Location("Diglett's Cave")
+    billHouse = Location("Bill's House")
+
+    route1 = Location("Route 1")
+    route2 = Location("Route 2")
+    route3 = Location("Route 3")
+    route4 = Location("Route 4")
+    route5 = Location("Route 5")
+    route6 = Location("Route 6")
+    route7 = Location("Route 7")
+    route8 = Location("Route 8")
+    route9 = Location("Route 9")
+    route10 = Location("Route 10")
+    route11 = Location("Route 11")
+    route12 = Location("Route 12")
+    route13 = Location("Route 13")
+    route14 = Location("Route 14")
+    route15 = Location("Route 15")
+    route16 = Location("Route 16")
+    route17 = Location("Route 17")
+    route18 = Location("Route 18")
+    route19 = Location("Route 19")
+    route20 = Location("Route 20")
+    route21 = Location("Route 21")
+    route22 = Location("Route 22")
+    route24 = Location("Route 24")
+    route25 = Location("Route 25")
+    route26 = Location("Route 26")
+    route27 = Location("Route 27")
+    route28 = Location("Route 28")
+
+    palletTown.setTwoWayLocationNeighbour(route1, "North")
+    palletTown.setTwoWayLocationNeighbour(route21, "South")
+    route1.setTwoWayLocationNeighbour(viridianCity, "North")
+    viridianCity.setTwoWayLocationNeighbour(viridianForest, "North")
+    viridianCity.setTwoWayLocationNeighbour(route22, "West")
+    viridianForest.setTwoWayLocationNeighbour(route2, "North")
+    route2.setTwoWayLocationNeighbour(diglettCave, "East")
+    route2.setTwoWayLocationNeighbour(pewterCity, "North")
+    pewterCity.setTwoWayLocationNeighbour(route3, "East")
+    route3.setTwoWayLocationNeighbour(mountMoon, "East")
+    mountMoon.setTwoWayLocationNeighbour(route4, "East")
+    route4.setTwoWayLocationNeighbour(ceruleanCity, "East")
+    ceruleanCity.setTwoWayLocationNeighbour(route24, "North")
+    route24.setTwoWayLocationNeighbour(route25, "East")
+    route25.setTwoWayLocationNeighbour(billHouse, "East")
+    ceruleanCity.setTwoWayLocationNeighbour(route9, "East")
+    route9.setTwoWayLocationNeighbour(rockTunnel, "East")
+    rockTunnel.setTwoWayLocationNeighbour(route10, "South")
+    route10.setTwoWayLocationNeighbour(powerPlant, "South")
+    powerPlant.setTwoWayLocationNeighbour(radioTower, "South")
+    radioTower.setTwoWayLocationNeighbour(lavendarCity, "South")
+    lavendarCity.setTwoWayLocationNeighbour(route8, "West")
+    route8.setTwoWayLocationNeighbour(saffronCity, "West")
+    saffronCity.setTwoWayLocationNeighbour(silphCo, "North")
+    silphCo.setTwoWayLocationNeighbour(route5, "North")
+    route5.setTwoWayLocationNeighbour(ceruleanCity, "North")
+    saffronCity.setTwoWayLocationNeighbour(route7, "West")
+    route7.setTwoWayLocationNeighbour(celadonCity, "West")
+    celadonCity.setTwoWayLocationNeighbour(route16, "West")
+    route16.setTwoWayLocationNeighbour(route17, "South")
+    route17.setTwoWayLocationNeighbour(route18, "South")
+    route18.setTwoWayLocationNeighbour(fuschiaCity, "East")
+    fuschiaCity.setTwoWayLocationNeighbour(route19, "South")
+    route19.setTwoWayLocationNeighbour(route20, "South")
+    route20.setTwoWayLocationNeighbour(seafoamIslands, "West")
+    seafoamIslands.setTwoWayLocationNeighbour(cinnibarIsland, "West")
+    cinnibarIsland.setTwoWayLocationNeighbour(route21, "North")
+    saffronCity.setTwoWayLocationNeighbour(route6, "South")
+    route6.setTwoWayLocationNeighbour(vermilionCity, "South")
+    vermilionCity.setTwoWayLocationNeighbour(route11, "East")
+    route11.setTwoWayLocationNeighbour(route12, "East")
+    route12.setTwoWayLocationNeighbour(lavendarCity, "North")
+    route12.setTwoWayLocationNeighbour(route13, "South")
+    route13.setTwoWayLocationNeighbour(route14, "West")
+    route14.setTwoWayLocationNeighbour(route15, "South")
+    route15.setTwoWayLocationNeighbour(fuschiaCity, "West")
+    route22.setTwoWayLocationNeighbour(victoryRoad, "West")
+    victoryRoad.setTwoWayLocationNeighbour(indigoPlateau, "North")
+    victoryRoad.setTwoWayLocationNeighbour(route28, "West")
+    route28.setTwoWayLocationNeighbour(mountSilver, "West")
+    victoryRoad.setTwoWayLocationNeighbour(route26, "South")
+    route26.setTwoWayLocationNeighbour(route27, "South")
+    route27.setTwoWayLocationNeighbour(tohjoFalls, "West")
+
+    palletTown.addLocationPokemon([magikarp, poliwag, goldeen, tentacool])
+    route1.addLocationPokemon([rattata, pidgey])
+    viridianCity.addLocationPokemon([magikarp, poliwag, goldeen, tentacool])
+    viridianForest.addLocationPokemon([caterpie, metapod, weedle, kakuna, pikachu])
+    route2.addLocationPokemon([caterpie, pidgey, rattata])
+    diglettCave.addLocationPokemon([diglett, dugtrio])
+    route21.addLocationPokemon([pidgey, pidgeotto, rattata, raticate, tangela, tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
+    cinnibarIsland.addLocationPokemon([magikarp, poliwag, goldeen, shellder, horsea, staryu])
+    route3.addLocationPokemon([pidgey, spearow, jigglypuff])
+    mountMoon.addLocationPokemon([clefairy, zubat, paras, geodude])
+    route4.addLocationPokemon([rattata, spearow, ekans, sandshrew, magikarp, poliwag, goldeen, psyduck, krabby])
+    ceruleanCity.addLocationPokemon([magikarp, poliwag, goldeen, psyduck, krabby, jynx])
+    route24.addLocationPokemon([caterpie, metapod, weedle, kakuna, pidgey, oddish, abra, bellsprout, magikarp, poliwag, goldeen, psyduck, krabby])
+    route25.addLocationPokemon([caterpie, metapod, weedle, kakuna, pidgey, oddish, abra, bellsprout, magikarp, poliwag, goldeen, psyduck, krabby])
+    route9.addLocationPokemon([rattata, spearow, ekans])
+    rockTunnel.addLocationPokemon([zubat, geodude, machop, onix])
+    route10.addLocationPokemon([spearow, ekans, sandshrew, voltorb, magikarp, poliwag, goldeen, poliwhirl, slowpoke])
+    powerPlant.addLocationPokemon([pikachu, raichu, magnemite, magneton, voltorb, electabuzz, electrode, zapdos])
+    radioTower.addLocationPokemon([gastly, haunter, cubone, marowak])
+    route5.addLocationPokemon([pidgey, oddish, meowth, mankey, bellsprout])
+    silphCo.addLocationPokemon([lapras])
+    route8.addLocationPokemon([pidgey, ekans, sandshrew, vulpix, meowth, mankey, growlithe])
+    route7.addLocationPokemon([pidgey, vulpix, oddish, meowth, mankey, growlithe, bellsprout])
+    celadonCity.addLocationPokemon([magikarp, poliwag, goldeen, poliwhirl, slowpoke])
+    route16.addLocationPokemon([rattata, raticate, spearow, doduo, snorlax])
+    route17.addLocationPokemon([raticate, spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby])
+    route18.addLocationPokemon([raticate, spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby, lickitung])
+    fuschiaCity.addLocationPokemon([magikarp, poliwag, goldeen, krabby, seaking])
+    route19.addLocationPokemon([tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
+    route20.addLocationPokemon([tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
+    seafoamIslands.addLocationPokemon([zubat, golbat, psyduck, golduck, slowpoke, slowbro, seel, shellder, krabby, horsea, staryu])
+    route6.addLocationPokemon([pidgey, oddish, meowth, mankey, bellsprout, magikarp, poliwag, goldeen, shellder, krabby])
+    vermilionCity.addLocationPokemon([farfetchd, magikarp, poliwag, goldeen, shellder, krabby])
+    route11.addLocationPokemon([spearow, ekans, sandshrew, drowzee, magikarp, poliwag, goldeen, shellder, krabby, nidorina])
+    route12.addLocationPokemon([pidgey, oddish, gloom, venonat, bellsprout, weepinbell, magikarp, poliwag, goldeen, tentacool, krabby, snorlax])
+    route13.addLocationPokemon([pidgey, oddish, gloom, venonat, bellsprout, weepinbell, ditto, magikarp, poliwag, goldeen, tentacool, krabby])
+    route14.addLocationPokemon([pidgey, oddish, gloom, venonat, bellsprout, weepinbell, ditto, magikarp, poliwag, goldeen])
+    route15.addLocationPokemon([pidgeot, pidgeotto, oddish, gloom, venonat, bellsprout, weepinbell, ditto])
+    route22.addLocationPokemon([rattata, spearow, nidoranMale, nidoranFemale, magikarp, poliwag, goldeen])
+    victoryRoad.addLocationPokemon([zubat, golbat, machop, machoke, geodude, graveler, onix, marowak, moltres, venomoth])
+    indigoPlateau.addLocationPokemon([magikarp, goldeen, poliwag])
 
 def setupTrainers():
     global protagonist
@@ -467,9 +508,6 @@ def setupTrainers():
     botanist = Trainer("Botanist", {"Charmeleon": charmeleon}, {}, route1)
 
 def setup():
-    #Creates and orders locations
-    setupMap()
-
     #Creates types and type advantages for use in battles
     setupTypes()
 
@@ -478,6 +516,9 @@ def setup():
 
     #Creates pokemons to be referenced for random encounters and other battles
     setupPokemon()
+
+    #Creates and orders locations
+    setupMap()
 
     #Creates trainers that can be played against, and the player protagonist
     setupTrainers()
@@ -497,15 +538,20 @@ while True:
             if len(protagonist.getTrainerLivePokemonsDict()) != 0:
                 #Roll chance for random encounter
                 if randint(1, 100) > 0:
-                    #Randomly pick a trainer from those in the current location
-                    trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
-                    del(trainers[protagonist.getTrainerName()])
+                    availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
+                    randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
+                    randomEncounter = RandomEncounter(protagonist, randomPokemon)
+                    randomEncounter.startBattle()
+
+                    # #Randomly pick a trainer from those in the current location
+                    # trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
+                    # del(trainers[protagonist.getTrainerName()])
                     
-                    if len(trainers) != 0:
-                        opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
+                    # if len(trainers) != 0:
+                    #     opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
                         
-                        #Check if the opponent has available pokemon to fight
-                        if opponent.getTrainerActivePokemon() != "":
-                            #Start battle
-                            battle = Battle(protagonist, opponent)
-                            battle.startBattle()
+                    #     #Check if the opponent has available pokemon to fight
+                    #     if opponent.getTrainerActivePokemon() != "":
+                    #         #Start battle
+                    #         battle = Battle(protagonist, opponent)
+                    #         battle.startBattle()
