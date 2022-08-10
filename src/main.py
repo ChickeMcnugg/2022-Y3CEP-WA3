@@ -4,6 +4,7 @@
 from random import randint
 from copy import deepcopy
 from Battle import *
+from Effect import Effect
 from Pokemon import *
 from Trainer import *
 from Item import *
@@ -134,6 +135,15 @@ def setupMoves():
         else:
             for category in moveCategories:
                 category.append(move)
+
+def setupEffects():
+    global burn, freeze, paralysis, poison, sleep
+
+    burn = Effect("Burned", fireType, "Attack", 0.0625)
+    freeze = Effect("Frozen", iceType, "Move", 0)
+    paralysis = Effect("Paralysed", electricType, "Move", 0.75)
+    poison = Effect("Poisoned", poisonType, "Attack", 0.0625)
+    sleep = Effect("Slept", ghostType, "Move", 3)
 
 def setupPokemon():
     global bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot
@@ -390,7 +400,7 @@ def setupItems():
     thunderStone = Item("Thunder Stone", "Stone", 0)
     waterStone = Item("Water Stone", "Stone", 0)
     leafStone = Item("Leaf Stone", "Stone", 0)
-    
+
     expAll = Item("EXP All", "EXP", 0)
     rareCandy = Item("Rare Candy", "Level", 1)
     xAccuracy = Item("X Accuracy", "Accuracy", 100)
@@ -569,6 +579,9 @@ def setup():
 
     #Creates and assigns moves with the corresponding pokemon types for use in battles
     setupMoves()
+
+    #Creates effects for use in battles
+    setupEffects()
 
     #Creates pokemons to be referenced for encounters
     setupPokemon()
