@@ -137,13 +137,42 @@
 >           -   UI in general
 >           -   Comment purpose of files
 >   -   10/8
+>       -   Fixed bug of protagonist being able to switch to the same pokemon by not giving the option
+>           -   Technically, the bug still exists but the player does not know that it is possible
+>           -   Should fix it in the future by not counting the same pokemon as a valid input
+>       -   Removed option to switch pokemon when there are no available pokemon to switch to
+>       -   Included more UI into battles to make it easier to understand what is happening
+>           -   Whose turn it is during the battle when it switches
+>           -   Move used by pokemon
+>           -   Effectiveness of damage based on type
+>       -   Added the ability for the player to run away from encounters
+>       -   Moved running away and switching pokemon out of a pokemon's move set, instead putting it as an available option before choosing pokemon moves
+>           -   This is similar to the original game where the layer is given 4 options to fight, switch pokemon, run away or use items in their bag
+>       -   Implemented random encounters by generating a random pokemon for the player to battle against
+>           -   Random pokemon is picked from a pool of selected pokemon to mimic the actual game where certain areas only spwan certain pokemon
+>           -   Initially separated pokemon encounters from trainer encounters but later merged both as there were many places where the code was repeated
+>               -   It was mainly UI that changed between the two so if statements were just used to replace the splitting
+>       -   Included descriptors for each file to make the functions clearer
+>       -   Changed the power of a move to be a booster of the pokemon's attack, rather than a multiplier, because there was not enough damage dealt in general
+>       -   Implemented items that can be used during and outside encounters
+>           -   Some items from the original game were excluded for now but may be included in the future if time permits
+>       -   Implemented logic for choosing items to use as anther function under the Trainer class
+>       -   Item class
+>           -   Contains the item's name, attribute and power
+>               -   Attribute is how the item affects battles and power is the intensity value
+>               -   E.g. Health potions contribute to Health (attribute), by increasing a pokemon's health by 30 (power)
+>       -   Effect class
+>           -   Contains the effects's name, attribute and power, similar to the item class
+>       -   Implemented logic for items to cancel out effects, but the effects have not been implemented yet
 >       -   TODO
 >           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
+>               -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
 >           -   Battles: Checkpoint battles and boss battles
->           -   Items in general
->           -   Trainers: Create more trainers so that random encounters are more randomised
+>           -   Effect: Effects on pokemon
+>           -   Trainers: Create more trainers so that random trainer encounters are more randomised
 >           -   Moves: Include more moves
->           -   UI in general
+>           -   UI in general, especially intro UI to the game
+>           -   Test code written today (most of it is not tested)
 
 ## Week 8 (16 Aug - 22 Aug)
 
