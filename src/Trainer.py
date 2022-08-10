@@ -64,8 +64,8 @@ class Trainer:
         print(self.trainerName + " chooses " + newPokemon.getPokemonName() + ".")
         sleep(1)
     
-    def getTrainerItemsList(self):
-        return self.trainerItemsList
+    def getTrainerItemsDict(self):
+        return self.trainerItemsDict
 
     def getTrainerLocation(self):
         return self.trainerLocation

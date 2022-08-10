@@ -69,7 +69,11 @@ class Move:
                 pokemonProtagonist.addPokemonEXP(30)
                 sleep(1)
                 
-                if pokemonOpponent.getPokemonOwner() != None:
+                if pokemonOpponent.getPokemonOwner() == None:
+                    battle.setIsEnded(True)
+                    print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                    sleep(1)
+                else:
                     pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
 
                     #Check if opponent has other available pokemon
@@ -79,7 +83,9 @@ class Move:
                         sleep(1)
                     else:
                         #Check if opponent is the opponent, because the player can only input for the protagonist
-                        if battle.getTrainerOpponent() == pokemonOpponent.getPokemonOwner():
+                        if battle.getEncounterProtagonist() == pokemonOpponent.getPokemonOwner():
+                            pokemonOpponent.getPokemonOwner().choosePokemon()
+                        else:
                             #Randomly choose new active pokemon from live pokemons
                             availablePokemon = pokemonOpponent.getPokemonOwner().getTrainerLivePokemonsDict()
                             if len(availablePokemon) > 1:
@@ -89,12 +95,6 @@ class Move:
 
                             print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon().getPokemonName() + ".")
                             sleep(1)
-                        else:
-                            pokemonOpponent.getPokemonOwner().choosePokemon()
-                else:
-                    battle.setIsEnded(True)
-                    print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
-                    sleep(1)
         else:
             print(pokemonProtagonist.getPokemonName() + " missed.")
             sleep(1)

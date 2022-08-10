@@ -81,10 +81,8 @@ def setupMoves():
     global tackle, switch, run
 
     tackle = Move("Tackle", normalType, "Attack", 40, 100)
-    switch = Move("Switch", normalType, "Switch", 0, 0)
-    run = Move("Run", normalType, "Run", 0, 0)
 
-    moves = [tackle, switch, run]
+    moves = [tackle]
 
     global bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves
     
@@ -552,7 +550,7 @@ def setupMap():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {}, palletTown)
+    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {"Poke Ball": pokeBall}, palletTown)
 
     global botanist
     
@@ -592,20 +590,20 @@ while True:
             if len(protagonist.getTrainerLivePokemonsDict()) != 0:
                 #Roll chance for random encounter
                 if randint(1, 100) > 0:
-                    availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
-                    randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
-                    randomEncounter = PokemonEncounter(protagonist, randomPokemon)
-                    randomEncounter.startBattle()
+                    # availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
+                    # randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
+                    # randomEncounter = Encounter(protagonist, randomPokemon)
+                    # randomEncounter.startBattle()
 
                     # #Randomly pick a trainer from those in the current location
-                    # trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
-                    # del(trainers[protagonist.getTrainerName()])
+                    trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
+                    del(trainers[protagonist.getTrainerName()])
                     
-                    # if len(trainers) != 0:
-                    #     opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
+                    if len(trainers) != 0:
+                        opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
                         
                     #     #Check if the opponent has available pokemon to fight
-                    #     if opponent.getTrainerActivePokemon() != "":
-                    #         #Start battle
-                    #         battle = TrainerEncounter(protagonist, opponent)
-                    #         battle.startBattle()
+                        if opponent.getTrainerActivePokemon() != "":
+                            #Start battle
+                            battle = Encounter(protagonist, opponent)
+                            battle.startBattle()

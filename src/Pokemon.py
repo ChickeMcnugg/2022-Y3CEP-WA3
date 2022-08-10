@@ -88,10 +88,6 @@ class Pokemon:
     def chooseMove(self):
         availableMoves = list(self.pokemonMovesDict.keys())
 
-        #Check if there are available pokemon to switch to
-        if len(self.getPokemonOwner().getTrainerLivePokemonsDict()) < 2:
-            availableMoves.remove("Switch")
-        
         #UI
         moveMessage = "Choose your move ("
         for move in availableMoves:
