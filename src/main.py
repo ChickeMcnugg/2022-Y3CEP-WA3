@@ -1,3 +1,6 @@
+#This is where the whole game is set up, including all the types, moves, pokemons, trainers, locations and map.
+#The logic for initiating random encounters and trainer encounters is also below.
+
 from random import randint
 from copy import deepcopy
 from Battle import *
@@ -540,7 +543,7 @@ while True:
                 if randint(1, 100) > 0:
                     availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
                     randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
-                    randomEncounter = RandomEncounter(protagonist, randomPokemon)
+                    randomEncounter = PokemonEncounter(protagonist, randomPokemon)
                     randomEncounter.startBattle()
 
                     # #Randomly pick a trainer from those in the current location
@@ -553,5 +556,5 @@ while True:
                     #     #Check if the opponent has available pokemon to fight
                     #     if opponent.getTrainerActivePokemon() != "":
                     #         #Start battle
-                    #         battle = Battle(protagonist, opponent)
+                    #         battle = TrainerEncounter(protagonist, opponent)
                     #         battle.startBattle()

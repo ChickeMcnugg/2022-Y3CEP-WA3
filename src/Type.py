@@ -1,3 +1,6 @@
+#The Type class contains the type advantages, disadvantages and immunity of every type in the game.
+#This is used during battles and affects the damage dealt when attacking.
+
 class Type:
     def __init__(self, typeName):
         self.typeName = typeName

@@ -1,3 +1,8 @@
+#The Move class contains the move's name, type, attribute, power and accuracy.
+#A move's type is referenced when assigning to pokemon that have the same type.
+#A move's attribute is referenced during battles to differentiate between attacks, recovers, running away and switching out pokemon.
+#A move's power and accuarcy is considered during battles to calculate whetehr the attack hits the opponent, adn how much damage is dealt
+
 from random import randint
 from time import sleep
 
@@ -34,7 +39,7 @@ class Move:
         
         #Calculate if move hits pokemonOpponent based on accuracy
         if randint(1, 100) > 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
-            damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 50)
+            damage = pokemonProtagonist.getPokemonAttack() + self.getMovePower()
             
             #Account for type advantages
             if pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeAdvantageList():

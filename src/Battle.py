@@ -1,7 +1,10 @@
+#The Encounter classes contain the battle's protagonist and opponent.
+#Both are referenced during the battle, and swap when the turn changes.
+
 from random import randint
 from time import sleep
 
-class Battle:
+class TrainerEncounter:
     def __init__(self, trainerProtagonist, trainerOpponent):
         self.trainerProtagonist = trainerProtagonist
         self.trainerOpponent = trainerOpponent
@@ -108,7 +111,7 @@ class Battle:
 
                 self.setIsProtagonistTurn(True)
 
-class RandomEncounter:
+class PokemonEncounter:
     def __init__(self, trainerProtagonist, pokemonOpponent):
         self.trainerProtagonist = trainerProtagonist
         self.pokemonOpponent = pokemonOpponent

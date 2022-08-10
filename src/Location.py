@@ -1,3 +1,7 @@
+#The Location class contains the location's name, neighbouring locations, and existing trainers and wild pokemon that can be found.
+#A location's neighbouring locations is referenced when teh player is moving from location to location on the map.
+#A location's existing trainers and wild pokemon are referenced during traienr battles and random encounters.
+
 class Location():
     def __init__(self, locationName):
         self.locationName = locationName

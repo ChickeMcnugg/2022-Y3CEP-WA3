@@ -1,3 +1,10 @@
+#The Pokemon class contains the pokemon's name, type, level, health, attack, defense, evasion, accuracy, owner and moves.
+#A pokemon's type is referenced during battle for type advantages.
+#A pokemon's level boosts the base statistics of the pokemon.
+#A pokemon's health, attack, defense, evasion and accuracy are considered when attacking or when being attacked by the opponent.
+#A pokemon's owner is referenced after battles to check if it is a random encounter.
+#A pokemon's moves are the moves the pokemon can make during battles.
+
 from math import floor
 from time import sleep
 

@@ -1,3 +1,7 @@
+#The Trainer class contains a trainer's name, pokemons, items and location.
+#A trainer's pokemon and items are referenced during battles.
+#A trainer's location is tracked to trigger special events like boss battles and checkpoints, and also affect the pokemon that can appear during random encounters.
+
 from time import sleep
 
 class Trainer:
