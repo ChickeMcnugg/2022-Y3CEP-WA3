@@ -94,9 +94,14 @@ class Trainer:
             return False
 
     def choosePokemon(self):
-        #UI    
+        #Provide pokemon options
+        availablePokemon = list(self.trainerLivePokemonsDict.keys())
+        if self.trainerActivePokemon != "":
+            availablePokemon.remove(self.trainerActivePokemon)
+
+        #UI
         pokemonMessage = "Choose a pokemon ("
-        for pokemon in list(self.trainerLivePokemonsDict.keys()):
+        for pokemon in availablePokemon:
             pokemonMessage += pokemon + ", "
         pokemonMessage = pokemonMessage[:-2] + ") : "
 
@@ -109,3 +114,4 @@ class Trainer:
             self.trainerActivePokemon = pokemonInput
             sleep(1)
             print(self.trainerName + " chooses " + pokemonInput)
+            print(self.getTrainerLivePokemonsDict()[self.trainerActivePokemon])

@@ -79,9 +79,15 @@ class Pokemon:
         self.pokemonOwner = newOwner
     
     def chooseMove(self):
+        availableMoves = list(self.pokemonMovesDict.keys())
+
+        #Check if there are available pokemon to switch to
+        if len(self.getPokemonOwner().getTrainerLivePokemonsDict()) < 2:
+            availableMoves.remove("Switch")
+        
         #UI
         moveMessage = "Choose your move ("
-        for move in list(self.pokemonMovesDict.keys()):
+        for move in availableMoves:
             moveMessage += move + ", "
         moveMessage = moveMessage[:-2] + ") : "
 

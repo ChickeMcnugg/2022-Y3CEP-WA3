@@ -10,7 +10,7 @@ class Move:
         self.moveAccuracy = moveAccuracy
     
     def __repr__(self):
-        return "The " + self.moveType.getTypeName() + " move, " + self.moveName + ", has a power of " + str(self.movePower) + "% and an accuarcy of " + str(self.moveAccuracy) + "%."
+        return "The " + self.moveType.getTypeName() + " move, " + self.moveName + ", has a power of " + str(self.movePower) + "% and an accuracy of " + str(self.moveAccuracy) + "%."
     
     def getMoveName(self):
         return self.moveName
@@ -28,6 +28,10 @@ class Move:
         return self.moveAccuracy
     
     def damage(self, battle, pokemonProtagonist, pokemonOpponent):
+        #UI
+        print(pokemonProtagonist.getPokemonName() + " uses " + self.moveName + ".")
+        sleep(1)
+        
         #Calculate if move hits pokemonOpponent based on accuracy
         if randint(1, 100) > 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
             damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 50)
@@ -35,10 +39,16 @@ class Move:
             #Account for type advantages
             if pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeAdvantageList():
                 damage *= 2
+                print("It was effective.")
+                sleep(1)
             elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeDisadvantageList():
                 damage *= 0.5
+                print("It was not effective.")
+                sleep(1)
             elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeImmuneList():
                 damage = 0
+                print("It was no effect.")
+                sleep(1)
             
             defense = pokemonOpponent.getPokemonDefense()
             netDamage = int(max(damage - defense, 0))

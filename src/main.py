@@ -1,3 +1,4 @@
+from cProfile import run
 from random import randint
 from Battle import *
 from Pokemon import *
@@ -188,10 +189,13 @@ def setupTypes():
     waterType.setTypeDisadvantageList([waterType, grassType, dragonType])
 
 def setupMoves():
-    global tackle
+    global tackle, switch, run
 
     tackle = Move("Tackle", normalType, "Attack", 40, 100)
     switch = Move("Switch", normalType, "Switch", 0, 0)
+    run = Move("Run", normalType, "Run", 0, 0)
+
+    moves = [tackle, switch, run]
 
     global bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves
     
@@ -210,8 +214,7 @@ def setupMoves():
     psychicMoves = []
     rockMoves = []
     waterMoves = []
-    
-    moves = [tackle, switch]
+
     moveCategories = [bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves]
 
     for move in moves:
