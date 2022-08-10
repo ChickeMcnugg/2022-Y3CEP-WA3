@@ -22,6 +22,7 @@ class Pokemon:
         self.pokemonAccuracy = pokemonAccuracy
         self.pokemonMovesDict = {}
         self.pokemonOwner = None
+        self.pokemonEffects = []
     
     def __repr__(self):
         return "This is a " + self.pokemonType.getTypeName() + ", Level " + str(self.pokemonLevel) + " " + self.pokemonName + "."
@@ -84,6 +85,21 @@ class Pokemon:
     
     def setPokemonOwner(self, newOwner):
         self.pokemonOwner = newOwner
+    
+    def getPokemonEffects(self):
+        return self.pokemonEffects
+    
+    def removePokemonEffects(self, effects):
+        for effect in effects:
+            if effect in self.pokemonEffects:
+                self.pokemonEffects.remove(effect)
+                print(self.pokemonName + "is no longer " + effect.lower() + ".")
+    
+    def addPokemonEffects(self, effects):
+        for effect in effects:
+            if effect not in self.pokemonEffects:
+                self.pokemonEffects.append(effect)
+                print(self.pokemonName + " has been " + effect.lower() + ".")
     
     def chooseMove(self):
         availableMoves = list(self.pokemonMovesDict.keys())
