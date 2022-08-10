@@ -119,3 +119,18 @@ class Trainer:
             sleep(1)
             print(self.trainerName + " chooses " + pokemonInput)
             print(self.getTrainerLivePokemonsDict()[self.trainerActivePokemon])
+    
+    def chooseItem(self):
+        availableItems = list(self.trainerItemsDict.keys())
+        
+        itemMessage = "Choose an item to use ("
+        for item in availableItems:
+            itemMessage += item + ", "
+        itemMessage = itemMessage[:-2] + ") : "
+
+        itemInput = ""
+        while itemInput not in availableItems:
+            itemInput = input(itemMessage)
+        
+        print(self.trainerName + " used a " + itemInput + ".")
+        return self.trainerItemsDict()[itemInput]

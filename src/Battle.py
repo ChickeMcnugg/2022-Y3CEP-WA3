@@ -96,8 +96,28 @@ class Encounter:
                     sleep(1)
                     self.setIsEnded(True)
                 else:
-                    print("Hi")
-                
+                    item = protagonist.chooseItem()
+
+                    if item.getItemAttribute() == "Ball" and self.isPokemonEncounter:
+                        continue
+                    elif item.getItemAttribute() == "Medicine":
+                        continue
+                    elif item.getItemAttribute() == "Revive":
+                        continue
+                    elif item.getItemAttribute() == "Health":
+                        protagonistActivePokemon.addPokemonHealth(item.getItemPower())
+                    elif item.getItemAttribute() == "EXP":
+                        continue
+                    elif item.getItemAttribute() == "Level":
+                        continue
+                    elif item.getItemAttribute() == "Accuracy":
+                        continue
+                    elif item.getItemAttribute() == "Attack":
+                        continue
+                    elif item.getItemAttribute() == "Defense":
+                        continue
+                    else:
+                        continue
                 self.setIsProtagonistTurn(False)
             else:
                 if self.isPokemonEncounter:

@@ -352,14 +352,17 @@ def setupItems():
     ultraBall = Item("Ultra Ball", "Ball", 0)
     greatBall = Item("Great Ball", "Ball", 0)
     pokeBall = Item("Poke Ball", "Ball", 0)
+
     antidote = Item("Antidote", "Medicine", 0)
     burnHeal = Item("Burn Heal", "Medicine", 0)
     iceHeal = Item("Ice Heal", "Medicine", 0)
     awakening = Item("Awakening", "Medicine", 0)
     paralyseHeal = Item("Parlyse Heal", "Medicine", 0)
     fullHeal = Item("Full Heal", "Medicine", 0)
+
     revive = Item("Revive", "Revive", 0.5)
     maxRevive = Item("Max Revive", "Revive", 1)
+
     fullRestore = Item("Full Restore", "Health", 0)
     maxPotion = Item("Max Potion", "Health", 0)
     hyperPotion = Item("Hyper Potion", "Health", 200)
@@ -368,6 +371,7 @@ def setupItems():
     freshWater = Item("Fresh Water", "Health", 30)
     sodaPop = Item("Soda Pop", "Health", 60)
     lemonade = Item("Lemonade", "Health", 80)
+
     boulderBadge = Item("Boulder Badge", "Badge", 0)
     cascadeBadge = Item("Cascade Badge", "Badge", 0)
     thunderBadge = Item("Thunder Badge", "Badge", 0)
@@ -376,14 +380,17 @@ def setupItems():
     marshBadge = Item("Marsh Badge", "Badge", 0)
     volcanoBadge = Item("Volcano Badge", "Badge", 0)
     earthBadge = Item("Earth Badge", "Badge", 0)
+
     oldAmber = Item("Old Amber", "Fossil", 0)
     domeFossil = Item("Dome Fossil", "Fossil", 0)
     helixFossil = Item("Helix Fossil", "Fossil", 0)
+
     moonStone = Item("Moon Stone", "Stone", 0)
     fireStone = Item("Fire Stone", "Stone", 0)
     thunderStone = Item("Thunder Stone", "Stone", 0)
     waterStone = Item("Water Stone", "Stone", 0)
     leafStone = Item("Leaf Stone", "Stone", 0)
+    
     expAll = Item("EXP All", "EXP", 0)
     rareCandy = Item("Rare Candy", "Level", 1)
     xAccuracy = Item("X Accuracy", "Accuracy", 100)
@@ -550,7 +557,7 @@ def setupMap():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {"Poke Ball": pokeBall}, palletTown)
+    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {"Poke Ball": [pokeBall, 1]}, palletTown)
 
     global botanist
     
