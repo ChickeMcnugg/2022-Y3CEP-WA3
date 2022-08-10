@@ -56,6 +56,10 @@ class Trainer:
         #Reset trainer's active pokemon
         self.trainerActivePokemon = ""
     
+    def revivePokemon(self, newPokemon):
+        self.trainerLivePokemonDict[newPokemon.getPokemonName().capitalize()] = newPokemon
+        del(self.trainerFaintedPokemonsDict[newPokemon.getPokemonName().capitalize()])
+    
     def getTrainerActivePokemon(self):
         return self.trainerActivePokemon
     

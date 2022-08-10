@@ -65,9 +65,6 @@ class Move:
                 #UI
                 print(pokemonOpponent.getPokemonName() + " has fainted.")
                 sleep(1)
-                print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
-                pokemonProtagonist.addPokemonEXP(30)
-                sleep(1)
                 
                 if pokemonOpponent.getPokemonOwner() == None:
                     battle.setIsEnded(True)
@@ -81,6 +78,14 @@ class Move:
                         battle.setIsEnded(True)
                         print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
                         sleep(1)
+                        if not battle.getHasEXPAll():
+                            print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
+                            pokemonProtagonist.addPokemonEXP(30)
+                            sleep(1)
+                        else:
+                            for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
+                                pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
+                                print(pokemon.getPokemonName() + " gained 30 EXP.")
                     else:
                         #Check if opponent is the opponent, because the player can only input for the protagonist
                         if battle.getEncounterProtagonist() == pokemonOpponent.getPokemonOwner():

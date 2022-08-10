@@ -12,6 +12,7 @@ class Encounter:
         self.isProtagonistTurn = True
         self.isEnded = False
         self.isPokemonEncounter = isinstance(self.encounterOpponent, Pokemon)
+        self.hasEXPAll = False
     
     def __repr__(self):
         if self.isPokemonEncounter:
@@ -36,6 +37,12 @@ class Encounter:
     
     def setIsEnded(self, isEnded):
         self.isEnded = isEnded
+    
+    def getHasEXPAll(self):
+        return self.hasEXPAll
+    
+    def setHasEXPAll(self, hasEXPAll):
+        self.hasEXPAll = hasEXPAll
     
     def getIsPokemonEncounter(self):
         return self.isPokemonEncounter
@@ -101,21 +108,37 @@ class Encounter:
                     if item.getItemAttribute() == "Ball" and self.isPokemonEncounter:
                         continue
                     elif item.getItemAttribute() == "Medicine":
-                        continue
+                        protagonistActivePokemon.removePokemonEffects(item.getItemPower())
                     elif item.getItemAttribute() == "Revive":
-                        continue
+                        availablePokemon = list(protagonist.getTrainerFaintedPokemonsDict().keys())
+                        reviveMessage = "Choose a pokemon to revive ("
+                        for pokemon in availablePokemon:
+                            reviveMessage += pokemon + ", "
+                        reviveMessage = reviveMessage[:-2] + ") : "
+                        
+                        reviveInput = ""
+                        while reviveInput not in availablePokemon:
+                            reviveInput = input(reviveMessage)
+                        
+                        revivedPokemon = protagonist.getTrainerFaintedPokemonsDict()[reviveInput]
+
+                        protagonist.revivePokemon(revivedPokemon)
+                        print(protagonist.trainerName + "'s " + revivedPokemon.getPokemonName() + " has been revived.")
+                        sleep(1)
+                        revivedPokemon.setPokemonHealth(revivedPokemon.getPokemonMaxHealth() * item.getItemPower())
+                        print(revivedPokemon.getPokemonName() + " has " + revivedPokemon.getPokemonHealth() + " health.")
                     elif item.getItemAttribute() == "Health":
                         protagonistActivePokemon.addPokemonHealth(item.getItemPower())
                     elif item.getItemAttribute() == "EXP":
-                        continue
+                        self.setHasEXPAll(True)
                     elif item.getItemAttribute() == "Level":
-                        continue
+                        protagonistActivePokemon.addPokemonLevel(item.getItemPower())
                     elif item.getItemAttribute() == "Accuracy":
-                        continue
+                        protagonistActivePokemon.addPokemonAccuracy(item.getItemPower())
                     elif item.getItemAttribute() == "Attack":
-                        continue
+                        protagonistActivePokemon.addPokemonAttack(item.getItemPower())
                     elif item.getItemAttribute() == "Defense":
-                        continue
+                        protagonistActivePokemon.addPokemonDefense(item.getItemPower())
                     else:
                         continue
                 self.setIsProtagonistTurn(False)

@@ -45,9 +45,20 @@ class Pokemon:
     def getPokemonLevel(self):
         return self.pokemonLevel
     
+    def addPokemonLevel(self, newLevel):
+        self.pokemonLevel += newLevel
+        self.pokemonEXP = self.pokemonLevel ** 3
+        print(self.pokemonName + " gained " + str(newLevel) + " levels.")
+    
+    def getPokemonMaxHealth(self):
+        return self.pokemonMaxHealth
+    
     def getPokemonHealth(self):
         return self.pokemonHealth
     
+    def setPokemonHealth(self, newHealth):
+        self.pokemonHealth = newHealth
+
     def addPokemonHealth(self, newHealth):
         self.pokemonHealth += newHealth
 
@@ -65,15 +76,26 @@ class Pokemon:
     def getPokemonAttack(self):
         return self.pokemonAttack
     
+    def addPokemonAttack(self, newAttack):
+        self.pokemonAttack += newAttack
+        print(self.pokemonName + "'s attack rose to " + str(self.pokemonAttack) + ".")
+    
     def getPokemonDefense(self):
         return self.pokemonDefense
     
+    def addPokemonDefense(self, newDefense):
+        self.pokemonDefense += newDefense
+        print(self.pokemonName + "'s defense rose to " + str(self.pokemonAttack) + ".")
+
     def getPokemonEvasion(self):
         return self.pokemonEvasion
     
     def getPokemonAccuracy(self):
         return self.pokemonAccuracy
     
+    def addPokemonAccuracy(self, newAccuracy):
+        self.pokemonAccuracy = max(self.pokemonAccuracy + newAccuracy, 100)
+
     def getPokemonMovesDict(self):
         return self.pokemonMovesDict
         

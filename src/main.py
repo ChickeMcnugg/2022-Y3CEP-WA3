@@ -356,19 +356,19 @@ def setupPokemon():
 def setupItems():
     global masterBall, ultraBall, greatBall, pokeBall, antidote, burnHeal, iceHeal, awakening, paralyseHeal, fullHeal, revive, maxRevive, fullRestore, maxPotion, hyperPotion, superPotion, potion
     global freshWater, sodaPop, lemonade, boulderBadge, cascadeBadge, thunderBadge, rainbowBadge, soulBadge, marshBadge, volcanoBadge, earthBadge, oldAmber, domeFossil, helixFossil
-    global moonStone, fireStone, thunderStone, waterStone, leafStone, expAll, rareCandy, xAccuracy, xAttack, xDefend, guardSpec
+    global moonStone, fireStone, thunderStone, waterStone, leafStone, expAll, rareCandy, xAccuracy, xAttack, xDefend
 
     masterBall = Item("Master Ball", "Ball", 0)
     ultraBall = Item("Ultra Ball", "Ball", 0)
     greatBall = Item("Great Ball", "Ball", 0)
     pokeBall = Item("Poke Ball", "Ball", 0)
 
-    antidote = Item("Antidote", "Medicine", 0)
-    burnHeal = Item("Burn Heal", "Medicine", 0)
-    iceHeal = Item("Ice Heal", "Medicine", 0)
-    awakening = Item("Awakening", "Medicine", 0)
-    paralyseHeal = Item("Parlyse Heal", "Medicine", 0)
-    fullHeal = Item("Full Heal", "Medicine", 0)
+    antidote = Item("Antidote", "Medicine", poison)
+    burnHeal = Item("Burn Heal", "Medicine", burn)
+    iceHeal = Item("Ice Heal", "Medicine", freeze)
+    awakening = Item("Awakening", "Medicine", sleep)
+    paralyseHeal = Item("Parlyse Heal", "Medicine", paralysis)
+    fullHeal = Item("Full Heal", "Medicine", [poison, burn, freeze, sleep, paralysis])
 
     revive = Item("Revive", "Revive", 0.5)
     maxRevive = Item("Max Revive", "Revive", 1)
@@ -406,7 +406,6 @@ def setupItems():
     xAccuracy = Item("X Accuracy", "Accuracy", 100)
     xAttack = Item("X Attack", "Attack", 50)
     xDefend = Item("X Defend", "Defense", 50)
-    guardSpec = Item("Guard Spec.", "Guard Spec.", 0)
 
 def setupMap():
     global palletTown, viridianCity, pewterCity, ceruleanCity, saffronCity, vermilionCity, celadonCity, lavendarCity, fuschiaCity, cinnibarIsland
