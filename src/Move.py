@@ -38,7 +38,10 @@ class Move:
         sleep(1)
         
         #Calculate if move hits pokemonOpponent based on accuracy
-        if randint(1, 100) > 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
+        if randint(1, 100) < 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
+            print(pokemonProtagonist.getPokemonName() + " missed.")
+            sleep(1)
+        else:
             damage = pokemonProtagonist.getPokemonAttack() + self.getMovePower()
             
             #Account for type advantages
@@ -85,7 +88,7 @@ class Move:
                         else:
                             for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
                                 pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
-                                print(pokemon.getPokemonName() + " gained 30 EXP.")
+                                print(pokemon + " gained 30 EXP.")
                     else:
                         #Check if opponent is the opponent, because the player can only input for the protagonist
                         if battle.getEncounterProtagonist() == pokemonOpponent.getPokemonOwner():
@@ -98,8 +101,5 @@ class Move:
                             else:
                                 pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[0])
 
-                            print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon().getPokemonName() + ".")
+                            print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon() + ".")
                             sleep(1)
-        else:
-            print(pokemonProtagonist.getPokemonName() + " missed.")
-            sleep(1)

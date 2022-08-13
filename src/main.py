@@ -4,7 +4,7 @@
 from random import randint
 from copy import deepcopy
 from Battle import *
-from Effect import Effect
+from Effect import *
 from Pokemon import *
 from Trainer import *
 from Item import *
@@ -566,11 +566,11 @@ def setupMap():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {"Poke Ball": [pokeBall, 1]}, palletTown)
+    protagonist = Trainer("Ace", {"Charmeleon": charmeleon}, {"X Attack": [xAttack, 2], "X Defend": [xDefend, 1], "X Accuracy": [xAccuracy, 3], "EXP All": [expAll, 1], "Rare Candy": [rareCandy, 4]}, palletTown)
 
     global botanist
     
-    botanist = Trainer("Botanist", {"Charmeleon": charmeleon}, {}, route1)
+    botanist = Trainer("Botanist", {"Venusaur": venusaur, "Weedle": weedle}, {}, route1)
 
 def setup():
     #Creates types and type advantages for use in battles
@@ -609,11 +609,6 @@ while True:
             if len(protagonist.getTrainerLivePokemonsDict()) != 0:
                 #Roll chance for random encounter
                 if randint(1, 100) > 0:
-                    # availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
-                    # randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
-                    # randomEncounter = Encounter(protagonist, randomPokemon)
-                    # randomEncounter.startBattle()
-
                     # #Randomly pick a trainer from those in the current location
                     trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
                     del(trainers[protagonist.getTrainerName()])
@@ -621,8 +616,13 @@ while True:
                     if len(trainers) != 0:
                         opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
                         
-                    #     #Check if the opponent has available pokemon to fight
+                        #Check if the opponent has available pokemon to fight
                         if opponent.getTrainerActivePokemon() != "":
                             #Start battle
                             battle = Encounter(protagonist, opponent)
                             battle.startBattle()
+                    else:
+                        availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
+                        randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
+                        randomEncounter = Encounter(protagonist, randomPokemon)
+                        randomEncounter.startBattle()

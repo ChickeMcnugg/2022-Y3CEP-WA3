@@ -142,7 +142,8 @@ class Trainer:
         while itemInput not in availableItems:
             itemInput = input(itemMessage)
         
-        self.useTrainerItem(itemInput)
-        print(self.trainerName + " used a " + itemInput + ".")
+        item = self.trainerItemsDict[itemInput][0]
+        self.useTrainerItem(item.getItemName())
+        print(self.trainerName + " used a " + item.getItemName() + ".")
         sleep(1)
-        return self.trainerItemsDict[itemInput]
+        return item

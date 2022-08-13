@@ -173,6 +173,15 @@
 >           -   Moves: Include more moves
 >           -   UI in general, especially intro UI to the game
 >           -   Test code written today (most of it is not tested)
+>   -   13/8
+>       -   TODO
+>           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
+>               -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
+>           -   Battles: Checkpoint battles and boss battles
+>           -   Effect: Effects on pokemon
+>           -   Trainers: Create more trainers so that random trainer encounters are more randomised
+>           -   Moves: Include more moves
+>           -   UI in general, especially intro UI to the game
 
 ## Week 8 (16 Aug - 22 Aug)
 
