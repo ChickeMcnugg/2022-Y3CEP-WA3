@@ -6,6 +6,7 @@
 #A pokemon's moves are the moves the pokemon can make during battles.
 
 from math import floor
+from random import randint
 from time import sleep
 
 class Pokemon:
@@ -23,6 +24,7 @@ class Pokemon:
         self.pokemonMovesDict = {}
         self.pokemonOwner = None
         self.pokemonEffects = []
+        self.cannotMoveTurns = 0
     
     def __repr__(self):
         return "This is a " + self.pokemonType.getTypeName() + ", Level " + str(self.pokemonLevel) + " " + self.pokemonName + "."
@@ -95,6 +97,7 @@ class Pokemon:
     
     def addPokemonAccuracy(self, newAccuracy):
         self.pokemonAccuracy = max(self.pokemonAccuracy + newAccuracy, 100)
+        print(self.pokemonName + "'s accuracy rose to " + str(self.pokemonAccuracy) + "%.")
 
     def getPokemonMovesDict(self):
         return self.pokemonMovesDict
@@ -107,7 +110,7 @@ class Pokemon:
     
     def setPokemonOwner(self, newOwner):
         self.pokemonOwner = newOwner
-    
+
     def getPokemonEffects(self):
         return self.pokemonEffects
     
@@ -115,14 +118,34 @@ class Pokemon:
         for effect in effects:
             if effect in self.pokemonEffects:
                 self.pokemonEffects.remove(effect)
-                print(self.pokemonName + "is no longer " + effect.lower() + ".")
+                print(self.pokemonName + "is no longer " + effect.getEffectName().lower() + ".")
     
     def addPokemonEffects(self, effects):
         for effect in effects:
             if effect not in self.pokemonEffects:
                 self.pokemonEffects.append(effect)
-                print(self.pokemonName + " has been " + effect.lower() + ".")
+                print(self.pokemonName + " has been " + effect.getEffectName().lower() + ".")
+
+    def getCannotMoveTurns(self):
+        return self.cannotMoveTurns
     
+    def addCannotMoveTurns(self, newCannotMoveTurns):
+        self.cannotMoveTurns += newCannotMoveTurns
+
+    def updateEffects(self):
+        pokemonEffects = self.getPokemonEffects()
+
+        for effect in pokemonEffects:
+            if effect.getEffectAttribute() == "Attack":
+                print(self.getPokemonName() + " was " + effect.getEffectName().lower() + ".")
+                self.addPokemonHealth(-int(self.getPokemonMaxHealth() * effect.getEffectPower()))
+            elif effect.getEffectAttribute() == "Move":
+                if effect.getEffectPower() <= 1:
+                    if randint(0, 100) > (1 - effect.getEffectPower()) * 100:
+                        self.addCannotMoveTurns(1)
+                else:
+                    self.addCannotMoveTurns(effect.getEffectPower())
+
     def chooseMove(self):
         availableMoves = list(self.pokemonMovesDict.keys())
 

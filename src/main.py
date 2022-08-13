@@ -31,6 +31,8 @@ def setupTypes():
     rockType = Type("Rock")
     waterType = Type("Water")
 
+    types = [bugType, dragonType, electricType, fightingType, fireType, flyingType, ghostType, grassType, groundType, iceType, normalType, poisonType, psychicType, rockType, waterType]
+
     bugType.setTypeAdvantageList([poisonType, grassType, psychicType])
     bugType.setTypeDisadvantageList([fightingType, flyingType, ghostType, fireType])
     
@@ -82,8 +84,9 @@ def setupMoves():
     global tackle, switch, run
 
     tackle = Move("Tackle", normalType, "Attack", 40, 100)
+    ember = Move("Ember", fireType, "Attack", 40, 100)
 
-    moves = [tackle]
+    moves = [tackle, ember]
 
     global bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves
     
@@ -135,9 +138,14 @@ def setupMoves():
         else:
             for category in moveCategories:
                 category.append(move)
+    
+        for effect in effects:
+            if move.getMoveType() == effect.getEffectType():
+                move.addMoveEffectors(effect)
 
 def setupEffects():
     global burn, freeze, paralysis, poison, sleep
+    global effects
 
     burn = Effect("Burned", fireType, "Attack", 0.0625)
     freeze = Effect("Frozen", iceType, "Move", 0)
@@ -145,19 +153,24 @@ def setupEffects():
     poison = Effect("Poisoned", poisonType, "Attack", 0.0625)
     sleep = Effect("Slept", ghostType, "Move", 3)
 
+    effects = [burn, freeze, paralysis, poison, sleep]
+
 def setupPokemon():
-    global bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot
-    global rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranFemale, nidorina, nidoqueen, nidoranMale, nidorino, nidoking, clefairy, clefable
-    global vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape
-    global growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem
-    global ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno
-    global krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra
-    global goldeen, seaking, staryu, starmie, mrmime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyrados, lapras, ditto, eevee, vaporean, jolteon, flareon, porygon, omanyte, omastar
-    global kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew
+    global bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill
+    global pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranFemale, nidorina
+    global nidoqueen, nidoranMale, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume
+    global paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag
+    global poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler
+    global golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder
+    global cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak
+    global hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu
+    global starmie, mrmime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyrados, lapras, ditto, eevee, vaporean, jolteon
+    global flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo
+    global mew
 
     bulbasaur = Pokemon("Bulbasaur", grassType, 45, 49, 49, 100, 100)
     ivysaur = Pokemon("Ivysaur", grassType, 60, 62, 63, 100, 100)
-    venusaur = Pokemon("Venusaur", grassType, 80, 82, 83, 100, 100)
+    venusaur = Pokemon("Venusaur", grassType, 300, 82, 83, 100, 100)
     charmander = Pokemon("Charmander", fireType, 39, 52, 43, 100, 100)
     charmeleon = Pokemon("Charmeleon", fireType, 58, 64, 58, 100, 100)
     charizard = Pokemon("Charizard", fireType, 78, 84, 78, 100, 100)
@@ -363,11 +376,11 @@ def setupItems():
     greatBall = Item("Great Ball", "Ball", 0)
     pokeBall = Item("Poke Ball", "Ball", 0)
 
-    antidote = Item("Antidote", "Medicine", poison)
-    burnHeal = Item("Burn Heal", "Medicine", burn)
-    iceHeal = Item("Ice Heal", "Medicine", freeze)
-    awakening = Item("Awakening", "Medicine", sleep)
-    paralyseHeal = Item("Parlyse Heal", "Medicine", paralysis)
+    antidote = Item("Antidote", "Medicine", [poison])
+    burnHeal = Item("Burn Heal", "Medicine", [burn])
+    iceHeal = Item("Ice Heal", "Medicine", [freeze])
+    awakening = Item("Awakening", "Medicine", [sleep])
+    paralyseHeal = Item("Parlyse Heal", "Medicine", [paralysis])
     fullHeal = Item("Full Heal", "Medicine", [poison, burn, freeze, sleep, paralysis])
 
     revive = Item("Revive", "Revive", 0.5)
@@ -566,21 +579,21 @@ def setupMap():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", {"Charmeleon": charmeleon}, {"X Attack": [xAttack, 2], "X Defend": [xDefend, 1], "X Accuracy": [xAccuracy, 3], "EXP All": [expAll, 1], "Rare Candy": [rareCandy, 4]}, palletTown)
+    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {"Burn Heal": [burnHeal, 1]}, palletTown)
 
     global botanist
     
-    botanist = Trainer("Botanist", {"Venusaur": venusaur, "Weedle": weedle}, {}, route1)
+    botanist = Trainer("Botanist", {"Charmander": charmander}, {}, route1)
 
 def setup():
     #Creates types and type advantages for use in battles
     setupTypes()
 
-    #Creates and assigns moves with the corresponding pokemon types for use in battles
-    setupMoves()
-
     #Creates effects for use in battles
     setupEffects()
+
+    #Creates and assigns moves with the corresponding pokemon types for use in battles
+    setupMoves()
 
     #Creates pokemons to be referenced for encounters
     setupPokemon()

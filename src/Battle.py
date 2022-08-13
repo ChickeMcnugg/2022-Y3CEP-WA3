@@ -46,7 +46,7 @@ class Encounter:
     
     def getIsPokemonEncounter(self):
         return self.isPokemonEncounter
-    
+
     def startBattle(self):
         if self.isPokemonEncounter:
             opponentActivePokemon = self.encounterOpponent
@@ -74,73 +74,84 @@ class Encounter:
                 print("It is " + protagonist.getTrainerName() + "'s turn.")
                 sleep(1)
 
-                availableActions = ["Fight", "Run"]
+                availableActions = []
+                protagonistActivePokemon.updateEffects()
+
+                if protagonistActivePokemon.getCannotMoveTurns() > 0:
+                    print(protagonistActivePokemon.getPokemonName() + " cannot move.")
+                    protagonistActivePokemon.addCannotMoveTurns(-1)
+                else:
+                    availableActions.append("Fight")
+                    availableActions.append("Run")
+
                 if len(protagonist.getTrainerLivePokemonsDict()) > 1:
                     availableActions.append("Switch")
+                
                 if len(protagonist.getTrainerItemsDict()) != 0:
                     availableActions.append("Bag")
 
-                actionMessage = "What will " + protagonistActivePokemon.getPokemonName() + " do? ("
-                for action in availableActions:
-                    actionMessage += action + ", "
-                actionMessage = actionMessage[:-2] + ") : "
+                if len(availableActions) != 0:
+                    actionMessage = "What will " + protagonistActivePokemon.getPokemonName() + " do? ("
+                    for action in availableActions:
+                        actionMessage += action + ", "
+                    actionMessage = actionMessage[:-2] + ") : "
 
-                action = ""
-                while action not in availableActions:
-                    action = input(actionMessage)
-                
-                if action == "Fight":
-                    move = protagonistActivePokemon.chooseMove()
+                    action = ""
+                    while action not in availableActions:
+                        action = input(actionMessage)
                     
-                    #Subsequent actions are found inside the functions
-                    if move.getMoveAttribute() == "Attack":
-                        move.damage(self, protagonistActivePokemon, opponentActivePokemon)
-
-                elif action == "Switch":
-                    protagonist.choosePokemon()
-                elif action == "Run":
-                    print(protagonist.getTrainerName() + " has decided to run away.")
-                    sleep(1)
-                    self.setIsEnded(True)
-                else:
-                    item = protagonist.chooseItem()
-
-                    if item.getItemAttribute() == "Ball" and self.isPokemonEncounter:
-                        continue
-                    elif item.getItemAttribute() == "Medicine":
-                        protagonistActivePokemon.removePokemonEffects(item.getItemPower())
-                    elif item.getItemAttribute() == "Revive":
-                        availablePokemon = list(protagonist.getTrainerFaintedPokemonsDict().keys())
-                        reviveMessage = "Choose a pokemon to revive ("
-                        for pokemon in availablePokemon:
-                            reviveMessage += pokemon + ", "
-                        reviveMessage = reviveMessage[:-2] + ") : "
+                    if action == "Fight":
+                        move = protagonistActivePokemon.chooseMove()
                         
-                        reviveInput = ""
-                        while reviveInput not in availablePokemon:
-                            reviveInput = input(reviveMessage)
-                        
-                        revivedPokemon = protagonist.getTrainerFaintedPokemonsDict()[reviveInput]
-
-                        protagonist.revivePokemon(revivedPokemon)
-                        print(protagonist.trainerName + "'s " + revivedPokemon.getPokemonName() + " has been revived.")
+                        #Subsequent actions are found inside the functions
+                        if move.getMoveAttribute() == "Attack":
+                            move.damage(self, protagonistActivePokemon, opponentActivePokemon)
+                    elif action == "Switch":
+                        protagonist.choosePokemon()
+                    elif action == "Run":
+                        print(protagonist.getTrainerName() + " has decided to run away.")
                         sleep(1)
-                        revivedPokemon.setPokemonHealth(revivedPokemon.getPokemonMaxHealth() * item.getItemPower())
-                        print(revivedPokemon.getPokemonName() + " has " + revivedPokemon.getPokemonHealth() + " health.")
-                    elif item.getItemAttribute() == "Health":
-                        protagonistActivePokemon.addPokemonHealth(item.getItemPower())
-                    elif item.getItemAttribute() == "EXP":
-                        self.setHasEXPAll(True)
-                    elif item.getItemAttribute() == "Level":
-                        protagonistActivePokemon.addPokemonLevel(item.getItemPower())
-                    elif item.getItemAttribute() == "Accuracy":
-                        protagonistActivePokemon.addPokemonAccuracy(item.getItemPower())
-                    elif item.getItemAttribute() == "Attack":
-                        protagonistActivePokemon.addPokemonAttack(item.getItemPower())
-                    elif item.getItemAttribute() == "Defense":
-                        protagonistActivePokemon.addPokemonDefense(item.getItemPower())
+                        self.setIsEnded(True)
                     else:
-                        continue
+                        item = protagonist.chooseItem()
+
+                        if item.getItemAttribute() == "Ball" and self.isPokemonEncounter:
+                            continue
+                        elif item.getItemAttribute() == "Medicine":
+                            protagonistActivePokemon.removePokemonEffects(item.getItemPower())
+                        elif item.getItemAttribute() == "Revive":
+                            availablePokemon = list(protagonist.getTrainerFaintedPokemonsDict().keys())
+                            reviveMessage = "Choose a pokemon to revive ("
+                            for pokemon in availablePokemon:
+                                reviveMessage += pokemon + ", "
+                            reviveMessage = reviveMessage[:-2] + ") : "
+                            
+                            reviveInput = ""
+                            while reviveInput not in availablePokemon:
+                                reviveInput = input(reviveMessage)
+                            
+                            revivedPokemon = protagonist.getTrainerFaintedPokemonsDict()[reviveInput]
+
+                            protagonist.revivePokemon(revivedPokemon)
+                            print(protagonist.trainerName + "'s " + revivedPokemon.getPokemonName() + " has been revived.")
+                            sleep(1)
+                            revivedPokemon.setPokemonHealth(revivedPokemon.getPokemonMaxHealth() * item.getItemPower())
+                            print(revivedPokemon.getPokemonName() + " has " + revivedPokemon.getPokemonHealth() + " health.")
+                        elif item.getItemAttribute() == "Health":
+                            protagonistActivePokemon.addPokemonHealth(item.getItemPower())
+                        elif item.getItemAttribute() == "EXP":
+                            self.setHasEXPAll(True)
+                        elif item.getItemAttribute() == "Level":
+                            protagonistActivePokemon.addPokemonLevel(item.getItemPower())
+                        elif item.getItemAttribute() == "Accuracy":
+                            protagonistActivePokemon.addPokemonAccuracy(item.getItemPower())
+                        elif item.getItemAttribute() == "Attack":
+                            protagonistActivePokemon.addPokemonAttack(item.getItemPower())
+                        elif item.getItemAttribute() == "Defense":
+                            protagonistActivePokemon.addPokemonDefense(item.getItemPower())
+                        else:
+                            continue
+
                 self.setIsProtagonistTurn(False)
             else:
                 if self.isPokemonEncounter:
@@ -149,14 +160,20 @@ class Encounter:
                     print("It is " + opponent.getTrainerName() + "'s turn.")
                 sleep(1)
 
-                availableMoves = list(opponentActivePokemon.getPokemonMovesDict().keys())
+                opponentActivePokemon.updateEffects()
 
-                if len(availableMoves) == 1:
-                    move = opponentActivePokemon.getPokemonMovesDict()[availableMoves[0]]
+                if opponentActivePokemon.getCannotMoveTurns() > 0:
+                    print(opponentActivePokemon.getPokemonName() + " cannot move.")
+                    opponentActivePokemon.addCannotMoveTurns(-1)
                 else:
-                    move = opponentActivePokemon.getPokemonMovesDict()[availableMoves[randint(0, len(availableMoves) - 1)]]
+                    availableMoves = list(opponentActivePokemon.getPokemonMovesDict().keys())
 
-                if move.getMoveAttribute() == "Attack":
-                    move.damage(self, opponentActivePokemon, protagonistActivePokemon)
+                    if len(availableMoves) == 1:
+                        move = opponentActivePokemon.getPokemonMovesDict()[availableMoves[0]]
+                    else:
+                        move = opponentActivePokemon.getPokemonMovesDict()[availableMoves[randint(0, len(availableMoves) - 1)]]
+
+                    if move.getMoveAttribute() == "Attack":
+                        move.damage(self, opponentActivePokemon, protagonistActivePokemon)
                 
                 self.setIsProtagonistTurn(True)

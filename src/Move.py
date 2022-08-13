@@ -13,6 +13,7 @@ class Move:
         self.moveAttribute = moveAttribute
         self.movePower = movePower
         self.moveAccuracy = moveAccuracy
+        self.moveEffectors = []
     
     def __repr__(self):
         return "The " + self.moveType.getTypeName() + " move, " + self.moveName + ", has a power of " + str(self.movePower) + "% and an accuracy of " + str(self.moveAccuracy) + "%."
@@ -32,7 +33,13 @@ class Move:
     def getMoveAccuracy(self):
         return self.moveAccuracy
     
-    def damage(self, battle, pokemonProtagonist, pokemonOpponent,):
+    def getMoveEffectors(self):
+        return self.moveEffectors
+
+    def addMoveEffectors(self, newEffector):
+        self.moveEffectors.append(newEffector)
+    
+    def damage(self, battle, pokemonProtagonist, pokemonOpponent):
         #UI
         print(pokemonProtagonist.getPokemonName() + " uses " + self.moveName + ".")
         sleep(1)
@@ -42,8 +49,9 @@ class Move:
             print(pokemonProtagonist.getPokemonName() + " missed.")
             sleep(1)
         else:
-            damage = pokemonProtagonist.getPokemonAttack() + self.getMovePower()
-            
+            damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 30)
+            hasEffect = True
+
             #Account for type advantages
             if pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeAdvantageList():
                 damage *= 2
@@ -53,10 +61,12 @@ class Move:
                 damage *= 0.5
                 print("It was not effective.")
                 sleep(1)
+                hasEffect = False
             elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeImmuneList():
                 damage = 0
-                print("It was no effect.")
+                print("It has no effect.")
                 sleep(1)
+                hasEffect = False
             
             defense = pokemonOpponent.getPokemonDefense()
             netDamage = int(max(damage - defense, 0))
@@ -103,3 +113,8 @@ class Move:
 
                             print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon() + ".")
                             sleep(1)
+            else:
+                if hasEffect:
+                    for effector in self.getMoveEffectors():
+                        if effector.getEffectType() != pokemonOpponent.getPokemonType():
+                            pokemonOpponent.addPokemonEffects([effector])
