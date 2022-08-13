@@ -83,8 +83,114 @@ def setupTypes():
 def setupMoves():
     global tackle, switch, run
 
-    tackle = Move("Tackle", normalType, "Attack", 40, 100)
+    absorb = Move("Absorb", grassType, "Leech", 20, 100)
+    dreamEater = Move("Dream Eater", psychicType, "Leech", 100, 100)
+    leechLife = Move("Leech Life", bugType, "Leech", 80, 100)
+    megaDrain = Move("Mega Drain", grassType, "Leech", 40, 100)
+
+    highJumpKick = Move("High Jump Kick", fightingType, "MissHit", 130, 90)
+    jumpKick = Move("Jump Kick", fightingType, "MissHit", 100, 95)
+
+    acidArmour = Move("Acid Armour", poisonType, "Gain Defense", 50, 100)
+    barrier = Move("Barrier", psychicType, "Gain Defense", 50, 100)
+    harden = Move("Harden", normalType, "Gain Defense", 25, 100)
+    withdraw = Move("Withdraw", waterType, "Gain Defense", 25, 100)    
+
+    tailWhip = Move("Tail Whip", normalType, "Lower Defense", 25, 100)
+    screech = Move("Screech", normalType, "Lower Defense", 50, 85)
+    
+    meditate = Move("Meditate", psychicType, "Gain Attack", 25, 100)
+    growth = Move("Growth", normalType, "Gain Attack", 25, 100)
+    swordsDance = Move("Swords Dance", normalType, "Gain Attack", 50, 100)
+    
+    doubleTeam = Move("Double Team", normalType, "Gain Evasiveness", 25, 100)
+    minimise = Move("Minimise", normalType, "Gain Evasiveness", 50, 100)
+
+    flash = Move("Flash", normalType, "Lower Accuracy", 25, 100)
+    kinesis = Move("Kinesis", psychicType, "Lower Accuracy", 25, 80)
+    sandAttack = Move("Sand Attack", groundType, "Lower Accuracy", 25, 100)
+    smokescreen = Move("Smokescreen", normalType, "Lower Accuracy", 25, 100)
+    
+    barrage = Move("Barrage", normalType, "Multiple Hits", 15, 90)
+    bonemerang = Move("Bonemerang", groundType, "Multiple Hits", 50, 90)
+    cometPunch = Move("Comet Punch", normalType, "Multiple Hits", 18, 85)
+    doubleKick = Move("Double Kick", fightingType, "Multiple Hits", 30, 100)
+    furyAttack = Move("Fury Attack", normalType, "Multiple Hits", 15, 85)
+    furySwipes = Move("Fury Swipes", normalType, "Multiple Hits", 18, 80)
+    pinMissile = Move("Pin Missile", bugType, "Multiple Hits", 25, 95)
+    spikeCannon = Move("Spike Cannon", normalType, 20, 100)
+    
+    blizzard = Move("Blizzard", iceType, "Freeze", 110, 70)
+    iceBeam = Move("Ice Beam", iceType, "Freeze", 90, 100)
+    icePunch = Move("Ice Punch", iceType, "Freeze", 75, 100)
+    
+    # Body Slam	NORMAL	Physical	85	100	15	May paralyze opponent.
+    # Glare	NORMAL	Status	—	100	30	Paralyzes opponent.
+    # Lick	GHOST	Physical	30	100	30	May paralyze opponent.
+    # Stun Spore	GRASS	Status	—	75	30	Paralyzes opponent.
+    # Thunder	ELECTRIC	Special	110	70	10	May paralyze opponent.
+    # Thunder Punch	ELECTRIC	Physical	75	100	15	May paralyze opponent.
+    # Thunder Shock	ELECTRIC	Special	40	100	30	May paralyze opponent.
+    # Thunder Wave	ELECTRIC	Status	—	90	20	Paralyzes opponent.
+    # Thunderbolt	ELECTRIC	Special	90	100	15	May paralyze opponent.
+    
+    # Ember	FIRE	Special	40	100	25	May burn opponent.
+    # Fire Blast	FIRE	Special	110	85	5	May burn opponent.
+    # Fire Punch	FIRE	Physical	75	100	15	May burn opponent.
+    # Flamethrower	FIRE	Special	90	100	15	May burn opponent.
+    
+    # Hypnosis	PSYCHIC	Status	—	60	20	Puts opponent to sleep.
+    # Lovely Kiss	NORMAL	Status	—	75	10	Puts opponent to sleep.
+    # Sing	NORMAL	Status	—	55	15	Puts opponent to sleep.
+    # Sleep Powder	GRASS	Status	—	75	15	Puts opponent to sleep.
+    # Spore	GRASS	Status	—	100	15	Puts opponent to sleep.
+    
+    # Poison Gas	POISON	Status	—	90	40	Poisons opponent.
+    # Poison Powder	POISON	Status	—	75	35	Poisons opponent.
+    # Poison Sting	POISON	Physical	15	100	35	May poison the opponent.
+    # Sludge	POISON	Special	65	100	20	May poison opponent.
+    # Smog	POISON	Special	30	70	20	May poison opponent.
+    # Toxic	POISON	Status	—	90	10	Badly poisons opponent.
+    
+    # Cut	NORMAL	Physical	50	95	30	
+    # Drill Peck	FLYING	Physical	80	100	20	
+    # Egg Bomb	NORMAL	Physical	100	75	10	
+    # Horn Attack	NORMAL	Physical	65	100	25	
+    # Hydro Pump	WATER	Special	110	80	5	
+    # Mega Kick	NORMAL	Physical	120	75	5	
+    # Mega Punch	NORMAL	Physical	80	85	20
+    # Peck	FLYING	Physical	35	100	35	
+    # Pound	NORMAL	Physical	40	100	35	
+    # Rock Throw	ROCK	Physical	50	90	15	
+    # Scratch	NORMAL	Physical	40	100	35	
+    # Slam	NORMAL	Physical	80	75	20	
+    # Strength	NORMAL	Physical	80	100	15	
+    # Tackle	NORMAL	Physical	40	100	35	
+    # Vine Whip	GRASS	Physical	45	100	25	
+    # Vise Grip	NORMAL	Physical	55	100	30	
+    # Water Gun	WATER	Special	40	100	25	
+    # Wing Attack	FLYING	Physical	60	100	35	
+    
+    
+    # Dragon Rage	DRAGON	Special	—	100	10	Always inflicts 40 HP.
+    # Sonic Boom	NORMAL	Special	—	90	20	Always inflicts 20 HP.
+    # Super Fang	NORMAL	Physical	—	90	10	Always takes off half of the opponent's HP.
+    
+    
+    # Explosion	NORMAL	Physical	250	100	5	User faints.
+    # Self-Destruct	NORMAL	Physical	200	100	5	User faints.
+    # Fissure	GROUND	Physical	—	30	5	One-Hit-KO, if it hits.
+    # Guillotine	NORMAL	Physical	—	30	5	One-Hit-KO, if it hits.
+    # Horn Drill	NORMAL	Physical	—	30	5	One-Hit-KO, if it hits.    
+    
+    doubleEdge = Move("Double-Edge", normalType, "Attack", 120, 100)
+    dragonRage = Move("Dragon Rage", dragonType, "Attack", 40, 100)
+    dreamEater = Move("Dream Eater", psychicType, "Attack", 100, 100)
+    drillPeck = Move("Drill Peck", flyingType, "Attack", 80, 100)
+    earthquake = Move("Earthquake", groundType, "Attack", 100, 100)
+    eggBomb = Move("Egg Bomb", normalType, "Attack", 100, 75)
     ember = Move("Ember", fireType, "Attack", 40, 100)
+    tackle = Move("Tackle", normalType, "Attack", 40, 100)
 
     moves = [tackle, ember]
 
