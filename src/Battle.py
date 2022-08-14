@@ -102,42 +102,23 @@ class Encounter:
                     
                     if action == "Fight":
                         move = protagonistActivePokemon.chooseMove()
-                        move.damage(self, protagonistActivePokemon, opponentActivePokemon)
                         
-                        if not self.checkDamageOutcome(protagonistActivePokemon, opponentActivePokemon):
-                            if move.getMoveAttribute() == "Lower Defense":
-                                continue
-                            elif move.getMoveAttribute() == "Lower Accuracy":
-                                continue
-                            elif move.getMoveAttribute() == "Freeze":
-                                continue
-                            elif move.getMoveAttribute() == "Paralysis":
-                                continue
-                            elif move.getMoveAttribute() == "Burn":
-                                continue
-                            elif move.getMoveAttribute() == "Sleep":
-                                continue
-                            elif move.getMoveAttribute() == "Poison":
-                                continue
-                        
-                        if move.getMoveAttribute() == "Leech":
-                            continue
-                        elif move.getMoveAttribute() == "MissHit":
-                            continue
-                        elif move.getMoveAttribute() == "Gain Defense":
-                            continue
+                        if move.getMoveAttribute() == "Lower Defense":
+                            opponentActivePokemon.addPokemonDefense(-move.getMovePower())
+                        elif move.getMoveAttribute() == "Lower Accuracy":
+                            opponentActivePokemon.addPokemonAccuracy(-move.getMovePower())
+                        if move.getMoveAttribute() == "Gain Defense":
+                            protagonistActivePokemon.addPokemonDefense(move.getMovePower())
                         elif move.getMoveAttribute() == "Gain Attack":
-                            continue
+                            protagonistActivePokemon.addPokemonAttack(move.getMovePower())
                         elif move.getMoveAttribute() == "Gain Evasiveness":
-                            continue
-                        elif move.getMoveAttribute() == "Multiple Hits":
-                            continue   
-                        elif move.getMoveAttribute() == "Constant Attack":
-                            continue
-                        elif move.getMoveAttribute() == "Faint":
-                            continue
-                        elif move.getMoveAttribute() == "KO":
-                            continue
+                            protagonistActivePokemon.addPokemonEvasion(move.getMovePower())
+                        else:
+                            move.damage(protagonistActivePokemon, opponentActivePokemon)
+                        
+                            if not self.checkDamageOutcome(protagonistActivePokemon, opponentActivePokemon):    
+                                if move.getMoveAttribute() == "Effect":
+                                    opponentActivePokemon.addPokemonEffects(move.getMoveEffectors())
                     elif action == "Switch":
                         protagonist.choosePokemon()
                     elif action == "Run":

@@ -92,6 +92,10 @@ class Pokemon:
     def getPokemonEvasion(self):
         return self.pokemonEvasion
     
+    def addPokemonEvasion(self, newEvasion):
+        self.pokemonEvasion += newEvasion
+        print(self.pokemonName + "'s evasion rose to " + str(self.pokemonEvasion) + ".")
+
     def getPokemonAccuracy(self):
         return self.pokemonAccuracy
     

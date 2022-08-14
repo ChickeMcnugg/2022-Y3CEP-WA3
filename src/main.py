@@ -80,6 +80,18 @@ def setupTypes():
     waterType.setTypeAdvantageList([groundType, rockType, fireType])
     waterType.setTypeDisadvantageList([waterType, grassType, dragonType])
 
+def setupEffects():
+    global burn, freeze, paralysis, poison, sleep
+    global effects
+
+    burn = Effect("Burned", "Attack", 0.0625)
+    freeze = Effect("Frozen", "Move", 0)
+    paralysis = Effect("Paralysed", "Move", 0.75)
+    poison = Effect("Poisoned", "Attack", 0.0625)
+    sleep = Effect("Slept", "Move", 3)
+
+    effects = [burn, freeze, paralysis, poison, sleep]
+
 def setupMoves():
     global absorb, dreamEater, leechLife, megaDrain, highJumpKick, jumpKick, acidArmour, barrier, harden, withdraw, tailWhip, screech, meditate, growth, swordsDance
     global doubleTeam, minimise, flash, kinesis, sandAttack, smokescreen, barrage, bonemerang, cometPunch, doubleKick, furyAttack, furySwipes, pinMissile, spikeCannon, blizzard
@@ -125,37 +137,37 @@ def setupMoves():
     pinMissile = Move("Pin Missile", bugType, "Multiple Hits", 25, 95)
     spikeCannon = Move("Spike Cannon", normalType, "Multiple Hits", 20, 100)
     
-    blizzard = Move("Blizzard", iceType, "Freeze", 110, 70)
-    iceBeam = Move("Ice Beam", iceType, "Freeze", 90, 100)
-    icePunch = Move("Ice Punch", iceType, "Freeze", 75, 100)
+    blizzard = Move("Blizzard", iceType, "Effect", 110, 70, [freeze])
+    iceBeam = Move("Ice Beam", iceType, "Effect", 90, 100, [freeze])
+    icePunch = Move("Ice Punch", iceType, "Effect", 75, 100, [freeze])
     
-    bodySlam = Move("Body Slam", normalType, "Paralysis", 85, 100)
-    glare = Move("Glare", normalType, "Paralysis", 0, 100)
-    lick = Move("Lick", ghostType, "Paralysis", 30, 100)
-    stunSpore = Move("Stun Spore", grassType, "Paralysis", 0, 75)
-    thunder = Move("Thunder", electricType, "Paralysis", 110, 70)
-    thunderPunch = Move("Thunder Punch", electricType, "Paralysis", 75, 100)
-    thunderShock = Move("Thunder Shock", electricType, "Paralysis", 40, 100)
-    thunderWave = Move("Thunder Wave", electricType, "Paralysis", 0, 90)
-    thunderbolt = Move("Thunderbolt", electricType, "Paralysis", 90, 100)
+    bodySlam = Move("Body Slam", normalType, "Effect", 85, 100, [paralysis])
+    glare = Move("Glare", normalType, "Effect", 0, 100, [paralysis])
+    lick = Move("Lick", ghostType, "Effect", 30, 100, [paralysis])
+    stunSpore = Move("Stun Spore", grassType, "Effect", 0, 75, [paralysis])
+    thunder = Move("Thunder", electricType, "Effect", 110, 70, [paralysis])
+    thunderPunch = Move("Thunder Punch", electricType, "Effect", 75, 100, [paralysis])
+    thunderShock = Move("Thunder Shock", electricType, "Effect", 40, 100, [paralysis])
+    thunderWave = Move("Thunder Wave", electricType, "Effect", 0, 90, [paralysis])
+    thunderbolt = Move("Thunderbolt", electricType, "Effect", 90, 100, [paralysis])
     
-    ember = Move("Ember", fireType, "Burn", 40, 100)
-    fireBlast = Move("Fire Blast", fireType, "Burn", 110, 85)
-    firePunch = Move("Fire Punch", fireType, "Burn", 75, 100)
-    flamethrower = Move("Flamethrower", fireType, "Burn", 90, 100)
+    ember = Move("Ember", fireType, "Effect", 40, 100, [burn])
+    fireBlast = Move("Fire Blast", fireType, "Effect", 110, 85, [burn])
+    firePunch = Move("Fire Punch", fireType, "Effect", 75, 100, [burn])
+    flamethrower = Move("Flamethrower", fireType, "Effect", 90, 100, [burn])
     
-    hypnosis = Move("Hypnosis", psychicType, "Sleep", 0, 60)
-    lovelyKiss = Move("Lovely Kiss", normalType, "Sleep", 0, 75)
-    sing = Move("Sing", normalType, "Sleep", 0, 55)
-    sleepPowder = Move("Sleep Powder", grassType, "Sleep", 0, 75)
-    spore = Move("Spore", grassType, "sleep", 0, 100)
+    hypnosis = Move("Hypnosis", psychicType, "Effect", 0, 60, [sleep])
+    lovelyKiss = Move("Lovely Kiss", normalType, "Effect", 0, 75, [sleep])
+    sing = Move("Sing", normalType, "Effect", 0, 55, [sleep])
+    sleepPowder = Move("Sleep Powder", grassType, "Effect", 0, 75, [sleep])
+    spore = Move("Spore", grassType, "Effect", 0, 100, [sleep])
     
-    poisonGas = Move("Poison Gas", poisonType, "Poison", 0, 90)
-    poisonPowder = Move("Poison Powder", poisonType, "Poison", 0, 75)
-    poisonSting = Move("Poison Sting", poisonType, "Poison", 15, 100)
-    sludge = Move("Sludge", poisonType, "Poison", 65, 100)
-    smog = Move("Smog", poisonType, "Poison", 30, 70)
-    toxic = Move("Toxic", poisonType, "Poison", 0, 90)
+    poisonGas = Move("Poison Gas", poisonType, "Effect", 0, 90, [poison])
+    poisonPowder = Move("Poison Powder", poisonType, "Effect", 0, 75, [poison])
+    poisonSting = Move("Poison Sting", poisonType, "Effect", 15, 100, [poison])
+    sludge = Move("Sludge", poisonType, "Effect", 65, 100, [poison])
+    smog = Move("Smog", poisonType, "Effect", 30, 70, [poison])
+    toxic = Move("Toxic", poisonType, "Effect", 0, 90, [poison])
     
     cut = Move("Cut", normalType, "Attack", 50, 95)	
     drillPeck = Move("Drill Peck", flyingType, "Attack", 80, 100)	
@@ -180,7 +192,7 @@ def setupMoves():
         
     explosion = Move("Explosion", normalType, "Faint", 250, 100)
     selfDestruct = Move("Self-Destruct", normalType, "Faint", 200, 100)
-    
+
     fissure = Move("Fissure", groundType, "KO", 0, 30)
     hornDrill = Move("Horn Drill", normalType, "KO", 0, 30)    
     
@@ -238,22 +250,6 @@ def setupMoves():
         else:
             for category in moveCategories:
                 category.append(move)
-    
-        for effect in effects:
-            if move.getMoveType() == effect.getEffectType():
-                move.addMoveEffectors(effect)
-
-def setupEffects():
-    global burn, freeze, paralysis, poison, sleep
-    global effects
-
-    burn = Effect("Burned", fireType, "Attack", 0.0625)
-    freeze = Effect("Frozen", iceType, "Move", 0)
-    paralysis = Effect("Paralysed", electricType, "Move", 0.75)
-    poison = Effect("Poisoned", poisonType, "Attack", 0.0625)
-    sleep = Effect("Slept", ghostType, "Move", 3)
-
-    effects = [burn, freeze, paralysis, poison, sleep]
 
 def setupPokemon():
     global bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill
