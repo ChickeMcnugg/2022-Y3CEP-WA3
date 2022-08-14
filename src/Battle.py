@@ -102,10 +102,42 @@ class Encounter:
                     
                     if action == "Fight":
                         move = protagonistActivePokemon.chooseMove()
+                        move.damage(self, protagonistActivePokemon, opponentActivePokemon)
                         
-                        #Subsequent actions are found inside the functions
-                        if move.getMoveAttribute() == "Attack":
-                            move.damage(self, protagonistActivePokemon, opponentActivePokemon)
+                        if not self.checkDamageOutcome(protagonistActivePokemon, opponentActivePokemon):
+                            if move.getMoveAttribute() == "Lower Defense":
+                                continue
+                            elif move.getMoveAttribute() == "Lower Accuracy":
+                                continue
+                            elif move.getMoveAttribute() == "Freeze":
+                                continue
+                            elif move.getMoveAttribute() == "Paralysis":
+                                continue
+                            elif move.getMoveAttribute() == "Burn":
+                                continue
+                            elif move.getMoveAttribute() == "Sleep":
+                                continue
+                            elif move.getMoveAttribute() == "Poison":
+                                continue
+                        
+                        if move.getMoveAttribute() == "Leech":
+                            continue
+                        elif move.getMoveAttribute() == "MissHit":
+                            continue
+                        elif move.getMoveAttribute() == "Gain Defense":
+                            continue
+                        elif move.getMoveAttribute() == "Gain Attack":
+                            continue
+                        elif move.getMoveAttribute() == "Gain Evasiveness":
+                            continue
+                        elif move.getMoveAttribute() == "Multiple Hits":
+                            continue   
+                        elif move.getMoveAttribute() == "Constant Attack":
+                            continue
+                        elif move.getMoveAttribute() == "Faint":
+                            continue
+                        elif move.getMoveAttribute() == "KO":
+                            continue
                     elif action == "Switch":
                         protagonist.choosePokemon()
                     elif action == "Run":
@@ -177,3 +209,49 @@ class Encounter:
                         move.damage(self, opponentActivePokemon, protagonistActivePokemon)
                 
                 self.setIsProtagonistTurn(True)
+
+    def checkOutcome(self, pokemonProtagonist, pokemonOpponent):
+        #Check if opponent's active pokemon has fainted
+        if pokemonOpponent.getPokemonHealth() != 0:
+            return False
+        else:
+            #UI
+            print(pokemonOpponent.getPokemonName() + " has fainted.")
+            sleep(1)
+            
+            if pokemonOpponent.getPokemonOwner() == None:
+                self.setIsEnded(True)
+                print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                sleep(1)
+            else:
+                pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
+
+                #Check if opponent has other available pokemon
+                if pokemonOpponent.getPokemonOwner().checkFainted():
+                    self.setIsEnded(True)
+                    print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                    sleep(1)
+                    if not self.getHasEXPAll():
+                        print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
+                        pokemonProtagonist.addPokemonEXP(30)
+                        sleep(1)
+                    else:
+                        for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
+                            pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
+                            print(pokemon + " gained 30 EXP.")
+                else:
+                    #Check if opponent is the opponent, because the player can only input for the protagonist
+                    if self.getEncounterProtagonist() == pokemonOpponent.getPokemonOwner():
+                        pokemonOpponent.getPokemonOwner().choosePokemon()
+                    else:
+                        #Randomly choose new active pokemon from live pokemons
+                        availablePokemon = pokemonOpponent.getPokemonOwner().getTrainerLivePokemonsDict()
+                        if len(availablePokemon) > 1:
+                            pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[randint(0, len(availablePokemon.values()) - 1)])
+                        else:
+                            pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[0])
+
+                        print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon() + ".")
+                        sleep(1)
+            
+            return True

@@ -81,7 +81,12 @@ def setupTypes():
     waterType.setTypeDisadvantageList([waterType, grassType, dragonType])
 
 def setupMoves():
-    global tackle, switch, run
+    global absorb, dreamEater, leechLife, megaDrain, highJumpKick, jumpKick, acidArmour, barrier, harden, withdraw, tailWhip, screech, meditate, growth, swordsDance
+    global doubleTeam, minimise, flash, kinesis, sandAttack, smokescreen, barrage, bonemerang, cometPunch, doubleKick, furyAttack, furySwipes, pinMissile, spikeCannon, blizzard
+    global iceBeam, icePunch, bodySlam, glare, lick, stunSpore, thunder, thunderPunch, thunderWave, thunderShock, thunderbolt, ember, fireBlast, firePunch, flamethrower
+    global hypnosis, lovelyKiss, sing, sleepPowder, spore, poisonGas, poisonPowder, poisonSting, sludge, smog, toxic, cut, drillPeck, eggBomb, hornAttack
+    global hydroPump, megaKick, megaPunch, peck, rockThrow, scratch, slam, strength, tackle, vineWhip, viseGrip, waterGun, wingAttack, dragonRage, sonicBoom
+    global explosion, selfDestruct, fissure, hornDrill
 
     absorb = Move("Absorb", grassType, "Leech", 20, 100)
     dreamEater = Move("Dream Eater", psychicType, "Leech", 100, 100)
@@ -118,81 +123,68 @@ def setupMoves():
     furyAttack = Move("Fury Attack", normalType, "Multiple Hits", 15, 85)
     furySwipes = Move("Fury Swipes", normalType, "Multiple Hits", 18, 80)
     pinMissile = Move("Pin Missile", bugType, "Multiple Hits", 25, 95)
-    spikeCannon = Move("Spike Cannon", normalType, 20, 100)
+    spikeCannon = Move("Spike Cannon", normalType, "Multiple Hits", 20, 100)
     
     blizzard = Move("Blizzard", iceType, "Freeze", 110, 70)
     iceBeam = Move("Ice Beam", iceType, "Freeze", 90, 100)
     icePunch = Move("Ice Punch", iceType, "Freeze", 75, 100)
     
-    # Body Slam	NORMAL	Physical	85	100	15	May paralyze opponent.
-    # Glare	NORMAL	Status	—	100	30	Paralyzes opponent.
-    # Lick	GHOST	Physical	30	100	30	May paralyze opponent.
-    # Stun Spore	GRASS	Status	—	75	30	Paralyzes opponent.
-    # Thunder	ELECTRIC	Special	110	70	10	May paralyze opponent.
-    # Thunder Punch	ELECTRIC	Physical	75	100	15	May paralyze opponent.
-    # Thunder Shock	ELECTRIC	Special	40	100	30	May paralyze opponent.
-    # Thunder Wave	ELECTRIC	Status	—	90	20	Paralyzes opponent.
-    # Thunderbolt	ELECTRIC	Special	90	100	15	May paralyze opponent.
+    bodySlam = Move("Body Slam", normalType, "Paralysis", 85, 100)
+    glare = Move("Glare", normalType, "Paralysis", 0, 100)
+    lick = Move("Lick", ghostType, "Paralysis", 30, 100)
+    stunSpore = Move("Stun Spore", grassType, "Paralysis", 0, 75)
+    thunder = Move("Thunder", electricType, "Paralysis", 110, 70)
+    thunderPunch = Move("Thunder Punch", electricType, "Paralysis", 75, 100)
+    thunderShock = Move("Thunder Shock", electricType, "Paralysis", 40, 100)
+    thunderWave = Move("Thunder Wave", electricType, "Paralysis", 0, 90)
+    thunderbolt = Move("Thunderbolt", electricType, "Paralysis", 90, 100)
     
-    # Ember	FIRE	Special	40	100	25	May burn opponent.
-    # Fire Blast	FIRE	Special	110	85	5	May burn opponent.
-    # Fire Punch	FIRE	Physical	75	100	15	May burn opponent.
-    # Flamethrower	FIRE	Special	90	100	15	May burn opponent.
+    ember = Move("Ember", fireType, "Burn", 40, 100)
+    fireBlast = Move("Fire Blast", fireType, "Burn", 110, 85)
+    firePunch = Move("Fire Punch", fireType, "Burn", 75, 100)
+    flamethrower = Move("Flamethrower", fireType, "Burn", 90, 100)
     
-    # Hypnosis	PSYCHIC	Status	—	60	20	Puts opponent to sleep.
-    # Lovely Kiss	NORMAL	Status	—	75	10	Puts opponent to sleep.
-    # Sing	NORMAL	Status	—	55	15	Puts opponent to sleep.
-    # Sleep Powder	GRASS	Status	—	75	15	Puts opponent to sleep.
-    # Spore	GRASS	Status	—	100	15	Puts opponent to sleep.
+    hypnosis = Move("Hypnosis", psychicType, "Sleep", 0, 60)
+    lovelyKiss = Move("Lovely Kiss", normalType, "Sleep", 0, 75)
+    sing = Move("Sing", normalType, "Sleep", 0, 55)
+    sleepPowder = Move("Sleep Powder", grassType, "Sleep", 0, 75)
+    spore = Move("Spore", grassType, "sleep", 0, 100)
     
-    # Poison Gas	POISON	Status	—	90	40	Poisons opponent.
-    # Poison Powder	POISON	Status	—	75	35	Poisons opponent.
-    # Poison Sting	POISON	Physical	15	100	35	May poison the opponent.
-    # Sludge	POISON	Special	65	100	20	May poison opponent.
-    # Smog	POISON	Special	30	70	20	May poison opponent.
-    # Toxic	POISON	Status	—	90	10	Badly poisons opponent.
+    poisonGas = Move("Poison Gas", poisonType, "Poison", 0, 90)
+    poisonPowder = Move("Poison Powder", poisonType, "Poison", 0, 75)
+    poisonSting = Move("Poison Sting", poisonType, "Poison", 15, 100)
+    sludge = Move("Sludge", poisonType, "Poison", 65, 100)
+    smog = Move("Smog", poisonType, "Poison", 30, 70)
+    toxic = Move("Toxic", poisonType, "Poison", 0, 90)
     
-    # Cut	NORMAL	Physical	50	95	30	
-    # Drill Peck	FLYING	Physical	80	100	20	
-    # Egg Bomb	NORMAL	Physical	100	75	10	
-    # Horn Attack	NORMAL	Physical	65	100	25	
-    # Hydro Pump	WATER	Special	110	80	5	
-    # Mega Kick	NORMAL	Physical	120	75	5	
-    # Mega Punch	NORMAL	Physical	80	85	20
-    # Peck	FLYING	Physical	35	100	35	
-    # Pound	NORMAL	Physical	40	100	35	
-    # Rock Throw	ROCK	Physical	50	90	15	
-    # Scratch	NORMAL	Physical	40	100	35	
-    # Slam	NORMAL	Physical	80	75	20	
-    # Strength	NORMAL	Physical	80	100	15	
-    # Tackle	NORMAL	Physical	40	100	35	
-    # Vine Whip	GRASS	Physical	45	100	25	
-    # Vise Grip	NORMAL	Physical	55	100	30	
-    # Water Gun	WATER	Special	40	100	25	
-    # Wing Attack	FLYING	Physical	60	100	35	
-    
-    
-    # Dragon Rage	DRAGON	Special	—	100	10	Always inflicts 40 HP.
-    # Sonic Boom	NORMAL	Special	—	90	20	Always inflicts 20 HP.
-    # Super Fang	NORMAL	Physical	—	90	10	Always takes off half of the opponent's HP.
-    
-    
-    # Explosion	NORMAL	Physical	250	100	5	User faints.
-    # Self-Destruct	NORMAL	Physical	200	100	5	User faints.
-    # Fissure	GROUND	Physical	—	30	5	One-Hit-KO, if it hits.
-    # Guillotine	NORMAL	Physical	—	30	5	One-Hit-KO, if it hits.
-    # Horn Drill	NORMAL	Physical	—	30	5	One-Hit-KO, if it hits.    
-    
-    doubleEdge = Move("Double-Edge", normalType, "Attack", 120, 100)
-    dragonRage = Move("Dragon Rage", dragonType, "Attack", 40, 100)
-    dreamEater = Move("Dream Eater", psychicType, "Attack", 100, 100)
-    drillPeck = Move("Drill Peck", flyingType, "Attack", 80, 100)
-    earthquake = Move("Earthquake", groundType, "Attack", 100, 100)
+    cut = Move("Cut", normalType, "Attack", 50, 95)	
+    drillPeck = Move("Drill Peck", flyingType, "Attack", 80, 100)	
     eggBomb = Move("Egg Bomb", normalType, "Attack", 100, 75)
-    ember = Move("Ember", fireType, "Attack", 40, 100)
-    tackle = Move("Tackle", normalType, "Attack", 40, 100)
-
-    moves = [tackle, ember]
+    hornAttack = Move("Horn Attack", normalType, "Attack", 65, 100)
+    hydroPump = Move("Hydro Pump", waterType, "Attack", 110, 80)
+    megaKick = Move("Mega Kick", normalType, "Attack", 120, 75)
+    megaPunch = Move("Mega Punch", normalType, "Attack", 80, 85)
+    peck = Move("Peck", flyingType, "Attack", 35, 100)
+    rockThrow = Move("Rock Throw", rockType, "Attack", 50, 90)
+    scratch = Move("Scratch", normalType, "Attack", 40, 100)	
+    slam = Move("Slam", normalType, "Attack", 80, 75)	
+    strength = Move("Strength", normalType, "Attack", 80, 100)	
+    tackle = Move("Tackle", normalType, "Attack", 40, 100)	
+    vineWhip = Move("Vine Whip", grassType, "Attack", 45, 100)	
+    viseGrip = Move("Vise Grip", normalType, "Attack", 55, 100)	
+    waterGun = Move("Water Gun", waterType, "Attack", 40, 100)	
+    wingAttack = Move("Wing Attack", flyingType, "Attack", 60, 100)
+    
+    dragonRage = Move("Dragon Rage", dragonType, "Constant Attack", 40, 100)
+    sonicBoom = Move("Sonic Boom", normalType, "Constant Attack", 20, 90)
+        
+    explosion = Move("Explosion", normalType, "Faint", 250, 100)
+    selfDestruct = Move("Self-Destruct", normalType, "Faint", 200, 100)
+    
+    fissure = Move("Fissure", groundType, "KO", 0, 30)
+    hornDrill = Move("Horn Drill", normalType, "KO", 0, 30)    
+    
+    moves = [absorb, dreamEater, leechLife, megaDrain, highJumpKick, jumpKick, acidArmour, barrier, harden, withdraw, tailWhip, screech, meditate, growth, swordsDance, doubleTeam, minimise, flash, kinesis, sandAttack, smokescreen, barrage, bonemerang, cometPunch, doubleKick, furyAttack, furySwipes, pinMissile, spikeCannon, blizzard, iceBeam, icePunch, bodySlam, glare, lick, stunSpore, thunder, thunderPunch, thunderWave, thunderShock, thunderbolt, ember, fireBlast, firePunch, flamethrower, hypnosis, lovelyKiss, sing, sleepPowder, spore, poisonGas, poisonPowder, poisonSting, sludge, smog, toxic, cut, drillPeck, eggBomb, hornAttack, hydroPump, megaKick, megaPunch, peck, rockThrow, scratch, slam, strength, tackle, vineWhip, viseGrip, waterGun, wingAttack, dragonRage, sonicBoom, explosion, selfDestruct, fissure, hornDrill]
 
     global bugMoves, dragonMoves, electricMoves, fightingMoves, fireMoves, flyingMoves, ghostMoves, grassMoves, groundMoves, iceMoves, normalMoves, poisonMoves, psychicMoves, rockMoves, waterMoves
     
@@ -233,6 +225,8 @@ def setupMoves():
             grassMoves.append(move)
         elif move.getMoveType() == groundType:
             groundMoves.append(move)
+        elif move.getMoveType() == iceType:
+            iceMoves.append(move)
         elif move.getMoveType() == poisonType:
             poisonMoves.append(move)
         elif move.getMoveType() == psychicType:

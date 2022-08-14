@@ -13,7 +13,6 @@ class Move:
         self.moveAttribute = moveAttribute
         self.movePower = movePower
         self.moveAccuracy = moveAccuracy
-        self.moveEffectors = []
     
     def __repr__(self):
         return "The " + self.moveType.getTypeName() + " move, " + self.moveName + ", has a power of " + str(self.movePower) + "% and an accuracy of " + str(self.moveAccuracy) + "%."
@@ -32,12 +31,6 @@ class Move:
     
     def getMoveAccuracy(self):
         return self.moveAccuracy
-    
-    def getMoveEffectors(self):
-        return self.moveEffectors
-
-    def addMoveEffectors(self, newEffector):
-        self.moveEffectors.append(newEffector)
     
     def damage(self, battle, pokemonProtagonist, pokemonOpponent):
         #UI
@@ -72,49 +65,3 @@ class Move:
             netDamage = int(max(damage - defense, 0))
             
             pokemonOpponent.addPokemonHealth(-netDamage)
-
-            #Check if opponent's active pokemon has fainted
-            if pokemonOpponent.getPokemonHealth() == 0:
-                #UI
-                print(pokemonOpponent.getPokemonName() + " has fainted.")
-                sleep(1)
-                
-                if pokemonOpponent.getPokemonOwner() == None:
-                    battle.setIsEnded(True)
-                    print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
-                    sleep(1)
-                else:
-                    pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
-
-                    #Check if opponent has other available pokemon
-                    if pokemonOpponent.getPokemonOwner().checkFainted():
-                        battle.setIsEnded(True)
-                        print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
-                        sleep(1)
-                        if not battle.getHasEXPAll():
-                            print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
-                            pokemonProtagonist.addPokemonEXP(30)
-                            sleep(1)
-                        else:
-                            for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
-                                pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
-                                print(pokemon + " gained 30 EXP.")
-                    else:
-                        #Check if opponent is the opponent, because the player can only input for the protagonist
-                        if battle.getEncounterProtagonist() == pokemonOpponent.getPokemonOwner():
-                            pokemonOpponent.getPokemonOwner().choosePokemon()
-                        else:
-                            #Randomly choose new active pokemon from live pokemons
-                            availablePokemon = pokemonOpponent.getPokemonOwner().getTrainerLivePokemonsDict()
-                            if len(availablePokemon) > 1:
-                                pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[randint(0, len(availablePokemon.values()) - 1)])
-                            else:
-                                pokemonOpponent.getPokemonOwner().setTrainerActivePokemon(list(availablePokemon.values())[0])
-
-                            print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon() + ".")
-                            sleep(1)
-            else:
-                if hasEffect:
-                    for effector in self.getMoveEffectors():
-                        if effector.getEffectType() != pokemonOpponent.getPokemonType():
-                            pokemonOpponent.addPokemonEffects([effector])
