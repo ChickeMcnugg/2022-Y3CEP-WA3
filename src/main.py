@@ -675,11 +675,13 @@ def setupMap():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Ace", {"Venusaur": venusaur, "Weedle": weedle}, {"Burn Heal": [burnHeal, 1]}, palletTown)
+    protagonist = Trainer("Red", {"Venusaur": venusaur, "Weedle": weedle}, {"Burn Heal": [burnHeal, 1]}, palletTown)
 
     global botanist
     
     botanist = Trainer("Botanist", {"Charmander": charmander}, {}, route1)
+    # brock, misty, lt surge, erika, koga, janine, sabrina, blaine, giovanni gym leaders
+    # lorelei, bruno, agatha, lance elite 4
 
 def setup():
     #Creates types and type advantages for use in battles
@@ -703,9 +705,9 @@ def setup():
     #Creates trainers that can be played against, and the player protagonist
     setupTrainers()
 
-    global randomEncounterChance
+    global randomEncounterChancePercentage
 
-    randomEncounterChance = 60
+    randomEncounterChancePercentage = 60
     
 setup()
 
@@ -734,7 +736,7 @@ while True:
                         battle.startBattle()
                 else:
                     #Roll chance for random encounter
-                    if randint(1, 100) > randomEncounterChance:
+                    if randint(1, 100) > randomEncounterChancePercentage:
                         availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
                         if len(availablePokemon) != 0:
                             randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
