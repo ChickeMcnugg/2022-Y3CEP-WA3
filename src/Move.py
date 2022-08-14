@@ -37,46 +37,47 @@ class Move:
         return self.moveEffectors
     
     def damage(self, pokemonProtagonist, pokemonOpponent):
+        damage = ((((2 / 5 * pokemonProtagonist.getPokemonLevel()) + 2) * self.getMovePower() * pokemonProtagonist.getPokemonAttack() / pokemonOpponent.getPokemonDefense() / 50) + 2) * randint(217, 255) / 255
+
+        #Account for type advantages
+        if pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeAdvantageList():
+            damage *= 1.5
+            print("It was effective.")
+            sleep(1)
+        elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeDisadvantageList():
+            damage *= 0.5
+            print("It was not effective.")
+            sleep(1)
+        elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeImmuneList():
+            damage = 0
+            print("It has no effect.")
+            sleep(1)
+        
+        damage = min(int(damage), 0)
+        
         #Calculate if move hits pokemonOpponent based on accuracy
-        if randint(1, 100) < 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
+        accuracy = 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (1 - (pokemonOpponent.getPokemonEvasion() / 100))) * 100)
+        accuracy = max(min(accuracy, 100), 1)
+        randomChance = randint(0, 100)
+        
+        if randomChance < accuracy or randomChance == 100:
             print(pokemonProtagonist.getPokemonName() + " missed.")
             sleep(1)
             if self.getMoveAttribute() == "MissHit":
-                damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 30)
                 pokemonProtagonist.addPokemonHealth(-(damage // 8))
         else:
             if self.getMoveAttribute() == "KO":
                 pokemonOpponent.addPokemonHealth(-pokemonOpponent.getPokemonHealth())
             elif self.getMoveAttribute() == "Constant Attack":
                 pokemonOpponent.addPokemonHealth(-self.getMovePower())
-            else:            
-                damage = pokemonProtagonist.getPokemonAttack() * (self.getMovePower() / 30)
-
-                #Account for type advantages
-                if pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeAdvantageList():
-                    damage *= 2
-                    print("It was effective.")
-                    sleep(1)
-                elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeDisadvantageList():
-                    damage *= 0.5
-                    print("It was not effective.")
-                    sleep(1)
-                elif pokemonOpponent.getPokemonType() in pokemonProtagonist.getPokemonType().getTypeImmuneList():
-                    damage = 0
-                    print("It has no effect.")
-                    sleep(1)
-                
-                defense = pokemonOpponent.getPokemonDefense()
-                netDamage = int(max(damage - defense, 0))
-                totalDamage = 0
-                
+            else:
                 if self.getMoveAttribute() == "Multiple Hits":
                     for _ in range(0, randint(2, 5)):
-                        pokemonOpponent.addPokemonHealth(-netDamage)
-                        totalDamage += netDamage
+                        pokemonOpponent.addPokemonHealth(-damage)
+                        totalDamage += damage
                 else:
-                    pokemonOpponent.addPokemonHealth(-netDamage)
-                    totalDamage += netDamage
+                    pokemonOpponent.addPokemonHealth(-damage)
+                    totalDamage += damage
                 
                 if self.getMoveAttribute() == "Leech" and totalDamage != 0:
                     pokemonProtagonist.addPokemonHealth(totalDamage // 2)

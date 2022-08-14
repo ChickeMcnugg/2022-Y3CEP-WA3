@@ -18,9 +18,11 @@ class Pokemon:
         self.pokemonHealth = self.pokemonMaxHealth
         self.pokemonEXP = 0
         self.pokemonAttack = pokemonAttack
+        self.pokemonBaseAttack = self.pokemonAttack
         self.pokemonDefense = pokemonDefense
-        self.pokemonEvasion = pokemonEvasion
-        self.pokemonAccuracy = pokemonAccuracy
+        self.pokemonBaseDefense = self.pokemonDefense
+        self.pokemonEvasion = 100
+        self.pokemonAccuracy = 100
         self.pokemonMovesDict = {}
         self.pokemonOwner = None
         self.pokemonEffects = []
@@ -43,7 +45,17 @@ class Pokemon:
         self.pokemonLevel = floor(self.pokemonEXP ** (1/3))
         if self.pokemonLevel > tempLevel:
             print(self.pokemonName + " levelled up, and is now at Level " + str(self.pokemonLevel))
+            self.updateAttackDefense(self.pokemonLevel)
     
+    def updateAttackDefense(self, newLevel):
+        self.pokemonAttack = self.pokemonBaseAttack + (newLevel / 50 * self.pokemonBaseAttack)
+        self.pokemonDefense = self.pokemonBaseDefense + (newLevel / 50 * self.pokemonBaseDefense)
+
+    def resetStats(self):
+        self.updateAttackDefense(self.pokemonLevel)
+        self.pokemonAccuracy = 100
+        self.pokemonEvasion = 100
+
     def getPokemonLevel(self):
         return self.pokemonLevel
     
@@ -102,8 +114,7 @@ class Pokemon:
         return self.pokemonEvasion
     
     def addPokemonEvasion(self, newEvasion):
-        self.pokemonEvasion += newEvasion
-        self.pokemonEvasion = max(self.pokemonEvasion, 0)
+        self.pokemonEvasion = max(self.pokemonEvasion + newEvasion, 0)
 
         if newEvasion >= 0:
             print(self.pokemonName + "'s evasion rose to " + str(self.pokemonEvasion) + ".")
@@ -116,7 +127,7 @@ class Pokemon:
         return self.pokemonAccuracy
     
     def addPokemonAccuracy(self, newAccuracy):
-        self.pokemonAccuracy = max(min(self.pokemonAccuracy + newAccuracy, 100), 0)
+        self.pokemonAccuracy = max(self.pokemonAccuracy + newAccuracy, 0)
 
         if newAccuracy >= 0:
             print(self.pokemonName + "'s accuracy rose to " + str(self.pokemonAccuracy) + ".")

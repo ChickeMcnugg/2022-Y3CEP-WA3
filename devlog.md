@@ -176,12 +176,20 @@
 >   -   13/8
 >       -   TODO
 >           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
->               -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
+>           -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
 >           -   Battles: Checkpoint battles and boss battles
->           -   Items: Capturing with pokeball
->           -   Pokemon: Levels affect base stats
->           -   Battles: Reset pokemon stats to base + level after battles
+>           -   Effect: Sleep, Paralysis and Freezing on pokemon
 >           -   Trainers: Create more trainers so that random trainer encounters are more randomised
+>           -   Moves: Include more moves
+>           -   UI in general, especially intro UI to the game
+>   -   14/8
+>       -   TODO
+>           -   Items: Capturing with pokeball
+>           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
+>           -   Battles: Checkpoint battles and boss battles
+>               -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
+>           -   Trainers: Create more trainers so that random trainer encounters are more randomised
+>           -   Clean up comments in code
 >           -   UI in general, especially intro UI to the game
 
 ## Week 8 (16 Aug - 22 Aug)

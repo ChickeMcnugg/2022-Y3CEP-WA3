@@ -103,26 +103,7 @@ class Encounter:
                     if action == "Fight":
                         move = protagonistActivePokemon.chooseMove()
 
-                        #UI
-                        print(protagonistActivePokemon.getPokemonName() + " uses " + move.getMoveName() + ".")
-                        sleep(1)
-                        
-                        if move.getMoveAttribute() == "Lower Defense":
-                            opponentActivePokemon.addPokemonDefense(-move.getMovePower())
-                        elif move.getMoveAttribute() == "Lower Accuracy":
-                            opponentActivePokemon.addPokemonAccuracy(-move.getMovePower())
-                        if move.getMoveAttribute() == "Gain Defense":
-                            protagonistActivePokemon.addPokemonDefense(move.getMovePower())
-                        elif move.getMoveAttribute() == "Gain Attack":
-                            protagonistActivePokemon.addPokemonAttack(move.getMovePower())
-                        elif move.getMoveAttribute() == "Gain Evasiveness":
-                            protagonistActivePokemon.addPokemonEvasion(move.getMovePower())
-                        else:
-                            move.damage(protagonistActivePokemon, opponentActivePokemon)
-                        
-                            if not self.checkDamageOutcome(protagonistActivePokemon, opponentActivePokemon):    
-                                if move.getMoveAttribute() == "Effect":
-                                    opponentActivePokemon.addPokemonEffects(move.getMoveEffectors())
+                        self.useMove(move, protagonistActivePokemon, opponentActivePokemon)
                     elif action == "Switch":
                         protagonist.choosePokemon()
                     elif action == "Run":
@@ -190,30 +171,33 @@ class Encounter:
                     else:
                         move = opponentActivePokemon.getPokemonMovesDict()[availableMoves[randint(0, len(availableMoves) - 1)]]
 
-                    #UI
-                    print(opponentActivePokemon.getPokemonName() + " uses " + move.getMoveName() + ".")
-                    sleep(1)
-
-                    if move.getMoveAttribute() == "Lower Defense":
-                        protagonistActivePokemon.addPokemonDefense(-move.getMovePower())
-                    elif move.getMoveAttribute() == "Lower Accuracy":
-                        protagonistActivePokemon.addPokemonAccuracy(-move.getMovePower())
-                    if move.getMoveAttribute() == "Gain Defense":
-                        opponentActivePokemon.addPokemonDefense(move.getMovePower())
-                    elif move.getMoveAttribute() == "Gain Attack":
-                        opponentActivePokemon.addPokemonAttack(move.getMovePower())
-                    elif move.getMoveAttribute() == "Gain Evasiveness":
-                        opponentActivePokemon.addPokemonEvasion(move.getMovePower())
-                    else:
-                        move.damage(opponentActivePokemon, protagonistActivePokemon)
-                    
-                        if not self.checkDamageOutcome(opponentActivePokemon, protagonistActivePokemon):    
-                            if move.getMoveAttribute() == "Effect":
-                                protagonistActivePokemon.addPokemonEffects(move.getMoveEffectors())
+                    self.useMove(move, opponentActivePokemon, protagonistActivePokemon)
                 
                 self.setIsProtagonistTurn(True)
 
-    def checkDamageOutcome(self, pokemonProtagonist, pokemonOpponent):
+    def useMove(self, move, pokemonProtagonist, pokemonOpponent):
+        #UI
+        print(pokemonProtagonist.getPokemonName() + " uses " + move.getMoveName() + ".")
+        sleep(1)
+
+        if move.getMoveAttribute() == "Lower Defense":
+            pokemonOpponent.addPokemonDefense(-move.getMovePower())
+        elif move.getMoveAttribute() == "Lower Accuracy":
+            pokemonOpponent.addPokemonAccuracy(-move.getMovePower())
+        if move.getMoveAttribute() == "Gain Defense":
+            pokemonProtagonist.addPokemonDefense(move.getMovePower())
+        elif move.getMoveAttribute() == "Gain Attack":
+            pokemonProtagonist.addPokemonAttack(move.getMovePower())
+        elif move.getMoveAttribute() == "Gain Evasiveness":
+            pokemonProtagonist.addPokemonEvasion(move.getMovePower())
+        else:
+            move.damage(pokemonProtagonist, pokemonOpponent)
+        
+            if not self.checkOutcome(pokemonProtagonist, pokemonOpponent):    
+                if move.getMoveAttribute() == "Effect":
+                    pokemonOpponent.addPokemonEffects(move.getMoveEffectors())
+
+    def checkOutcome(self, pokemonProtagonist, pokemonOpponent):
         #Check if opponent's active pokemon has fainted
         if pokemonOpponent.getPokemonHealth() != 0:
             return False
@@ -221,17 +205,20 @@ class Encounter:
             #UI
             print(pokemonOpponent.getPokemonName() + " has fainted.")
             sleep(1)
+            pokemonOpponent.resetStats()
             
             if pokemonOpponent.getPokemonOwner() == None:
                 self.setIsEnded(True)
                 print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
                 sleep(1)
+                pokemonProtagonist.resetStats()
             else:
                 pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
 
                 #Check if opponent has other available pokemon
                 if pokemonOpponent.getPokemonOwner().checkFainted():
                     self.setIsEnded(True)
+                    pokemonProtagonist.resetStats()
                     print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
                     sleep(1)
                     if not self.getHasEXPAll():
