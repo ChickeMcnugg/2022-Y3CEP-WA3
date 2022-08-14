@@ -174,15 +174,42 @@
 >           -   UI in general, especially intro UI to the game
 >           -   Test code written today (most of it is not tested)
 >   -   13/8
+>       -   Debugged previously written and untested code
+>       -   Made if-else conditions easier to read by putting the condition with less code at the bottom, instead of the bottom
+>       -   Integrated random pokemon encounters into trainer encounters
+>           -   If there are no trainers to battle against, the random pokemon encounter will happen
+>           -   Trainers act like checkpoints in the game to test a player's skill and power level for now, but may change later into development
+>       -   Implemented effects of all effects
+>           -   Moves wth the same type as the effect will cause the opponent to get the effect
+>           -   Every turn, if a pokemon is frozen, sleeping or paralysed, it cannot fight
+>               -   A counter in the Pokemon class keeps count of how many turns the pokemon cannot fight
+>           -   Every turn, if a pokemon is burned or poisoned, it will take damage
+>       -   Damage is switched back from being an addition of power to a multiplier of power because it was too high
+>       -   Organised set up functions
+>       -   Began including all possible moves as of current code functions
 >       -   TODO
 >           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
->           -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
+>               -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
 >           -   Battles: Checkpoint battles and boss battles
 >           -   Effect: Sleep, Paralysis and Freezing on pokemon
 >           -   Trainers: Create more trainers so that random trainer encounters are more randomised
 >           -   Moves: Include more moves
 >           -   UI in general, especially intro UI to the game
 >   -   14/8
+>       -   Finished inlcuding all possible moves
+>       -   Fixed bug of not adding ice moves to ice type pokemon
+>       -   Restructured damage() function to implement various move types (Changing stats, Effects, etc.)
+>           -   Moved checking of battle end out of Move class to Battle class
+>           -   Effects are not stored in every move anymore. Only when a move has an attribute linked to an effect, the effect is stored in the move
+>           -   Effects as such do not have types anymore
+>           -   Using moves is its own function under the Battle class, so checking attributes of moves is more identifiable, and also because it repeats during the opponent's turn
+>       -   Added new function to Pokemon class to change pokemon evasion stat for use during battles
+>       -   Fainted pokemons' stats reset to base stats + level boosts after battles because they are considered out of the battle and items used during battle do not apply outside the battle
+>       -   Damage formula has been adjusted to the actual calculation used in-game, and is calculated first before any logic
+>       -   Made the percentage threshold for random pokemon encounters a variable for easier identification and changing in the future
+>       -   Found bug of not being to start random encounters in locations which do not spawn pokemon and fixed with simple conditional
+>       -   Organised set ups into table-like structure for way easier editing
+>       -   TODO list below is finally ordered by importance
 >       -   TODO
 >           -   Items: Capturing with pokeball
 >           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
