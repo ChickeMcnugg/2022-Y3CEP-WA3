@@ -57,9 +57,6 @@ class Pokemon:
     
     def getPokemonHealth(self):
         return self.pokemonHealth
-    
-    def setPokemonHealth(self, newHealth):
-        self.pokemonHealth = newHealth
 
     def addPokemonHealth(self, newHealth):
         self.pokemonHealth += newHealth
@@ -72,36 +69,61 @@ class Pokemon:
             print(self.pokemonName + " took " + str(-newHealth) + " damage, and has " + str(self.pokemonHealth) + " health.")
             sleep(1)
         else:
-            print(self.pokemonName + " gained " + str(newHealth) + " health, and has " + self.pokemonHealth + " health.")
+            print(self.pokemonName + " gained " + str(newHealth) + " health, and has " + str(self.pokemonHealth) + " health.")
             sleep(1)
 
     def getPokemonAttack(self):
         return self.pokemonAttack
     
     def addPokemonAttack(self, newAttack):
-        self.pokemonAttack += newAttack
-        print(self.pokemonName + "'s attack rose to " + str(self.pokemonAttack) + ".")
-    
+        self.pokemonAttack = max(self.pokemonAttack + newAttack, 0)
+
+        if newAttack >= 0:
+            print(self.pokemonName + "'s attack rose to " + str(self.pokemonAttack) + ".")
+            sleep(1)
+        else:
+            print(self.pokemonName + "'s attack dropped to " + str(self.pokemonAttack) + ".")
+            sleep(1)
+
     def getPokemonDefense(self):
         return self.pokemonDefense
     
     def addPokemonDefense(self, newDefense):
-        self.pokemonDefense += newDefense
-        print(self.pokemonName + "'s defense rose to " + str(self.pokemonAttack) + ".")
+        self.pokemonDefense = max(self.pokemonDefense + newDefense, 0)
+        
+        if newDefense >= 0:
+            print(self.pokemonName + "'s defense rose to " + str(self.pokemonDefense) + ".")
+            sleep(1)
+        else:
+            print(self.pokemonName + "'s defense dropped to " + str(self.pokemonDefense) + ".")
+            sleep(1)
 
     def getPokemonEvasion(self):
         return self.pokemonEvasion
     
     def addPokemonEvasion(self, newEvasion):
         self.pokemonEvasion += newEvasion
-        print(self.pokemonName + "'s evasion rose to " + str(self.pokemonEvasion) + ".")
+        self.pokemonEvasion = max(self.pokemonEvasion, 0)
+
+        if newEvasion >= 0:
+            print(self.pokemonName + "'s evasion rose to " + str(self.pokemonEvasion) + ".")
+            sleep(1)
+        else:
+            print(self.pokemonName + "'s evasion dropped to " + str(self.pokemonEvasion) + ".")
+            sleep(1)
 
     def getPokemonAccuracy(self):
         return self.pokemonAccuracy
     
     def addPokemonAccuracy(self, newAccuracy):
-        self.pokemonAccuracy = max(self.pokemonAccuracy + newAccuracy, 100)
-        print(self.pokemonName + "'s accuracy rose to " + str(self.pokemonAccuracy) + "%.")
+        self.pokemonAccuracy = max(min(self.pokemonAccuracy + newAccuracy, 100), 0)
+
+        if newAccuracy >= 0:
+            print(self.pokemonName + "'s accuracy rose to " + str(self.pokemonAccuracy) + ".")
+            sleep(1)
+        else:
+            print(self.pokemonName + "'s accuracy dropped to " + str(self.pokemonAccuracy) + ".")
+            sleep(1)
 
     def getPokemonMovesDict(self):
         return self.pokemonMovesDict

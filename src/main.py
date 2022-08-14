@@ -702,6 +702,10 @@ def setup():
 
     #Creates trainers that can be played against, and the player protagonist
     setupTrainers()
+
+    global randomEncounterChance
+
+    randomEncounterChance = 60
     
 setup()
 
@@ -716,22 +720,23 @@ while True:
         if protagonist.moveToLocation(direction):
             #Check if the player can fight any trainer
             if len(protagonist.getTrainerLivePokemonsDict()) != 0:
-                #Roll chance for random encounter
-                if randint(1, 100) > 0:
-                    # #Randomly pick a trainer from those in the current location
-                    trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
-                    del(trainers[protagonist.getTrainerName()])
+                # #Randomly pick a trainer from those in the current location
+                trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
+                del(trainers[protagonist.getTrainerName()])
+                
+                if len(trainers) != 0:
+                    opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
                     
-                    if len(trainers) != 0:
-                        opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
-                        
-                        #Check if the opponent has available pokemon to fight
-                        if opponent.getTrainerActivePokemon() != "":
-                            #Start battle
-                            battle = Encounter(protagonist, opponent)
-                            battle.startBattle()
-                    else:
+                    #Check if the opponent has available pokemon to fight
+                    if opponent.getTrainerActivePokemon() != "":
+                        #Start battle
+                        battle = Encounter(protagonist, opponent)
+                        battle.startBattle()
+                else:
+                    #Roll chance for random encounter
+                    if randint(1, 100) > randomEncounterChance:
                         availablePokemon = list(protagonist.getTrainerLocation().getLocationPokemonDict().keys())
-                        randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
-                        randomEncounter = Encounter(protagonist, randomPokemon)
-                        randomEncounter.startBattle()
+                        if len(availablePokemon) != 0:
+                            randomPokemon = deepcopy(protagonist.getTrainerLocation().getLocationPokemonDict()[availablePokemon[randint(0, len(availablePokemon) - 1)]])
+                            randomEncounter = Encounter(protagonist, randomPokemon)
+                            randomEncounter.startBattle()

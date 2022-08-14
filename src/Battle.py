@@ -102,6 +102,10 @@ class Encounter:
                     
                     if action == "Fight":
                         move = protagonistActivePokemon.chooseMove()
+
+                        #UI
+                        print(protagonistActivePokemon.getPokemonName() + " uses " + move.getMoveName() + ".")
+                        sleep(1)
                         
                         if move.getMoveAttribute() == "Lower Defense":
                             opponentActivePokemon.addPokemonDefense(-move.getMovePower())
@@ -186,12 +190,30 @@ class Encounter:
                     else:
                         move = opponentActivePokemon.getPokemonMovesDict()[availableMoves[randint(0, len(availableMoves) - 1)]]
 
-                    if move.getMoveAttribute() == "Attack":
-                        move.damage(self, opponentActivePokemon, protagonistActivePokemon)
+                    #UI
+                    print(opponentActivePokemon.getPokemonName() + " uses " + move.getMoveName() + ".")
+                    sleep(1)
+
+                    if move.getMoveAttribute() == "Lower Defense":
+                        protagonistActivePokemon.addPokemonDefense(-move.getMovePower())
+                    elif move.getMoveAttribute() == "Lower Accuracy":
+                        protagonistActivePokemon.addPokemonAccuracy(-move.getMovePower())
+                    if move.getMoveAttribute() == "Gain Defense":
+                        opponentActivePokemon.addPokemonDefense(move.getMovePower())
+                    elif move.getMoveAttribute() == "Gain Attack":
+                        opponentActivePokemon.addPokemonAttack(move.getMovePower())
+                    elif move.getMoveAttribute() == "Gain Evasiveness":
+                        opponentActivePokemon.addPokemonEvasion(move.getMovePower())
+                    else:
+                        move.damage(opponentActivePokemon, protagonistActivePokemon)
+                    
+                        if not self.checkDamageOutcome(opponentActivePokemon, protagonistActivePokemon):    
+                            if move.getMoveAttribute() == "Effect":
+                                protagonistActivePokemon.addPokemonEffects(move.getMoveEffectors())
                 
                 self.setIsProtagonistTurn(True)
 
-    def checkOutcome(self, pokemonProtagonist, pokemonOpponent):
+    def checkDamageOutcome(self, pokemonProtagonist, pokemonOpponent):
         #Check if opponent's active pokemon has fainted
         if pokemonOpponent.getPokemonHealth() != 0:
             return False

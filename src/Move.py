@@ -37,10 +37,6 @@ class Move:
         return self.moveEffectors
     
     def damage(self, pokemonProtagonist, pokemonOpponent):
-        #UI
-        print(pokemonProtagonist.getPokemonName() + " uses " + self.moveName + ".")
-        sleep(1)
-        
         #Calculate if move hits pokemonOpponent based on accuracy
         if randint(1, 100) < 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100):
             print(pokemonProtagonist.getPokemonName() + " missed.")
@@ -75,15 +71,15 @@ class Move:
                 totalDamage = 0
                 
                 if self.getMoveAttribute() == "Multiple Hits":
-                    for _ in range(0, randint(2, 5) - 1):
+                    for _ in range(0, randint(2, 5)):
                         pokemonOpponent.addPokemonHealth(-netDamage)
                         totalDamage += netDamage
                 else:
                     pokemonOpponent.addPokemonHealth(-netDamage)
                     totalDamage += netDamage
                 
-                if self.getMoveAttribute() == "Leech":
+                if self.getMoveAttribute() == "Leech" and totalDamage != 0:
                     pokemonProtagonist.addPokemonHealth(totalDamage // 2)
                 
                 if self.getMoveAttribute() == "Faint":
-                    pokemonProtagonist.addPokemonHealth(-pokemonOpponent.getPokemonHealth())
+                    pokemonProtagonist.addPokemonHealth(-pokemonProtagonist.getPokemonHealth())
