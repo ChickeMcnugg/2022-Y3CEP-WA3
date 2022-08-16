@@ -213,13 +213,34 @@
 >       -   TODO
 >           -   Items: Capturing with pokeball
 >           -   Battles: Reset each trainer's stats and pokemon after the battle to be reused again if encountered again
->           -   Battles: Checkpoint battles and boss battles
 >               -   Unsure if should do this because trainers are used more as checks to see if the player has attained a certain level of skill and power
+>           -   Battles: Checkpoint battles and boss battles
 >           -   Trainers: Create more trainers so that random trainer encounters are more randomised
 >           -   Clean up comments in code
 >           -   UI in general, especially intro UI to the game
 
 ## Week 8 (16 Aug - 22 Aug)
+
+>   -   16/8
+>       -   Brainstorming for possible future implementation
+>           -   Each location's spawnable pokemon have a range of levels
+>           -   Add the ability to assign a pokemon's level when initialising it
+>           -   Redo dealing with invalid inputs for moving to locations, and choosing pokemon, moves and items (Exception Handling)
+>           -   The player cannot run away from Trainer encounters
+>           -   Trainers will be split into two groups: Checkpoint Trainers and Random Trainers
+>               -   Checkpoint Trainers are compulsory to defeat in order to progress on to other locations (The map locks certain locations depending on player's progress)
+>               -   Checkpoint Trainers's stats will have to be reset if the player loses the fight
+>               -   Random trainers work like random pokemon encounters, and exist for the player to gain more EXP at a time instead of spending long hours grinding
+>       -   TODO
+>           -   Redo exepcetion handling for invalid inputs for moving locations, and choosing pokemon, move and item
+>           -   Pokemon: Ability to assign level when initialising
+>           -   Items: Capturing with pokeball
+>           -   Battle: Fix range of levels of random encounter pokemon depending on location
+>           -   Battles: Checkpoint Trainers and Elite Four
+>           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
+>           -   Trainers: Create more trainers so that random trainer encounters are more randomised
+>           -   Clean up comments in code
+>           -   UI in general, especially intro UI to the game
 
 ## Week 9 (23 Aug - 29 Aug)
 
