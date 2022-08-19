@@ -10,7 +10,7 @@ from random import randint
 from time import sleep
 
 class Pokemon:
-    def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonEvasion, pokemonAccuracy):
+    def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonCatchRate):
         self.pokemonName = pokemonName
         self.pokemonType = pokemonType
         self.pokemonLevel = 0
@@ -27,6 +27,7 @@ class Pokemon:
         self.pokemonOwner = None
         self.pokemonEffects = []
         self.cannotMoveTurns = 0
+        self.pokemonCatchRate = pokemonCatchRate
     
     def __repr__(self):
         return "This is a " + self.pokemonType.getTypeName() + ", Level " + str(self.pokemonLevel) + " " + self.pokemonName + "."
@@ -63,6 +64,9 @@ class Pokemon:
         self.pokemonLevel += newLevel
         self.pokemonEXP = self.pokemonLevel ** 3
         print(self.pokemonName + " gained " + str(newLevel) + " levels.")
+    
+    def setPokemonLevel(self, newLevel):
+        self.pokemonLevel = newLevel
     
     def getPokemonMaxHealth(self):
         return self.pokemonMaxHealth
@@ -168,6 +172,9 @@ class Pokemon:
     
     def addCannotMoveTurns(self, newCannotMoveTurns):
         self.cannotMoveTurns += newCannotMoveTurns
+    
+    def getPokemonCatchRate(self):
+        return self.pokemonCatchRate
 
     def updateEffects(self):
         pokemonEffects = self.getPokemonEffects()

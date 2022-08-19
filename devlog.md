@@ -241,6 +241,15 @@
 >           -   Trainers: Create more trainers so that random trainer encounters are more randomised
 >           -   Clean up comments in code
 >           -   UI in general, especially intro UI to the game
+>   -   19/8
+>       -   TODO
+>           -   Items: Capturing with pokeball
+>           -   Battle: Fix range of levels of random encounter pokemon depending on location
+>           -   Battles: Checkpoint Trainers and Elite Four
+>           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
+>           -   Trainers: Create more trainers so that random trainer encounters are more randomised
+>           -   Clean up comments in code
+>           -   UI in general, especially intro UI to the game
 
 ## Week 9 (23 Aug - 29 Aug)
 

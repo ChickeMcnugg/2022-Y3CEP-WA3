@@ -1,6 +1,7 @@
 #The Encounter classes contain the battle's protagonist and opponent.
 #Both are referenced during the battle, and swap when the turn changes.
 
+from math import floor
 from random import randint
 from time import sleep
 from Pokemon import Pokemon
@@ -114,7 +115,44 @@ class Encounter:
                         item = protagonist.chooseItem()
 
                         if item.getItemAttribute() == "Ball" and self.isPokemonEncounter:
-                            continue
+                            isCaught = False
+
+                            if item.getItemPower() == 0:
+                                isCaught = True
+                            else:
+                                randomChance = randint(0, item.getItemPower())
+                                
+                                for effect in opponentActivePokemon.getPokemonEffects():
+                                    if effect.getEffectAttribute() == "Move":
+                                        if randomChance < 25:
+                                            isCaught = True
+                                        else:
+                                            if randomChance - 25 <= opponentActivePokemon.getPokemonCatchRate():
+                                                isCaught = True
+                                    elif effect.getEffectAttribute() == "Attack":
+                                        if randomChance < 12:
+                                            isCaught = True
+                                        else:
+                                            if randomChance - 12 <= opponentActivePokemon.getPokemonCatchRate():
+                                                isCaught = True                             
+
+                                randomChance = randint(0, 255)
+                                catchRate = opponentActivePokemon.getPokemonMaxHealth() / opponentActivePokemon.getPokemonHealth() * 255 * 4
+                                if item.getItemPower() == 200:
+                                    catchRate /= 8
+                                else:
+                                    catchRate /= 12
+                                catchRate = max(min(floor(catchRate), 255), 1)
+                                
+                                if randomChance >= catchRate:
+                                    isCaught = True
+
+                            if isCaught:
+                                #change owner, change name
+                                pass
+                            else:
+                                #pokemon run away
+                                pass
                         elif item.getItemAttribute() == "Medicine":
                             protagonistActivePokemon.removePokemonEffects(item.getItemPower())
                         elif item.getItemAttribute() == "Revive":
@@ -147,9 +185,6 @@ class Encounter:
                             protagonistActivePokemon.addPokemonAttack(item.getItemPower())
                         elif item.getItemAttribute() == "Defense":
                             protagonistActivePokemon.addPokemonDefense(item.getItemPower())
-                        else:
-                            continue
-
                 self.setIsProtagonistTurn(False)
             else:
                 if self.isPokemonEncounter:
