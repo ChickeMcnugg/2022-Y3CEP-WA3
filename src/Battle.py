@@ -57,6 +57,8 @@ class Encounter:
             #UI
             print("A wild " + opponentActivePokemon.getPokemonName() + " appeared.")
             sleep(1)
+            print(opponentActivePokemon)
+            sleep(1)
         else:
             opponent = self.encounterOpponent
             opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
@@ -321,18 +323,22 @@ class Encounter:
 
                         print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon() + ".")
                         sleep(1)
+            
             if self.getIsEnded():
                 pokemonProtagonist.resetStats()
 
                 #UI
-                print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
-                sleep(1)
+                if pokemonProtagonist.getPokemonOwner() == None:
+                    print(pokemonProtagonist.getPokemonName() + " has run away.")
+                else:
+                    print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                    sleep(1)
 
-                #Check if winner is encounterProtagonist
-                if self.getEncounterProtagonist() == pokemonProtagonist.getPokemonOwner():
-                    #Check if "EXP All" has been used during the battle
-                    if not self.getHasEXPAll():
-                        pokemonProtagonist.addPokemonEXP(30)
-                    else:
-                        for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
-                            pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
+                    #Check if winner is encounterProtagonist
+                    if self.getEncounterProtagonist() == pokemonProtagonist.getPokemonOwner():
+                        #Check if "EXP All" has been used during the battle
+                        if not self.getHasEXPAll():
+                            pokemonProtagonist.addPokemonEXP(30)
+                        else:
+                            for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
+                                pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)

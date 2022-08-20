@@ -55,7 +55,7 @@ class Location():
 
     def addLocationPokemon(self, newPokemon):
         for pokemon in newPokemon:
-            self.locationPokemonDict[pokemon.getPokemonName().capitalize()] = pokemon
+            self.locationPokemonDict[pokemon[0].getPokemonName().capitalize()] = pokemon
     
     def removeLocationPokemon(self, oldPokemon):
         del(self.locationPokemonDict[oldPokemon.getPokemonName().capitalize()])
