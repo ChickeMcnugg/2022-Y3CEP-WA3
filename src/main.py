@@ -492,7 +492,7 @@ def setupItems():
     xDefend         = Item("X Defend",          "Defense",      20)
 
 def setupMap():
-    global palletTown, viridianCity, pewterCity, ceruleanCity, saffronCity, vermilionCity, celadonCity, lavendarCity, fuschiaCity, cinnibarIsland
+    global palletTown, viridianCity, pewterCity, ceruleanCity, saffronCity, vermilionCity, celadonCity, lavendarCity, fuchsiaCity, cinnibarIsland
     global victoryRoad, viridianForest, mountMoon, rockTunnel, powerPlant, radioTower, silphCo, seafoamIslands, tohjoFalls
     global indigoPlateau, mountSilver, diglettCave, billHouse
     global route1, route2, route3, route4, route5, route6, route7, route8, route9, route10, route11, route12, route13, route14, route15, route16, route17, route18, route19, route20, route21, route22, route24, route25, route26, route27, route28
@@ -505,7 +505,7 @@ def setupMap():
     vermilionCity   = Location("Vermilion City")
     celadonCity     = Location("Celandon City")
     lavendarCity    = Location("Lavendar City")
-    fuschiaCity     = Location("Fuschia City")
+    fuchsiaCity     = Location("Fuschia City")
     cinnibarIsland  = Location("Cinnibar Island")
     victoryRoad     = Location("Victory Road")
     viridianForest  = Location("Viridian Forest")
@@ -579,8 +579,8 @@ def setupMap():
     celadonCity.setTwoWayLocationNeighbour(route16, "West")
     route16.setTwoWayLocationNeighbour(route17, "South")
     route17.setTwoWayLocationNeighbour(route18, "South")
-    route18.setTwoWayLocationNeighbour(fuschiaCity, "East")
-    fuschiaCity.setTwoWayLocationNeighbour(route19, "South")
+    route18.setTwoWayLocationNeighbour(fuchsiaCity, "East")
+    fuchsiaCity.setTwoWayLocationNeighbour(route19, "South")
     route19.setTwoWayLocationNeighbour(route20, "South")
     route20.setTwoWayLocationNeighbour(seafoamIslands, "West")
     seafoamIslands.setTwoWayLocationNeighbour(cinnibarIsland, "West")
@@ -593,7 +593,7 @@ def setupMap():
     route12.setTwoWayLocationNeighbour(route13, "South")
     route13.setTwoWayLocationNeighbour(route14, "West")
     route14.setTwoWayLocationNeighbour(route15, "South")
-    route15.setTwoWayLocationNeighbour(fuschiaCity, "West")
+    route15.setTwoWayLocationNeighbour(fuchsiaCity, "West")
     route22.setTwoWayLocationNeighbour(victoryRoad, "West")
     victoryRoad.setTwoWayLocationNeighbour(indigoPlateau, "North")
     victoryRoad.setTwoWayLocationNeighbour(route28, "West")
@@ -629,7 +629,7 @@ def setupMap():
     route16.addLocationPokemon([rattata, raticate, spearow, doduo, snorlax])
     route17.addLocationPokemon([raticate, spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby])
     route18.addLocationPokemon([raticate, spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby, lickitung])
-    fuschiaCity.addLocationPokemon([magikarp, poliwag, goldeen, krabby, seaking])
+    fuchsiaCity.addLocationPokemon([magikarp, poliwag, goldeen, krabby, seaking])
     route19.addLocationPokemon([tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
     route20.addLocationPokemon([tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
     seafoamIslands.addLocationPokemon([zubat, golbat, psyduck, golduck, slowpoke, slowbro, seel, shellder, krabby, horsea, staryu])
@@ -645,15 +645,147 @@ def setupMap():
     indigoPlateau.addLocationPokemon([magikarp, goldeen, poliwag])
 
 def setupTrainers():
-    global protagonist
+    global brock
 
-    protagonist = Trainer("Red", {"Venusaur": venusaur, "Weedle": weedle}, {"Poke Ball": [pokeBall, 5], "Great Ball": [greatBall, 5]}, palletTown)
+    brockGeodude = deepcopy(geodude)
+    brockGeodude.setPokemonLevel(12)
+    brockOnix = deepcopy(onix)
+    brockOnix.setPokemonLevel(14)
+    brock = Trainer("Brock", {"Geodude": brockGeodude, "Onix": brockOnix}, {}, pewterCity)
 
-    global botanist
+    global misty
     
-    botanist = Trainer("Botanist", {"Charmander": charmander}, {}, route1)
-    # brock, misty, lt surge, erika, koga, janine, sabrina, blaine, giovanni gym leaders
-    # lorelei, bruno, agatha, lance elite 4
+    mistyStaryu = deepcopy(staryu)
+    mistyStaryu.setPokemonLevel(18)
+    mistyStarmie = deepcopy(starmie)
+    mistyStarmie.setPokemonLevel(21)
+    misty = Trainer("Misty", {"Staryu": mistyStaryu, "Starmie": mistyStarmie}, {}, ceruleanCity)
+
+    global ltSurge
+
+    ltSurgeVoltorb = deepcopy(voltorb)
+    ltSurgeVoltorb.setPokemonLevel(21)
+    ltSurgePikachu = deepcopy(pikachu)
+    ltSurgePikachu.setPokemonLevel(18)
+    ltSurgeRaichu = deepcopy(raichu)
+    ltSurgeRaichu.setPokemonLevel(24)
+    ltSurge = Trainer("Lt. Surge", {"Voltorb": ltSurgeVoltorb, "Pikachu": ltSurgePikachu, "Raichu": ltSurgeRaichu}, {}, vermilionCity)
+
+    global erika
+    
+    erikaVictreebel = deepcopy(victreebel)
+    erikaVictreebel.setPokemonLevel(29)
+    erikaTangela = deepcopy(tangela)
+    erikaTangela.setPokemonLevel(24)
+    erikaVileplume = deepcopy(vileplume)
+    erikaVileplume.setPokemonLevel(29)
+    erika = Trainer("Erika", {"Victreebel": erikaVictreebel, "Tangela": erikaTangela, "Vileplume": erikaVileplume}, {}, celadonCity)
+    
+    global koga
+    
+    kogaKoffing = deepcopy(koffing)
+    kogaKoffing.setPokemonLevel(37)
+    kogaMuk = deepcopy(muk)
+    kogaMuk.setPokemonLevel(39)
+    kogaKoffing2 = deepcopy(koffing)
+    kogaKoffing2.changePokemonName("Koffing2")
+    kogaKoffing2.setPokemonLevel(37)
+    kogaWeezing = deepcopy(weezing)
+    kogaWeezing.setPokemonLevel(43)
+    koga = Trainer("Koga", {"Koffing": kogaKoffing, "Muk": kogaMuk, "Koffing2": kogaKoffing2, "Weezing": kogaWeezing}, {}, fuchsiaCity)
+
+    global sabrina
+    
+    sabrinaKadabra = deepcopy(kadabra)
+    sabrinaKadabra.setPokemonLevel(38)
+    sabrinaMrMime = deepcopy(mrmime)
+    sabrinaMrMime.setPokemonLevel(37)
+    sabrinaVenomoth = deepcopy(venomoth)
+    sabrinaVenomoth.setPokemonLevel(38)
+    sabrinaAlakazam = deepcopy(alakazam)
+    sabrinaAlakazam.setPokemonLevel(43)
+    sabrina = Trainer("Sabrina", {"Kadabra": sabrinaKadabra, "Mr Mime": sabrinaMrMime, "Venomoth": sabrinaVenomoth, "Alakazam": sabrinaAlakazam}, {}, saffronCity)
+
+    global blaine
+    
+    blaineGrowlithe = deepcopy(growlithe)
+    blaineGrowlithe.setPokemonLevel(42)
+    blainePonyta = deepcopy(ponyta)
+    blainePonyta.setPokemonLevel(40)
+    blaineRapidash = deepcopy(rapidash)
+    blaineRapidash.setPokemonLevel(42)
+    blaineArcanine = deepcopy(arcanine)
+    blaineArcanine.setPokemonLevel(47)
+    blaine = Trainer("Blaine", {"Growlithe": blaineGrowlithe, "Ponyta": blainePonyta, "Rapidash": blaineRapidash, "Arcanine": blaineArcanine}, {}, cinnibarIsland)
+
+    global giovanni
+    
+    giovanniRhyhorn = deepcopy(rhyhorn)
+    giovanniRhyhorn.setPokemonLevel(45)
+    giovanniDugtrio = deepcopy(dugtrio)
+    giovanniDugtrio.setPokemonLevel(42)
+    giovanniNidoqueen = deepcopy(nidoqueen)
+    giovanniNidoqueen.setPokemonLevel(44)
+    giovanniNidoking = deepcopy(nidoking)
+    giovanniNidoking.setPokemonLevel(45)
+    giovanniRhydon = deepcopy(rhydon)
+    giovanniRhydon.setPokemonLevel(50)
+    giovanni = Trainer("Giovanni", {"Rhyhorn": giovanniRhyhorn, "Dugtrio": giovanniDugtrio, "Nidoqueen": giovanniNidoqueen, "Nidoking": giovanniNidoking, "Rhydon": giovanniRhydon}, {}, viridianCity)
+    
+    global lorelei
+    loreleiDewgong = deepcopy(dewgong)
+    loreleiDewgong.setPokemonLevel(54)
+    loreleiCloyster = deepcopy(cloyster)
+    loreleiCloyster.setPokemonLevel(53)
+    loreleiSlowbro = deepcopy(slowbro)
+    loreleiSlowbro.setPokemonLevel(54)
+    loreleiJynx = deepcopy(jynx)
+    loreleiJynx.setPokemonLevel(56)
+    loreleiLapras = deepcopy(lapras)
+    loreleiLapras.setPokemonLevel(56)
+    lorelei = Trainer("Lorelei", {"Dewgong": loreleiDewgong, "Cloyster": loreleiCloyster, "Slowbro": loreleiSlowbro, "Jynx": loreleiJynx, "Lapras": loreleiLapras}, {}, indigoPlateau)
+
+    global bruno
+    brunoOnix = deepcopy(onix)
+    brunoOnix.setPokemonLevel(53)
+    brunoHitmonchan = deepcopy(hitmonchan)
+    brunoHitmonchan.setPokemonLevel(55)
+    brunoHitmonlee = deepcopy(hitmonlee)
+    brunoHitmonlee.setPokemonLevel(55)
+    brunoOnix2 = deepcopy(onix)
+    brunoOnix2.changePokemonName("Onix2")
+    brunoOnix2.setPokemonLevel(56)
+    brunoMachamp = deepcopy(machamp)
+    brunoMachamp.setPokemonLevel(58)
+    bruno = Trainer("Bruno", {"Onix": brunoOnix, "Hitmonchan": brunoHitmonchan, "Hitmonlee": brunoHitmonlee, "Onix2": brunoOnix2, "Machamp": brunoMachamp}, {}, indigoPlateau)
+
+    global agatha
+    agathaGengar = deepcopy(gengar)
+    agathaGengar.setPokemonLevel(56)
+    agathaGolbat = deepcopy(golbat)
+    agathaGolbat.setPokemonLevel(56)
+    agathaHaunter = deepcopy(haunter)
+    agathaHaunter.setPokemonLevel(55)
+    agathaArbok = deepcopy(arbok)
+    agathaArbok.setPokemonLevel(58)
+    agathaGengar2 = deepcopy(gengar)
+    agathaGengar2.changePokemonName("Gengar2")
+    agathaGengar2.setPokemonLevel(60)
+    agatha = Trainer("Agatha", {"Gengar": agathaGengar, "Golbat": agathaGolbat, "Haunter": agathaHaunter, "Arbok": agathaArbok, "Gengar2": agathaGengar2}, {}, indigoPlateau)
+
+    global lance
+    lanceGyrados = deepcopy(gyrados)
+    lanceGyrados.setPokemonLevel(58)
+    lanceDragonair = deepcopy(dragonair)
+    lanceDragonair.setPokemonLevel(56)
+    lanceDragonair2 = deepcopy(dragonair)
+    lanceDragonair2.changePokemonName("Dragonair2")
+    lanceDragonair2.setPokemonLevel(56)
+    lanceAerodactyl = deepcopy(aerodactyl)
+    lanceAerodactyl.setPokemonLevel(60)
+    lanceDragonite = deepcopy(dragonite)
+    lanceDragonite.setPokemonLevel(62)
+    lance = Trainer("Lance", {"Gyrados": lanceGyrados, "Dragonair": lanceDragonair, "Dragonair2": lanceDragonair2, "Aerodactyl": lanceAerodactyl, "Dragonite": lanceDragonite}, {}, indigoPlateau)
 
 def setup():
     #Creates types and type advantages for use in battles
@@ -680,7 +812,27 @@ def setup():
     global randomEncounterChancePercentage
 
     randomEncounterChancePercentage = 60
+
+    global protagonist
+
+    starterInput = ""
+    while starterInput not in ["Bulbasaur", "Charmander", "Squirtle"]:
+        starterInput = input("Choose you starter Pokemon (Bulbasaur, Charmander, Squirtle) : ")
+
+    nameInput = ""
+    while nameInput == "":
+        nameInput = input("What is your Pokemon's name? : ").strip()
+
+    if starterInput == "Bulbasaur":
+        starterPokemon = deepcopy(bulbasaur)    
+    elif starterInput == "Charmander":
+        starterPokemon = deepcopy(charmander)
+    else:
+        starterPokemon = deepcopy(squirtle)
     
+    starterPokemon.changePokemonName(nameInput)
+    protagonist = Trainer("Red", {f"{nameInput}": starterPokemon}, {}, palletTown)
+
 setup()
 
 while True:

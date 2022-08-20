@@ -139,7 +139,7 @@ class Pokemon:
         #UI
         print(self.pokemonName + " has gained " + str(newEXP) + " EXP.")
         sleep(1)
-        
+
         tempLevel = self.pokemonLevel
         self.pokemonLevel = floor(self.pokemonEXP ** (1/3))
         if self.pokemonLevel > tempLevel:
@@ -152,12 +152,15 @@ class Pokemon:
     def addPokemonLevel(self, newLevel):
         self.pokemonLevel += newLevel
         self.pokemonEXP = self.pokemonLevel ** 3
+        self.updateAttackDefense(self.pokemonLevel)
 
         #UI
         print(self.pokemonName + " gained " + str(newLevel) + " levels.")
     
     def setPokemonLevel(self, newLevel):
         self.pokemonLevel = newLevel
+        self.pokemonEXP = self.pokemonLevel ** 3
+        self.updateAttackDefense(self.pokemonLevel)
     
     def getPokemonMovesDict(self):
         return self.pokemonMovesDict

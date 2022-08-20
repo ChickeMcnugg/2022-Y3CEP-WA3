@@ -252,9 +252,9 @@
 >           -   UI in general, especially intro UI to the game
 >   -   20/8
 >       -   TODO
->           -   Battle: Fix range of levels of random encounter pokemon depending on location
->           -   Battles: Checkpoint Trainers and Elite Four
 >           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
+>           -   Battles: Fix order of Elite 4 Trainers
+>           -   Battles: Fix range of levels of random encounter pokemon depending on location
 >           -   Trainers: Create more trainers so that random trainer encounters are more randomised
 >           -   UI in general, especially intro UI to the game
 
