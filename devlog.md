@@ -255,7 +255,7 @@
 >           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
 >           -   Battles: Fix order of Elite 4 Trainers and include Blue
 >           -   Battles: Recalculate EXP gained after winning
->           -   Shop: Add shops to buy items
+>           -   Shop: UI
 >           -   Shop: Implement currency
 >           -   UI in general, especially intro UI to the game
 

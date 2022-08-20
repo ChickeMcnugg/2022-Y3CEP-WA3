@@ -11,6 +11,7 @@ from Item import *
 from Type import *
 from Location import *
 from Move import *
+from Mart import *
 
 def setupTypes():
     global bugType, dragonType, electricType, fightingType, fireType, flyingType, ghostType, grassType, groundType, iceType, normalType, poisonType, psychicType, rockType, waterType
@@ -449,47 +450,47 @@ def setupItems():
     global freshWater, sodaPop, lemonade, boulderBadge, cascadeBadge, thunderBadge, rainbowBadge, soulBadge, marshBadge, volcanoBadge, earthBadge, oldAmber, domeFossil, helixFossil
     global moonStone, fireStone, thunderStone, waterStone, leafStone, expAll, rareCandy, xAccuracy, xAttack, xDefend
 
-    masterBall      = Item("Master Ball",       "Ball",         0)
-    ultraBall       = Item("Ultra Ball",        "Ball",         150)
-    greatBall       = Item("Great Ball",        "Ball",         200)
-    pokeBall        = Item("Poke Ball",         "Ball",         255)
-    antidote        = Item("Antidote",          "Medicine",     [poison])
-    burnHeal        = Item("Burn Heal",         "Medicine",     [burn])
-    iceHeal         = Item("Ice Heal",          "Medicine",     [freeze])
-    awakening       = Item("Awakening",         "Medicine",     [sleep])
-    paralyseHeal    = Item("Parlyse Heal",      "Medicine",     [paralysis])
-    fullHeal        = Item("Full Heal",         "Medicine",     [poison, burn, freeze, sleep, paralysis])
-    revive          = Item("Revive",            "Revive",       0.5)
-    maxRevive       = Item("Max Revive",        "Revive",       1)
-    fullRestore     = Item("Full Restore",      "Health",       0)
-    maxPotion       = Item("Max Potion",        "Health",       0)
-    hyperPotion     = Item("Hyper Potion",      "Health",       200)
-    superPotion     = Item("Super Potion",      "Health",       50)
-    potion          = Item("Potion",            "Health",       20)
-    freshWater      = Item("Fresh Water",       "Health",       30)
-    sodaPop         = Item("Soda Pop",          "Health",       60)
-    lemonade        = Item("Lemonade",          "Health",       80)
-    boulderBadge    = Item("Boulder Badge",     "Badge",        0)
-    cascadeBadge    = Item("Cascade Badge",     "Badge",        0)
-    thunderBadge    = Item("Thunder Badge",     "Badge",        0)
-    rainbowBadge    = Item("Rainbow Badge",     "Badge",        0)
-    soulBadge       = Item("Soul Badge",        "Badge",        0)
-    marshBadge      = Item("Marsh Badge",       "Badge",        0)
-    volcanoBadge    = Item("Volcano Badge",     "Badge",        0)
-    earthBadge      = Item("Earth Badge",       "Badge",        0)
-    oldAmber        = Item("Old Amber",         "Fossil",       0)
-    domeFossil      = Item("Dome Fossil",       "Fossil",       0)
-    helixFossil     = Item("Helix Fossil",      "Fossil",       0)
-    moonStone       = Item("Moon Stone",        "Stone",        0)
-    fireStone       = Item("Fire Stone",        "Stone",        0)
-    thunderStone    = Item("Thunder Stone",     "Stone",        0)
-    waterStone      = Item("Water Stone",       "Stone",        0)
-    leafStone       = Item("Leaf Stone",        "Stone",        0)
-    expAll          = Item("EXP All",           "EXP",          0)
-    rareCandy       = Item("Rare Candy",        "Level",        1)
-    xAccuracy       = Item("X Accuracy",        "Accuracy",     20)
-    xAttack         = Item("X Attack",          "Attack",       20)
-    xDefend         = Item("X Defend",          "Defense",      20)
+    masterBall      = Item("Master Ball",       0,      0,      "Ball",         0)
+    ultraBall       = Item("Ultra Ball",        1200,   600,    "Ball",         150)
+    greatBall       = Item("Great Ball",        600,    300,    "Ball",         200)
+    pokeBall        = Item("Poke Ball",         200,    100,    "Ball",         255)
+    antidote        = Item("Antidote",          100,    50,     "Medicine",     [poison])
+    burnHeal        = Item("Burn Heal",         250,    125,    "Medicine",     [burn])
+    iceHeal         = Item("Ice Heal",          250,    125,    "Medicine",     [freeze])
+    awakening       = Item("Awakening",         200,    100,    "Medicine",     [sleep])
+    paralyseHeal    = Item("Parlyse Heal",      200,    100,    "Medicine",     [paralysis])
+    fullHeal        = Item("Full Heal",         600,    300,    "Medicine",     [poison, burn, freeze, sleep, paralysis])
+    revive          = Item("Revive",            1500,   750,    "Revive",       0.5)
+    maxRevive       = Item("Max Revive",        0,      2000,   "Revive",       1)
+    fullRestore     = Item("Full Restore",      3000,   1500,   "Health",       0)
+    maxPotion       = Item("Max Potion",        2500,   1250,   "Health",       0)
+    hyperPotion     = Item("Hyper Potion",      1200,   600,    "Health",       200)
+    superPotion     = Item("Super Potion",      700,    350,    "Health",       50)
+    potion          = Item("Potion",            300,    150,    "Health",       20)
+    freshWater      = Item("Fresh Water",       200,    100,    "Health",       30)
+    sodaPop         = Item("Soda Pop",          300,    150,    "Health",       60)
+    lemonade        = Item("Lemonade",          350,    175,    "Health",       80)
+    boulderBadge    = Item("Boulder Badge",     0,      0,      "Badge",        0)
+    cascadeBadge    = Item("Cascade Badge",     0,      0,      "Badge",        0)
+    thunderBadge    = Item("Thunder Badge",     0,      0,      "Badge",        0)
+    rainbowBadge    = Item("Rainbow Badge",     0,      0,      "Badge",        0)
+    soulBadge       = Item("Soul Badge",        0,      0,      "Badge",        0)
+    marshBadge      = Item("Marsh Badge",       0,      0,      "Badge",        0)
+    volcanoBadge    = Item("Volcano Badge",     0,      0,      "Badge",        0)
+    earthBadge      = Item("Earth Badge",       0,      0,      "Badge",        0)
+    oldAmber        = Item("Old Amber",         0,      0,      "Fossil",       0)
+    domeFossil      = Item("Dome Fossil",       0,      0,      "Fossil",       0)
+    helixFossil     = Item("Helix Fossil",      0,      0,      "Fossil",       0)
+    moonStone       = Item("Moon Stone",        0,      0,      "Stone",        0)
+    fireStone       = Item("Fire Stone",        2100,   1050,   "Stone",        0)
+    thunderStone    = Item("Thunder Stone",     2100,   1050,   "Stone",        0)
+    waterStone      = Item("Water Stone",       2100,   1050,   "Stone",        0)
+    leafStone       = Item("Leaf Stone",        2100,   1050,   "Stone",        0)
+    expAll          = Item("EXP All",           0,      0,      "EXP",          0)
+    rareCandy       = Item("Rare Candy",        0,      2400,   "Level",        1)
+    xAccuracy       = Item("X Accuracy",        950,    475,    "Accuracy",     20)
+    xAttack         = Item("X Attack",          500,    250,    "Attack",       20)
+    xDefend         = Item("X Defend",          550,    275,    "Defense",      20)
 
 def setupMap():
     global palletTown, viridianCity, pewterCity, ceruleanCity, saffronCity, vermilionCity, celadonCity, lavendarCity, fuchsiaCity, cinnibarIsland
@@ -646,7 +647,18 @@ def setupMap():
     route23.addLocationPokemon(         [[spearow, 26],         [fearow, 38, 43],       [ekans, 26],            [arbok, 41],            [sandshrew, 26],        [sandslash, 41],        [ditto, 33, 43],        [magikarp, 5],          [poliwag, 10],          [goldeen, 10],      [slowbro, 23],      [kingler, 23],      [seadra, 23],       [seaking, 23]])
     route24.addLocationPokemon(         [[caterpie, 7],         [metapod, 8],           [weedle, 7],            [kakuna, 8],            [pidgey, 12, 13],       [oddish, 12, 14],       [abra, 8, 12],          [bellsprout, 12, 14],   [magikarp, 5],          [poliwag, 10],      [goldeen, 10, 15],  [psyduck, 15],      [krabby, 15]])
     route25.addLocationPokemon(         [[caterpie, 8],         [metapod, 7, 9],        [weedle, 8],            [kakuna, 7, 9],         [pidgey, 13],           [oddish, 12, 14],       [abra, 10, 12],         [bellsprout, 12, 14],   [magikarp, 5],          [poliwag, 10],      [goldeen, 10, 15],  [psyduck, 15],      [krabby, 15]])
-    
+
+def setupShops():
+    viridianCityMart    = Mart("Viridian City Mart",    viridianCity,   {})
+    pewterCityMart      = Mart("Pewter City Mart",      pewterCity,     {})
+    ceruleanCityMart    = Mart("Cerulean City Mart",    ceruleanCity,   {})
+    vermilionCityMart   = Mart("Vermilion City Mart",   vermilionCity,  {})
+    lavendarTownMart    = Mart("Lavendar Town Mart",    lavendarCity,   {})
+    saffronCityMart     = Mart("Saffron City Mart",     saffronCity,    {})
+    fuchsiaCityMart     = Mart("Fuchsia City Mart",     fuchsiaCity,    {})
+    cinnibarIslandMart  = Mart("Cinnibar Island Mart",  cinnibarIsland, {})
+    indigoPlateauMart   = Mart("Indigo Plateau Mart",   indigoPlateau,  {})
+
 def setupTrainers():
     global brock
 
@@ -808,6 +820,9 @@ def setup():
 
     #Creates and orders locations
     setupMap()
+
+    #Creates and places shops in locations around the map
+    setupShops()
 
     #Creates trainers that can be played against, and the player protagonist
     setupTrainers()
