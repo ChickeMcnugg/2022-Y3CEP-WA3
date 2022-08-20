@@ -53,14 +53,14 @@ class Move:
             print("It has no effect.")
             sleep(1)
         
-        damage = min(int(damage), 0)
+        damage = max(int(damage), 0)
         
         #Calculate if move hits pokemonOpponent based on accuracy
-        accuracy = 100 - (((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (1 - (pokemonOpponent.getPokemonEvasion() / 100))) * 100)
+        accuracy = ((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100
         accuracy = max(min(accuracy, 100), 1)
         randomChance = randint(0, 100)
         
-        if randomChance < accuracy or randomChance == 100:
+        if randomChance > accuracy or randomChance == 100:
             print(pokemonProtagonist.getPokemonName() + " missed.")
             sleep(1)
             if self.getMoveAttribute() == "MissHit":
@@ -71,6 +71,8 @@ class Move:
             elif self.getMoveAttribute() == "Constant Attack":
                 pokemonOpponent.addPokemonHealth(-self.getMovePower())
             else:
+                totalDamage = 0
+
                 if self.getMoveAttribute() == "Multiple Hits":
                     for _ in range(0, randint(2, 5)):
                         pokemonOpponent.addPokemonHealth(-damage)
@@ -84,3 +86,6 @@ class Move:
                 
                 if self.getMoveAttribute() == "Faint":
                     pokemonProtagonist.addPokemonHealth(-pokemonProtagonist.getPokemonHealth())
+            
+            if self.getMoveAttribute() == "Effect":
+                pokemonOpponent.addPokemonEffects(self.getMoveEffectors())

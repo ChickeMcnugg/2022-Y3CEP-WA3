@@ -45,6 +45,10 @@ class Trainer:
     def getTrainerLivePokemonsDict(self):
         return self.trainerLivePokemonsDict
     
+    def addTrainerLivePokemonsDict(self, newPokemon):
+        self.trainerLivePokemonsDict[newPokemon.getPokemonName()] = newPokemon
+        newPokemon.setPokemonOwner(self)
+    
     def getTrainerFaintedPokemonsDict(self):
         return self.trainerFaintedPokemonDict
 

@@ -647,7 +647,7 @@ def setupMap():
 def setupTrainers():
     global protagonist
 
-    protagonist = Trainer("Red", {"Venusaur": venusaur, "Weedle": weedle}, {"Burn Heal": [burnHeal, 1]}, palletTown)
+    protagonist = Trainer("Red", {"Venusaur": venusaur, "Weedle": weedle}, {"Poke Ball": [pokeBall, 5], "Great Ball": [greatBall, 5]}, palletTown)
 
     global botanist
     
@@ -684,11 +684,16 @@ def setup():
 setup()
 
 while True:
-    direction = input("Direction to move: ")
-    
+    directionMessage = "Direction to move ("
+    for dir in protagonist.getTrainerLocation().getLocationNeighboursDict().keys():
+        directionMessage += dir + ", "
+    directionMessage = directionMessage[:-2] + ") : "
+
+    direction = ""
+
     #Wait until user's input is valid
-    while direction not in ["North", "South", "East", "West"]:
-        direction = input("Direction to move: ")
+    while direction not in protagonist.getTrainerLocation().getLocationNeighboursDict().keys():
+        direction = input(directionMessage)
     else:
         #Check if the player can move in the given direction
         if protagonist.moveToLocation(direction):

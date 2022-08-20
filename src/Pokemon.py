@@ -13,7 +13,7 @@ class Pokemon:
     def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonCatchRate):
         self.pokemonName = pokemonName
         self.pokemonType = pokemonType
-        self.pokemonLevel = 0
+        self.pokemonLevel = 5
         self.pokemonMaxHealth = pokemonMaxHealth
         self.pokemonHealth = self.pokemonMaxHealth
         self.pokemonEXP = 0
@@ -30,10 +30,13 @@ class Pokemon:
         self.pokemonCatchRate = pokemonCatchRate
     
     def __repr__(self):
-        return "This is a " + self.pokemonType.getTypeName() + ", Level " + str(self.pokemonLevel) + " " + self.pokemonName + "."
+        return self.pokemonName + " is a " + self.pokemonType.getTypeName() + " pokemon at Level " + str(self.pokemonLevel) + "."
     
     def getPokemonName(self):
         return self.pokemonName
+    
+    def changePokemonName(self, newName):
+        self.pokemonName = newName
     
     def getPokemonType(self):
         return self.pokemonType

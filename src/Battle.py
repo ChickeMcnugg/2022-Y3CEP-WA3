@@ -105,6 +105,9 @@ class Encounter:
                         move = protagonistActivePokemon.chooseMove()
 
                         self.useMove(move, protagonistActivePokemon, opponentActivePokemon)
+
+                        self.checkOutcome(protagonistActivePokemon, opponentActivePokemon)
+                        self.checkOutcome(opponentActivePokemon, protagonistActivePokemon)
                     elif action == "Switch":
                         protagonist.choosePokemon()
                     elif action == "Run":
@@ -138,21 +141,27 @@ class Encounter:
 
                                 randomChance = randint(0, 255)
                                 catchRate = opponentActivePokemon.getPokemonMaxHealth() / opponentActivePokemon.getPokemonHealth() * 255 * 4
+
                                 if item.getItemPower() == 200:
                                     catchRate /= 8
                                 else:
                                     catchRate /= 12
                                 catchRate = max(min(floor(catchRate), 255), 1)
                                 
-                                if randomChance >= catchRate:
+                                if randomChance <= catchRate:
                                     isCaught = True
 
                             if isCaught:
-                                #change owner, change name
-                                pass
+                                print(opponentActivePokemon.getPokemonName() + " has been caught.")
+                                sleep(1)
+
+                                nameInput = input("What is your " + opponentActivePokemon.getPokemonName() + "'s name? : ")
+                                opponentActivePokemon.changePokemonName(nameInput)
+                                protagonist.addTrainerLivePokemonsDict(opponentActivePokemon)
                             else:
-                                #pokemon run away
-                                pass
+                                print(protagonist.getTrainerName() + " missed. " + opponentActivePokemon.getPokemonName() + " ran away.")
+
+                            self.isEnded = True
                         elif item.getItemAttribute() == "Medicine":
                             protagonistActivePokemon.removePokemonEffects(item.getItemPower())
                         elif item.getItemAttribute() == "Revive":
@@ -207,6 +216,9 @@ class Encounter:
                         move = opponentActivePokemon.getPokemonMovesDict()[availableMoves[randint(0, len(availableMoves) - 1)]]
 
                     self.useMove(move, opponentActivePokemon, protagonistActivePokemon)
+
+                    self.checkOutcome(opponentActivePokemon, protagonistActivePokemon)
+                    self.checkOutcome(protagonistActivePokemon, opponentActivePokemon)
                 
                 self.setIsProtagonistTurn(True)
 
@@ -224,13 +236,9 @@ class Encounter:
         elif move.getMoveAttribute() == "Gain Attack":
             pokemonProtagonist.addPokemonAttack(move.getMovePower())
         elif move.getMoveAttribute() == "Gain Evasiveness":
-            pokemonProtagonist.addPokemonEvasion(move.getMovePower())
+            pokemonProtagonist.addPokemonEvasion(-move.getMovePower())
         else:
             move.damage(pokemonProtagonist, pokemonOpponent)
-        
-            if not self.checkOutcome(pokemonProtagonist, pokemonOpponent):    
-                if move.getMoveAttribute() == "Effect":
-                    pokemonOpponent.addPokemonEffects(move.getMoveEffectors())
 
     def checkOutcome(self, pokemonProtagonist, pokemonOpponent):
         #Check if opponent's active pokemon has fainted
