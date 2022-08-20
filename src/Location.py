@@ -9,6 +9,8 @@ class Location():
 
         self.locationTrainersDict = {}
         self.locationPokemonDict = {}
+        self.locationPokemonLevelMinimum = 5
+        self.locationPokemonLevelMaximum = 10
     
     def __repr__(self):
         return "This is the " + self.locationName + "."
@@ -57,3 +59,7 @@ class Location():
     
     def removeLocationPokemon(self, oldPokemon):
         del(self.locationPokemonDict[oldPokemon.getPokemonName().capitalize()])
+    
+    def setLocationPokemonLevelRange(self, newMinimum, newMaximum):
+        self.locationPokemonLevelMinimum = newMinimum
+        self.locationPokemonLevelMaximum = newMaximum

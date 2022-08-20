@@ -602,48 +602,48 @@ def setupMap():
     route26.setTwoWayLocationNeighbour(route27, "South")
     route27.setTwoWayLocationNeighbour(tohjoFalls, "West")
 
-    palletTown.addLocationPokemon([magikarp, poliwag, goldeen, tentacool])
-    route1.addLocationPokemon([rattata, pidgey])
-    viridianCity.addLocationPokemon([magikarp, poliwag, goldeen, tentacool])
-    viridianForest.addLocationPokemon([caterpie, metapod, weedle, kakuna, pikachu])
-    route2.addLocationPokemon([caterpie, pidgey, rattata])
-    diglettCave.addLocationPokemon([diglett, dugtrio])
-    route21.addLocationPokemon([pidgey, pidgeotto, rattata, raticate, tangela, tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
-    cinnibarIsland.addLocationPokemon([magikarp, poliwag, goldeen, shellder, horsea, staryu])
-    route3.addLocationPokemon([pidgey, spearow, jigglypuff])
-    mountMoon.addLocationPokemon([clefairy, zubat, paras, geodude])
-    route4.addLocationPokemon([rattata, spearow, ekans, sandshrew, magikarp, poliwag, goldeen, psyduck, krabby])
-    ceruleanCity.addLocationPokemon([magikarp, poliwag, goldeen, psyduck, krabby, jynx])
-    route24.addLocationPokemon([caterpie, metapod, weedle, kakuna, pidgey, oddish, abra, bellsprout, magikarp, poliwag, goldeen, psyduck, krabby])
-    route25.addLocationPokemon([caterpie, metapod, weedle, kakuna, pidgey, oddish, abra, bellsprout, magikarp, poliwag, goldeen, psyduck, krabby])
-    route9.addLocationPokemon([rattata, spearow, ekans])
-    rockTunnel.addLocationPokemon([zubat, geodude, machop, onix])
-    route10.addLocationPokemon([spearow, ekans, sandshrew, voltorb, magikarp, poliwag, goldeen, poliwhirl, slowpoke])
-    powerPlant.addLocationPokemon([pikachu, raichu, magnemite, magneton, voltorb, electabuzz, electrode, zapdos])
-    radioTower.addLocationPokemon([gastly, haunter, cubone, marowak])
-    route5.addLocationPokemon([pidgey, oddish, meowth, mankey, bellsprout])
-    silphCo.addLocationPokemon([lapras])
-    route8.addLocationPokemon([pidgey, ekans, sandshrew, vulpix, meowth, mankey, growlithe])
-    route7.addLocationPokemon([pidgey, vulpix, oddish, meowth, mankey, growlithe, bellsprout])
-    celadonCity.addLocationPokemon([magikarp, poliwag, goldeen, poliwhirl, slowpoke])
-    route16.addLocationPokemon([rattata, raticate, spearow, doduo, snorlax])
-    route17.addLocationPokemon([raticate, spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby])
-    route18.addLocationPokemon([raticate, spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby, lickitung])
-    fuchsiaCity.addLocationPokemon([magikarp, poliwag, goldeen, krabby, seaking])
-    route19.addLocationPokemon([tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
-    route20.addLocationPokemon([tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
-    seafoamIslands.addLocationPokemon([zubat, golbat, psyduck, golduck, slowpoke, slowbro, seel, shellder, krabby, horsea, staryu])
-    route6.addLocationPokemon([pidgey, oddish, meowth, mankey, bellsprout, magikarp, poliwag, goldeen, shellder, krabby])
-    vermilionCity.addLocationPokemon([farfetchd, magikarp, poliwag, goldeen, shellder, krabby])
-    route11.addLocationPokemon([spearow, ekans, sandshrew, drowzee, magikarp, poliwag, goldeen, shellder, krabby, nidorina])
-    route12.addLocationPokemon([pidgey, oddish, gloom, venonat, bellsprout, weepinbell, magikarp, poliwag, goldeen, tentacool, krabby, snorlax])
-    route13.addLocationPokemon([pidgey, oddish, gloom, venonat, bellsprout, weepinbell, ditto, magikarp, poliwag, goldeen, tentacool, krabby])
-    route14.addLocationPokemon([pidgey, oddish, gloom, venonat, bellsprout, weepinbell, ditto, magikarp, poliwag, goldeen])
-    route15.addLocationPokemon([pidgeot, pidgeotto, oddish, gloom, venonat, bellsprout, weepinbell, ditto])
-    route22.addLocationPokemon([rattata, spearow, nidoranMale, nidoranFemale, magikarp, poliwag, goldeen])
-    victoryRoad.addLocationPokemon([zubat, golbat, machop, machoke, geodude, graveler, onix, marowak, moltres, venomoth])
-    indigoPlateau.addLocationPokemon([magikarp, goldeen, poliwag])
-
+    palletTown.addLocationPokemon(      [[magikarp, 5],     [poliwag, 10],  [goldeen, 10],      [tentacool, 15]])
+    viridianCity.addLocationPokemon(    [[magikarp, 5],     [poliwag, 10],  [goldeen, 10],      [tentacool, 15]])
+    ceruleanCity.addLocationPokemon(    [[magikarp, 5],     [poliwag, 10],  [goldeen, 10],      [psyduck, 15],      [krabby, 15],       [jynx, 15]])
+    vermilionCity.addLocationPokemon(   [[farfetchd, 15],   [magikarp, 5],  [poliwag, 10],      [goldeen, 10],      [shellder, 15],     [krabby, 15]])
+    celadonCity.addLocationPokemon(     [[magikarp, 5],     [poliwag, 10],  [goldeen, 10],      [poliwhirl, 23],    [slowpoke, 15]])
+    fuchsiaCity.addLocationPokemon(     [[magikarp, 5, 15], [poliwag, 10],  [goldeen, 10, 15],  [krabby, 15],       [seaking, 23]])
+    cinnibarIsland.addLocationPokemon(  [[magikarp, 5],     [poliwag, 10],  [goldeen, 10, 15],  [shellder, 15],     [horsea, 15],       [staryu, 15]])
+    victoryRoad.addLocationPokemon(     [[zubat, 22, 26],       [golbat, 40, 41],   [machop, 22, 24],       [machoke, 41, 42, 45],      [geodude, 24, 26],      [graveler, 41, 43],     [onix, 36, 39, 42, 45],     [marowak, 40, 43], [moltres, 50], [venomoth, 40]])
+    viridianForest.addLocationPokemon(  [[caterpie, 3, 4, 5],          [metapod, 4, 5, 6], [weedle, 3, 4, 5], [kakuna, 4, 5, 6], [pikachu, 3, 5]])
+    mountMoon.addLocationPokemon(       [[clefairy, 8, 9],          [zubat, 6, 7, 8, 9, 10, 11], [paras, 8, 10], [geodude, 7, 8, 9, 10]])
+    rockTunnel.addLocationPokemon(      [zubat,             geodude, machop, onix])
+    powerPlant.addLocationPokemon(      [pikachu,           raichu, magnemite, magneton, voltorb, electabuzz, electrode, zapdos])
+    radioTower.addLocationPokemon(      [gastly,            haunter, cubone, marowak])
+    silphCo.addLocationPokemon(         [lapras])
+    seafoamIslands.addLocationPokemon(  [zubat,             golbat, psyduck, golduck, slowpoke, slowbro, seel, shellder, krabby, horsea, staryu])
+    indigoPlateau.addLocationPokemon(   [magikarp,          goldeen, poliwag])
+    diglettCave.addLocationPokemon(     [diglett,           dugtrio])
+    route1.addLocationPokemon(          [rattata,           pidgey])
+    route2.addLocationPokemon(          [caterpie,          pidgey, rattata])
+    route3.addLocationPokemon(          [pidgey,            spearow, jigglypuff])
+    route4.addLocationPokemon(          [rattata,           spearow, ekans, sandshrew, magikarp, poliwag, goldeen, psyduck, krabby])
+    route5.addLocationPokemon(          [pidgey,            oddish, meowth, mankey, bellsprout])
+    route6.addLocationPokemon(          [pidgey,            oddish, meowth, mankey, bellsprout, magikarp, poliwag, goldeen, shellder, krabby])
+    route7.addLocationPokemon(          [pidgey,            vulpix, oddish, meowth, mankey, growlithe, bellsprout])
+    route8.addLocationPokemon(          [pidgey,            ekans, sandshrew, vulpix, meowth, mankey, growlithe])
+    route9.addLocationPokemon(          [rattata,           spearow, ekans])
+    route10.addLocationPokemon(         [spearow,           ekans, sandshrew, voltorb, magikarp, poliwag, goldeen, poliwhirl, slowpoke])
+    route11.addLocationPokemon(         [spearow,           ekans, sandshrew, drowzee, magikarp, poliwag, goldeen, shellder, krabby, nidorina])
+    route12.addLocationPokemon(         [pidgey,            oddish, gloom, venonat, bellsprout, weepinbell, magikarp, poliwag, goldeen, tentacool, krabby, snorlax])
+    route13.addLocationPokemon(         [pidgey,            oddish, gloom, venonat, bellsprout, weepinbell, ditto, magikarp, poliwag, goldeen, tentacool, krabby])
+    route14.addLocationPokemon(         [pidgey,            oddish, gloom, venonat, bellsprout, weepinbell, ditto, magikarp, poliwag, goldeen])
+    route15.addLocationPokemon(         [pidgeot,           pidgeotto, oddish, gloom, venonat, bellsprout, weepinbell, ditto])
+    route16.addLocationPokemon(         [rattata,           raticate, spearow, doduo, snorlax])
+    route17.addLocationPokemon(         [raticate,          spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby])
+    route18.addLocationPokemon(         [raticate,          spearow, fearow, doduo, magikarp, poliwag, goldeen, tentacool, krabby, lickitung])
+    route19.addLocationPokemon(         [tentacool,         magikarp, poliwag, goldeen, shellder, horsea, staryu])
+    route20.addLocationPokemon(         [tentacool,         magikarp, poliwag, goldeen, shellder, horsea, staryu])
+    route21.addLocationPokemon(         [pidgey,            pidgeotto, rattata, raticate, tangela, tentacool, magikarp, poliwag, goldeen, shellder, horsea, staryu])
+    route22.addLocationPokemon(         [rattata,           spearow, nidoranMale, nidoranFemale, magikarp, poliwag, goldeen])
+    route24.addLocationPokemon(         [caterpie,          metapod, weedle, kakuna, pidgey, oddish, abra, bellsprout, magikarp, poliwag, goldeen, psyduck, krabby])
+    route25.addLocationPokemon(         [caterpie,          metapod, weedle, kakuna, pidgey, oddish, abra, bellsprout, magikarp, poliwag, goldeen, psyduck, krabby])
+    
 def setupTrainers():
     global brock
 
@@ -813,6 +813,7 @@ def setup():
 
     randomEncounterChancePercentage = 60
 
+def introduction():
     global protagonist
 
     starterInput = ""
@@ -833,8 +834,10 @@ def setup():
     starterPokemon.changePokemonName(nameInput)
     protagonist = Trainer("Red", {f"{nameInput}": starterPokemon}, {}, palletTown)
 
-setup()
+####################################################################################################
 
+setup()
+introduction()
 while True:
     #UI
     directionMessage = "Direction to move ("
