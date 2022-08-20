@@ -93,15 +93,7 @@ class Trainer:
 
     def moveToLocation(self, newDirection):
         sleep(1)
-
-        #Check if the input is valid
-        if newDirection in self.trainerLocation.getLocationNeighboursDict():
-            self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
-            return True
-        else:
-            print("It is a dead end. Please try again.")
-            sleep(1)
-            return False
+        self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
     
     def checkFainted(self):
         if len(self.trainerLivePokemonsDict) == 0:

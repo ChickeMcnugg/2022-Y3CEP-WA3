@@ -6,6 +6,7 @@ class Location():
     def __init__(self, locationName):
         self.locationName = locationName
         self.locationNeighboursDict = {}
+
         self.locationTrainersDict = {}
         self.locationPokemonDict = {}
     
@@ -17,25 +18,6 @@ class Location():
     
     def getLocationNeighboursDict(self):
         return self.locationNeighboursDict
-    
-    def getLocationTrainersDict(self):
-        return self.locationTrainersDict
-    
-    def addLocationTrainer(self, newTrainer):
-        self.locationTrainersDict[newTrainer.getTrainerName().capitalize()] = newTrainer
-    
-    def removeLocationTrainer(self, oldTrainer):
-        del(self.locationTrainersDict[oldTrainer.getTrainerName().capitalize()])
-
-    def getLocationPokemonDict(self):
-        return self.locationPokemonDict
-
-    def addLocationPokemon(self, newPokemon):
-        for pokemon in newPokemon:
-            self.locationPokemonDict[pokemon.getPokemonName().capitalize()] = pokemon
-    
-    def removeLocationPokemon(self, oldPokemon):
-        del(self.locationPokemonDict[oldPokemon.getPokemonName().capitalize()])
 
     def setOneWayLocationNeighbours(self, newLocation, direction):
         #Check if input direction is valid and available
@@ -56,3 +38,22 @@ class Location():
             newLocation.setOneWayLocationNeighbours(self, "West")
         else:
             newLocation.setOneWayLocationNeighbours(self, "East")
+    
+    def getLocationTrainersDict(self):
+        return self.locationTrainersDict
+    
+    def addLocationTrainer(self, newTrainer):
+        self.locationTrainersDict[newTrainer.getTrainerName().capitalize()] = newTrainer
+    
+    def removeLocationTrainer(self, oldTrainer):
+        del(self.locationTrainersDict[oldTrainer.getTrainerName().capitalize()])
+
+    def getLocationPokemonDict(self):
+        return self.locationPokemonDict
+
+    def addLocationPokemon(self, newPokemon):
+        for pokemon in newPokemon:
+            self.locationPokemonDict[pokemon.getPokemonName().capitalize()] = pokemon
+    
+    def removeLocationPokemon(self, oldPokemon):
+        del(self.locationPokemonDict[oldPokemon.getPokemonName().capitalize()])

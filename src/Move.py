@@ -10,8 +10,10 @@ class Move:
     def __init__(self, moveName, moveType, moveAttribute, movePower, moveAccuracy, moveEffectors=[]):
         self.moveName = moveName
         self.moveType = moveType
+
         self.moveAttribute = moveAttribute
         self.movePower = movePower
+        
         self.moveAccuracy = moveAccuracy
         self.moveEffectors = moveEffectors
     
@@ -37,6 +39,7 @@ class Move:
         return self.moveEffectors
     
     def damage(self, pokemonProtagonist, pokemonOpponent):
+        #Calculate base damage
         damage = ((((2 / 5 * pokemonProtagonist.getPokemonLevel()) + 2) * self.getMovePower() * pokemonProtagonist.getPokemonAttack() / pokemonOpponent.getPokemonDefense() / 50) + 2) * randint(217, 255) / 255
 
         #Account for type advantages
@@ -53,16 +56,20 @@ class Move:
             print("It has no effect.")
             sleep(1)
         
+        #Bound damage to be non-negative
         damage = max(int(damage), 0)
         
-        #Calculate if move hits pokemonOpponent based on accuracy
+        #Calculate accuracy
         accuracy = ((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100
         accuracy = max(min(accuracy, 100), 1)
         randomChance = randint(0, 100)
         
+        #Check if move hits or misses
         if randomChance > accuracy or randomChance == 100:
+            #UI
             print(pokemonProtagonist.getPokemonName() + " missed.")
             sleep(1)
+
             if self.getMoveAttribute() == "MissHit":
                 pokemonProtagonist.addPokemonHealth(-(damage // 8))
         else:
@@ -87,5 +94,6 @@ class Move:
                 if self.getMoveAttribute() == "Faint":
                     pokemonProtagonist.addPokemonHealth(-pokemonProtagonist.getPokemonHealth())
             
+            #Apply any effects
             if self.getMoveAttribute() == "Effect":
                 pokemonOpponent.addPokemonEffects(self.getMoveEffectors())

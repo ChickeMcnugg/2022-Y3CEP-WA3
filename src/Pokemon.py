@@ -13,22 +13,27 @@ class Pokemon:
     def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonCatchRate):
         self.pokemonName = pokemonName
         self.pokemonType = pokemonType
-        self.pokemonLevel = 5
+
         self.pokemonMaxHealth = pokemonMaxHealth
         self.pokemonHealth = self.pokemonMaxHealth
-        self.pokemonEXP = 0
+
         self.pokemonAttack = pokemonAttack
         self.pokemonBaseAttack = self.pokemonAttack
         self.pokemonDefense = pokemonDefense
         self.pokemonBaseDefense = self.pokemonDefense
         self.pokemonEvasion = 100
         self.pokemonAccuracy = 100
+
+        self.pokemonEXP = 0
+        self.pokemonLevel = 5
+        
         self.pokemonMovesDict = {}
-        self.pokemonOwner = None
         self.pokemonEffects = []
         self.cannotMoveTurns = 0
         self.pokemonCatchRate = pokemonCatchRate
-    
+
+        self.pokemonOwner = None        
+        
     def __repr__(self):
         return self.pokemonName + " is a " + self.pokemonType.getTypeName() + " pokemon at Level " + str(self.pokemonLevel) + "."
     
@@ -41,36 +46,6 @@ class Pokemon:
     def getPokemonType(self):
         return self.pokemonType
     
-    def addPokemonEXP(self, newEXP):
-        self.pokemonEXP += newEXP
-
-        #UI
-        tempLevel = self.pokemonLevel
-        self.pokemonLevel = floor(self.pokemonEXP ** (1/3))
-        if self.pokemonLevel > tempLevel:
-            print(self.pokemonName + " levelled up, and is now at Level " + str(self.pokemonLevel))
-            self.updateAttackDefense(self.pokemonLevel)
-    
-    def updateAttackDefense(self, newLevel):
-        self.pokemonAttack = self.pokemonBaseAttack + (newLevel / 50 * self.pokemonBaseAttack)
-        self.pokemonDefense = self.pokemonBaseDefense + (newLevel / 50 * self.pokemonBaseDefense)
-
-    def resetStats(self):
-        self.updateAttackDefense(self.pokemonLevel)
-        self.pokemonAccuracy = 100
-        self.pokemonEvasion = 100
-
-    def getPokemonLevel(self):
-        return self.pokemonLevel
-    
-    def addPokemonLevel(self, newLevel):
-        self.pokemonLevel += newLevel
-        self.pokemonEXP = self.pokemonLevel ** 3
-        print(self.pokemonName + " gained " + str(newLevel) + " levels.")
-    
-    def setPokemonLevel(self, newLevel):
-        self.pokemonLevel = newLevel
-    
     def getPokemonMaxHealth(self):
         return self.pokemonMaxHealth
     
@@ -78,82 +53,117 @@ class Pokemon:
         return self.pokemonHealth
 
     def addPokemonHealth(self, newHealth):
-        self.pokemonHealth += newHealth
-
-        #Bound pokemon's health from 0 to maxHealth
-        self.pokemonHealth = max(min(self.pokemonHealth, self.pokemonMaxHealth), 0)
+        #Bound pokemon's health from 0 to pokemonMaxHealth
+        self.pokemonHealth = max(min(self.pokemonHealth + newHealth, self.pokemonMaxHealth), 0)
 
         #UI
         if newHealth <= 0:
             print(self.pokemonName + " took " + str(-newHealth) + " damage, and has " + str(self.pokemonHealth) + " health.")
-            sleep(1)
         else:
             print(self.pokemonName + " gained " + str(newHealth) + " health, and has " + str(self.pokemonHealth) + " health.")
-            sleep(1)
-
+        
+        sleep(1)
+    
     def getPokemonAttack(self):
         return self.pokemonAttack
     
     def addPokemonAttack(self, newAttack):
+        #Bound pokemon's attack to be non-negative
         self.pokemonAttack = max(self.pokemonAttack + newAttack, 0)
 
+        #UI
         if newAttack >= 0:
             print(self.pokemonName + "'s attack rose to " + str(self.pokemonAttack) + ".")
-            sleep(1)
         else:
             print(self.pokemonName + "'s attack dropped to " + str(self.pokemonAttack) + ".")
-            sleep(1)
+        
+        sleep(1)
 
     def getPokemonDefense(self):
         return self.pokemonDefense
     
     def addPokemonDefense(self, newDefense):
+        #Bound pokemon's defense to be non-negative
         self.pokemonDefense = max(self.pokemonDefense + newDefense, 0)
         
+        #UI
         if newDefense >= 0:
             print(self.pokemonName + "'s defense rose to " + str(self.pokemonDefense) + ".")
-            sleep(1)
         else:
             print(self.pokemonName + "'s defense dropped to " + str(self.pokemonDefense) + ".")
-            sleep(1)
+        
+        sleep(1)
+
+    def updateAttackDefense(self, newLevel):
+        self.pokemonAttack = self.pokemonBaseAttack + (newLevel / 50 * self.pokemonBaseAttack)
+        self.pokemonDefense = self.pokemonBaseDefense + (newLevel / 50 * self.pokemonBaseDefense)
 
     def getPokemonEvasion(self):
         return self.pokemonEvasion
     
     def addPokemonEvasion(self, newEvasion):
+        #Bound pokemon's evasion to be non-negative
         self.pokemonEvasion = max(self.pokemonEvasion + newEvasion, 0)
 
+        #UI
         if newEvasion >= 0:
             print(self.pokemonName + "'s evasion rose to " + str(self.pokemonEvasion) + ".")
-            sleep(1)
         else:
             print(self.pokemonName + "'s evasion dropped to " + str(self.pokemonEvasion) + ".")
-            sleep(1)
+        
+        sleep(1)
 
     def getPokemonAccuracy(self):
         return self.pokemonAccuracy
     
     def addPokemonAccuracy(self, newAccuracy):
+        #Bound pokemon's accuracy to be non-negative
         self.pokemonAccuracy = max(self.pokemonAccuracy + newAccuracy, 0)
 
+        #UI
         if newAccuracy >= 0:
             print(self.pokemonName + "'s accuracy rose to " + str(self.pokemonAccuracy) + ".")
-            sleep(1)
         else:
             print(self.pokemonName + "'s accuracy dropped to " + str(self.pokemonAccuracy) + ".")
-            sleep(1)
+        
+        sleep(1)
 
+    def resetStats(self):
+        self.updateAttackDefense(self.pokemonLevel)
+        self.pokemonAccuracy = 100
+        self.pokemonEvasion = 100
+
+    def addPokemonEXP(self, newEXP):
+        self.pokemonEXP += newEXP
+
+        #UI
+        print(self.pokemonName + " has gained " + str(newEXP) + " EXP.")
+        sleep(1)
+        
+        tempLevel = self.pokemonLevel
+        self.pokemonLevel = floor(self.pokemonEXP ** (1/3))
+        if self.pokemonLevel > tempLevel:
+            print(self.pokemonName + " levelled up, and is now at Level " + str(self.pokemonLevel))
+            self.updateAttackDefense(self.pokemonLevel)
+    
+    def getPokemonLevel(self):
+        return self.pokemonLevel
+    
+    def addPokemonLevel(self, newLevel):
+        self.pokemonLevel += newLevel
+        self.pokemonEXP = self.pokemonLevel ** 3
+
+        #UI
+        print(self.pokemonName + " gained " + str(newLevel) + " levels.")
+    
+    def setPokemonLevel(self, newLevel):
+        self.pokemonLevel = newLevel
+    
     def getPokemonMovesDict(self):
         return self.pokemonMovesDict
         
     def addPokemonMoves(self, newMove):
         self.pokemonMovesDict[newMove.getMoveName()] = newMove
-    
-    def getPokemonOwner(self):
-        return self.pokemonOwner
-    
-    def setPokemonOwner(self, newOwner):
-        self.pokemonOwner = newOwner
 
     def getPokemonEffects(self):
         return self.pokemonEffects
@@ -162,12 +172,16 @@ class Pokemon:
         for effect in effects:
             if effect in self.pokemonEffects:
                 self.pokemonEffects.remove(effect)
+                
+                #UI
                 print(self.pokemonName + "is no longer " + effect.getEffectName().lower() + ".")
     
     def addPokemonEffects(self, effects):
         for effect in effects:
             if effect not in self.pokemonEffects:
                 self.pokemonEffects.append(effect)
+                
+                #UI
                 print(self.pokemonName + " has been " + effect.getEffectName().lower() + ".")
 
     def getCannotMoveTurns(self):
@@ -175,23 +189,6 @@ class Pokemon:
     
     def addCannotMoveTurns(self, newCannotMoveTurns):
         self.cannotMoveTurns += newCannotMoveTurns
-    
-    def getPokemonCatchRate(self):
-        return self.pokemonCatchRate
-
-    def updateEffects(self):
-        pokemonEffects = self.getPokemonEffects()
-
-        for effect in pokemonEffects:
-            if effect.getEffectAttribute() == "Attack":
-                print(self.getPokemonName() + " was " + effect.getEffectName().lower() + ".")
-                self.addPokemonHealth(-int(self.getPokemonMaxHealth() * effect.getEffectPower()))
-            elif effect.getEffectAttribute() == "Move":
-                if effect.getEffectPower() <= 1:
-                    if randint(0, 100) > (1 - effect.getEffectPower()) * 100:
-                        self.addCannotMoveTurns(1)
-                else:
-                    self.addCannotMoveTurns(effect.getEffectPower())
 
     def chooseMove(self):
         availableMoves = list(self.pokemonMovesDict.keys())
@@ -209,4 +206,31 @@ class Pokemon:
             moveInput = input(moveMessage)
         
         sleep(1)
+
         return self.pokemonMovesDict[moveInput]
+
+    def updateEffects(self):
+        pokemonEffects = self.getPokemonEffects()
+
+        for effect in pokemonEffects:
+            #Check if the effect is "Poisoned" or "Burned"
+            if effect.getEffectAttribute() == "Attack":
+                print(self.getPokemonName() + " was " + effect.getEffectName().lower() + ".")
+                self.addPokemonHealth(-int(self.getPokemonMaxHealth() * effect.getEffectPower()))
+            #Check if the effect is "Paralysed", "Slept" or "Frozen"
+            elif effect.getEffectAttribute() == "Move":
+                #Check if the effect is "Paralysed" or "Frozen"
+                if effect.getEffectPower() <= 1:
+                    if randint(0, 100) > (1 - effect.getEffectPower()) * 100:
+                        self.addCannotMoveTurns(1)
+                else:
+                    self.addCannotMoveTurns(effect.getEffectPower())
+
+    def getPokemonCatchRate(self):
+        return self.pokemonCatchRate
+
+    def getPokemonOwner(self):
+        return self.pokemonOwner
+    
+    def setPokemonOwner(self, newOwner):
+        self.pokemonOwner = newOwner

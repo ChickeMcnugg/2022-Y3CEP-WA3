@@ -10,9 +10,11 @@ class Encounter:
     def __init__(self, encounterProtagonist, encounterOpponent):
         self.encounterProtagonist = encounterProtagonist
         self.encounterOpponent = encounterOpponent
+        self.isPokemonEncounter = isinstance(self.encounterOpponent, Pokemon)
+
         self.isProtagonistTurn = True
         self.isEnded = False
-        self.isPokemonEncounter = isinstance(self.encounterOpponent, Pokemon)
+        
         self.hasEXPAll = False
     
     def __repr__(self):
@@ -27,6 +29,9 @@ class Encounter:
     def getEncounterOpponent(self):
         return self.encounterOpponent
     
+    def getIsPokemonEncounter(self):
+        return self.isPokemonEncounter
+
     def getIsProtagonistTurn(self):
         return self.isProtagonistTurn
     
@@ -45,17 +50,18 @@ class Encounter:
     def setHasEXPAll(self, hasEXPAll):
         self.hasEXPAll = hasEXPAll
     
-    def getIsPokemonEncounter(self):
-        return self.isPokemonEncounter
-
     def startBattle(self):
         if self.isPokemonEncounter:
             opponentActivePokemon = self.encounterOpponent
+
+            #UI
             print("A wild " + opponentActivePokemon.getPokemonName() + " appeared.")
             sleep(1)
         else:
             opponent = self.encounterOpponent
             opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
+            
+            #UI
             print(self)
             sleep(1)
             print(opponent.getTrainerName() + " chooses " + opponentActivePokemon.getPokemonName() + ".")
@@ -63,41 +69,55 @@ class Encounter:
 
         protagonist = self.encounterProtagonist
         protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
+        
+        #UI
         print(protagonist.getTrainerName() + " chooses " + protagonistActivePokemon.getPokemonName() + ".")
         sleep(1)
         
+        #Check if the fight can continue
         while not self.getIsEnded():
+            #Update protagonistActivePokemon and opponentActivePokemon
             protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]
             if not self.isPokemonEncounter:
                 opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
-        
+
+            #Check if it is protagonist's turn
             if self.getIsProtagonistTurn():
+                #UI
                 print("It is " + protagonist.getTrainerName() + "'s turn.")
                 sleep(1)
 
-                availableActions = []
+                #Effects take effect
                 protagonistActivePokemon.updateEffects()
 
+                availableActions = []
+
+                #Check if protagonistActivePokemon can fight
                 if protagonistActivePokemon.getCannotMoveTurns() > 0:
                     print(protagonistActivePokemon.getPokemonName() + " cannot move.")
                     protagonistActivePokemon.addCannotMoveTurns(-1)
                 else:
                     availableActions.append("Fight")
                     availableActions.append("Run")
-
+                
+                #Check if protagonist can switch to other pokemon
                 if len(protagonist.getTrainerLivePokemonsDict()) > 1:
                     availableActions.append("Switch")
                 
+                #Check if protagonist can use items
                 if len(protagonist.getTrainerItemsDict()) != 0:
                     availableActions.append("Bag")
 
                 if len(availableActions) != 0:
+                    #UI
                     actionMessage = "What will " + protagonistActivePokemon.getPokemonName() + " do? ("
                     for action in availableActions:
                         actionMessage += action + ", "
                     actionMessage = actionMessage[:-2] + ") : "
 
                     action = ""
+                    
+                    #Wait until user's input is valid
                     while action not in availableActions:
                         action = input(actionMessage)
                     
@@ -111,103 +131,34 @@ class Encounter:
                     elif action == "Switch":
                         protagonist.choosePokemon()
                     elif action == "Run":
+                        #UI
                         print(protagonist.getTrainerName() + " has decided to run away.")
                         sleep(1)
+                        
                         self.setIsEnded(True)
                     else:
                         item = protagonist.chooseItem()
 
-                        if item.getItemAttribute() == "Ball" and self.isPokemonEncounter:
-                            isCaught = False
+                        self.useItem(item, protagonistActivePokemon, opponentActivePokemon)
 
-                            if item.getItemPower() == 0:
-                                isCaught = True
-                            else:
-                                randomChance = randint(0, item.getItemPower())
-                                
-                                for effect in opponentActivePokemon.getPokemonEffects():
-                                    if effect.getEffectAttribute() == "Move":
-                                        if randomChance < 25:
-                                            isCaught = True
-                                        else:
-                                            if randomChance - 25 <= opponentActivePokemon.getPokemonCatchRate():
-                                                isCaught = True
-                                    elif effect.getEffectAttribute() == "Attack":
-                                        if randomChance < 12:
-                                            isCaught = True
-                                        else:
-                                            if randomChance - 12 <= opponentActivePokemon.getPokemonCatchRate():
-                                                isCaught = True                             
-
-                                randomChance = randint(0, 255)
-                                catchRate = opponentActivePokemon.getPokemonMaxHealth() / opponentActivePokemon.getPokemonHealth() * 255 * 4
-
-                                if item.getItemPower() == 200:
-                                    catchRate /= 8
-                                else:
-                                    catchRate /= 12
-                                catchRate = max(min(floor(catchRate), 255), 1)
-                                
-                                if randomChance <= catchRate:
-                                    isCaught = True
-
-                            if isCaught:
-                                print(opponentActivePokemon.getPokemonName() + " has been caught.")
-                                sleep(1)
-
-                                nameInput = input("What is your " + opponentActivePokemon.getPokemonName() + "'s name? : ")
-                                opponentActivePokemon.changePokemonName(nameInput)
-                                protagonist.addTrainerLivePokemonsDict(opponentActivePokemon)
-                            else:
-                                print(protagonist.getTrainerName() + " missed. " + opponentActivePokemon.getPokemonName() + " ran away.")
-
-                            self.isEnded = True
-                        elif item.getItemAttribute() == "Medicine":
-                            protagonistActivePokemon.removePokemonEffects(item.getItemPower())
-                        elif item.getItemAttribute() == "Revive":
-                            availablePokemon = list(protagonist.getTrainerFaintedPokemonsDict().keys())
-                            reviveMessage = "Choose a pokemon to revive ("
-                            for pokemon in availablePokemon:
-                                reviveMessage += pokemon + ", "
-                            reviveMessage = reviveMessage[:-2] + ") : "
-                            
-                            reviveInput = ""
-                            while reviveInput not in availablePokemon:
-                                reviveInput = input(reviveMessage)
-                            
-                            revivedPokemon = protagonist.getTrainerFaintedPokemonsDict()[reviveInput]
-
-                            protagonist.revivePokemon(revivedPokemon)
-                            print(protagonist.trainerName + "'s " + revivedPokemon.getPokemonName() + " has been revived.")
-                            sleep(1)
-                            revivedPokemon.setPokemonHealth(revivedPokemon.getPokemonMaxHealth() * item.getItemPower())
-                            print(revivedPokemon.getPokemonName() + " has " + revivedPokemon.getPokemonHealth() + " health.")
-                        elif item.getItemAttribute() == "Health":
-                            protagonistActivePokemon.addPokemonHealth(item.getItemPower())
-                        elif item.getItemAttribute() == "EXP":
-                            self.setHasEXPAll(True)
-                        elif item.getItemAttribute() == "Level":
-                            protagonistActivePokemon.addPokemonLevel(item.getItemPower())
-                        elif item.getItemAttribute() == "Accuracy":
-                            protagonistActivePokemon.addPokemonAccuracy(item.getItemPower())
-                        elif item.getItemAttribute() == "Attack":
-                            protagonistActivePokemon.addPokemonAttack(item.getItemPower())
-                        elif item.getItemAttribute() == "Defense":
-                            protagonistActivePokemon.addPokemonDefense(item.getItemPower())
                 self.setIsProtagonistTurn(False)
             else:
+                #UI
                 if self.isPokemonEncounter:
                     print("It is " + opponentActivePokemon.getPokemonName() + "'s turn.")
                 else:
                     print("It is " + opponent.getTrainerName() + "'s turn.")
                 sleep(1)
 
+                #Effects take effect
                 opponentActivePokemon.updateEffects()
 
+                #Check if opponentActivePokemon can fight
                 if opponentActivePokemon.getCannotMoveTurns() > 0:
                     print(opponentActivePokemon.getPokemonName() + " cannot move.")
                     opponentActivePokemon.addCannotMoveTurns(-1)
                 else:
+                    #Randomyl pick a move from opponentActivePOkemon's move dictionary
                     availableMoves = list(opponentActivePokemon.getPokemonMovesDict().keys())
 
                     if len(availableMoves) == 1:
@@ -240,11 +191,109 @@ class Encounter:
         else:
             move.damage(pokemonProtagonist, pokemonOpponent)
 
+    def useItem(self, item, pokemonProtagonist, pokemonOpponent):
+        if item.getItemAttribute() == "Ball" and self.isPokemonEncounter:
+            isCaught = False
+
+            #Check if ball used is "Master Ball"
+            if item.getItemPower() == 0:
+                isCaught = True
+            else:
+                #Calculate chance of being caught with effects
+                randomChance = randint(0, item.getItemPower())
+                
+                for effect in pokemonOpponent.getPokemonEffects():
+                    if not isCaught:
+                        if effect.getEffectAttribute() == "Move":
+                            if randomChance < 25 or randomChance - 25 <= pokemonOpponent.getPokemonCatchRate():
+                                isCaught = True
+                        elif effect.getEffectAttribute() == "Attack":
+                            if randomChance < 12 or randomChance - 12 <= pokemonOpponent.getPokemonCatchRate():
+                                isCaught = True
+
+                #Calculate chance of being caught with catch rate
+                if not isCaught:    
+                    randomChance = randint(0, 255)
+                    catchRate = pokemonOpponent.getPokemonMaxHealth() / pokemonOpponent.getPokemonHealth() * 255 * 4
+
+                    #Check if ball used is "Great Ball"
+                    if item.getItemPower() == 200:
+                        catchRate /= 8
+                    else:
+                        catchRate /= 12
+
+                    #Bound catchRate from 1 to 255
+                    catchRate = max(min(floor(catchRate), 255), 1)
+                    
+                    if randomChance <= catchRate:
+                        isCaught = True
+
+            #Check if pokemonOpponent has been caught
+            if isCaught:
+                #UI
+                print(pokemonOpponent.getPokemonName() + " has been caught.")
+                sleep(1)
+
+                nameInput = ""
+
+                #Ask user to change pokemon name to a valid name
+                while (nameInput == "") or (nameInput in pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()):
+                    nameInput = input("What is your " + pokemonOpponent.getPokemonName() + "'s name? : ").strip()
+                sleep(1)
+                
+                pokemonOpponent.changePokemonName(nameInput)
+                pokemonProtagonist.getPokemonOwner().addTrainerLivePokemonsDict(pokemonOpponent)
+            else:
+                #UI
+                print("It missed. " + pokemonOpponent.getPokemonName() + " ran away.")
+                sleep(1)
+
+            #End the battle
+            self.isEnded = True
+        elif item.getItemAttribute() == "Medicine":
+            pokemonProtagonist.removePokemonEffects(item.getItemPower())
+        elif item.getItemAttribute() == "Revive":
+            trainerProtagonist = pokemonProtagonist.getPokemonOwner()
+            availablePokemon = list(trainerProtagonist.getTrainerFaintedPokemonsDict().keys())
+            
+            #UI
+            reviveMessage = "Choose a pokemon to revive ("
+            for pokemon in availablePokemon:
+                reviveMessage += pokemon + ", "
+            reviveMessage = reviveMessage[:-2] + ") : "
+            
+            reviveInput = ""
+            
+            #Wait until user's input is valid
+            while reviveInput not in availablePokemon:
+                reviveInput = input(reviveMessage)
+            
+            sleep(1)
+            revivedPokemon = trainerProtagonist.getTrainerFaintedPokemonsDict()[reviveInput]
+            trainerProtagonist.revivePokemon(revivedPokemon)
+            revivedPokemon.setPokemonHealth(revivedPokemon.getPokemonMaxHealth() * item.getItemPower())
+
+            #UI
+            print(trainerProtagonist.getTrainerName() + "'s " + revivedPokemon.getPokemonName() + " has been revived.")
+            sleep(1)
+            print(revivedPokemon.getPokemonName() + " has " + revivedPokemon.getPokemonHealth() + " health.")
+            sleep(1)
+        elif item.getItemAttribute() == "Health":
+            pokemonProtagonist.addPokemonHealth(item.getItemPower())
+        elif item.getItemAttribute() == "EXP":
+            self.setHasEXPAll(True)
+        elif item.getItemAttribute() == "Level":
+            pokemonProtagonist.addPokemonLevel(item.getItemPower())
+        elif item.getItemAttribute() == "Accuracy":
+            pokemonProtagonist.addPokemonAccuracy(item.getItemPower())
+        elif item.getItemAttribute() == "Attack":
+            pokemonProtagonist.addPokemonAttack(item.getItemPower())
+        elif item.getItemAttribute() == "Defense":
+            pokemonProtagonist.addPokemonDefense(item.getItemPower())
+
     def checkOutcome(self, pokemonProtagonist, pokemonOpponent):
         #Check if opponent's active pokemon has fainted
-        if pokemonOpponent.getPokemonHealth() != 0:
-            return False
-        else:
+        if pokemonOpponent.getPokemonHealth() == 0:
             #UI
             print(pokemonOpponent.getPokemonName() + " has fainted.")
             sleep(1)
@@ -252,26 +301,12 @@ class Encounter:
             
             if pokemonOpponent.getPokemonOwner() == None:
                 self.setIsEnded(True)
-                print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
-                sleep(1)
-                pokemonProtagonist.resetStats()
             else:
                 pokemonOpponent.getPokemonOwner().setFaintedPokemon(pokemonOpponent)
 
                 #Check if opponent has other available pokemon
                 if pokemonOpponent.getPokemonOwner().checkFainted():
                     self.setIsEnded(True)
-                    pokemonProtagonist.resetStats()
-                    print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
-                    sleep(1)
-                    if not self.getHasEXPAll():
-                        print(pokemonProtagonist.getPokemonName() + " gained 30 EXP.")
-                        pokemonProtagonist.addPokemonEXP(30)
-                        sleep(1)
-                    else:
-                        for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
-                            pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
-                            print(pokemon + " gained 30 EXP.")
                 else:
                     #Check if opponent is the opponent, because the player can only input for the protagonist
                     if self.getEncounterProtagonist() == pokemonOpponent.getPokemonOwner():
@@ -286,5 +321,18 @@ class Encounter:
 
                         print(pokemonOpponent.getPokemonOwner().getTrainerName() + " chooses " + pokemonOpponent.getPokemonOwner().getTrainerActivePokemon() + ".")
                         sleep(1)
-            
-            return True
+            if self.getIsEnded():
+                pokemonProtagonist.resetStats()
+
+                #UI
+                print(pokemonProtagonist.getPokemonOwner().getTrainerName() + " has won.")
+                sleep(1)
+
+                #Check if winner is encounterProtagonist
+                if self.getEncounterProtagonist() == pokemonProtagonist.getPokemonOwner():
+                    #Check if "EXP All" has been used during the battle
+                    if not self.getHasEXPAll():
+                        pokemonProtagonist.addPokemonEXP(30)
+                    else:
+                        for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
+                            pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
