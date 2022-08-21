@@ -7,6 +7,7 @@ from time import sleep
 class Trainer:
     def __init__(self, trainerName, trainerLivePokemonsDict, trainerItemsDict, trainerLocation):
         self.trainerName = trainerName
+        self.trainerMoney = 3000
         self.trainerLivePokemonsDict = trainerLivePokemonsDict
         for pokemonKey in self.trainerLivePokemonsDict:
             self.trainerLivePokemonsDict[pokemonKey].setPokemonOwner(self)
@@ -42,6 +43,17 @@ class Trainer:
     def getTrainerName(self):
         return self.trainerName
     
+    def getTrainerMoney(self):
+        return self.trainerMoney
+    
+    def addTrainerMoney(self, newMoney):
+        self.trainerMoney += newMoney
+
+        if newMoney >= 0:
+            print(self.trainerName + " gained " + str(newMoney) + " Poke Dollars.")
+        else:
+            print(self.trainerName + " spent " + str(newMoney) + " Poke Dollars.")
+
     def getTrainerLivePokemonsDict(self):
         return self.trainerLivePokemonsDict
     
@@ -75,11 +87,21 @@ class Trainer:
     def getTrainerItemsDict(self):
         return self.trainerItemsDict
     
-    def useTrainerItem(self, newItem):
-        self.trainerItemsDict[newItem][1] -= 1
+    def addTrainerItem(self, newItem, itemCounter):
+        if newItem.getItemName() not in list(self.trainerItemsDict.keys()):
+            self.trainerItemsDict[newItem.getItemName()] = [newItem, itemCounter]
+        else:
+            self.trainerItemsDict[newItem.getItemName()][1] += itemCounter
+        
+        print(self.trainerName + " now has " + str(self.trainerItemsDict[newItem.getItemName()][1]) + " " + newItem.getItemName() + ".")
+    
+    def useTrainerItem(self, newItem, itemCounter):
+        self.trainerItemsDict[newItem.getItemName()][1] -= itemCounter
 
-        if self.trainerItemsDict[newItem][1] == 0:
-            del(self.trainerItemsDict[newItem])
+        if self.trainerItemsDict[newItem.getItemName()][1] <= 0:
+            del(self.trainerItemsDict[newItem.getItemName()])
+        
+        print(self.trainerName + " now has " + str(self.trainerItemsDict[newItem.getItemName()][1]) + " " + newItem.getItemName() + ".")
 
     def getTrainerLocation(self):
         return self.trainerLocation
@@ -93,6 +115,7 @@ class Trainer:
 
     def moveToLocation(self, newDirection):
         sleep(1)
+        self.trainerLocation.removeLocationTrainer(self)
         self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
     
     def checkFainted(self):
@@ -139,7 +162,7 @@ class Trainer:
             itemInput = input(itemMessage)
         
         item = self.trainerItemsDict[itemInput][0]
-        self.useTrainerItem(item.getItemName())
+        self.useTrainerItem(item, 1)
         print(self.trainerName + " used a " + item.getItemName() + ".")
         sleep(1)
         return item

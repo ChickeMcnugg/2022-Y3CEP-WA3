@@ -258,6 +258,11 @@
 >           -   Shop: UI
 >           -   Shop: Implement currency
 >           -   UI in general, especially intro UI to the game
+>   -   21/8
+>       -   TODO
+>           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
+>           -   Battles: Fix order of Elite 4 Trainers and include Blue
+>           -   UI in general, especially intro UI to the game
 
 ## Week 9 (23 Aug - 29 Aug)
 

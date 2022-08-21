@@ -10,7 +10,7 @@ from random import randint
 from time import sleep
 
 class Pokemon:
-    def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonCatchRate):
+    def __init__(self, pokemonName, pokemonType, pokemonMaxHealth, pokemonAttack, pokemonDefense, pokemonCatchRate, pokemonDefeatEXP):
         self.pokemonName = pokemonName
         self.pokemonType = pokemonType
 
@@ -32,7 +32,9 @@ class Pokemon:
         self.cannotMoveTurns = 0
         self.pokemonCatchRate = pokemonCatchRate
 
-        self.pokemonOwner = None        
+        self.pokemonOwner = None
+
+        self.pokemonDefeatEXP = pokemonDefeatEXP
         
     def __repr__(self):
         return self.pokemonName + " is a " + self.pokemonType.getTypeName() + " pokemon at Level " + str(self.pokemonLevel) + "."
@@ -95,8 +97,8 @@ class Pokemon:
         sleep(1)
 
     def updateAttackDefense(self, newLevel):
-        self.pokemonAttack = self.pokemonBaseAttack + (newLevel / 50 * self.pokemonBaseAttack)
-        self.pokemonDefense = self.pokemonBaseDefense + (newLevel / 50 * self.pokemonBaseDefense)
+        self.pokemonAttack = int(self.pokemonBaseAttack + (newLevel / 50 * self.pokemonBaseAttack))
+        self.pokemonDefense = int(self.pokemonBaseDefense + (newLevel / 50 * self.pokemonBaseDefense))
 
     def getPokemonEvasion(self):
         return self.pokemonEvasion
@@ -237,3 +239,6 @@ class Pokemon:
     
     def setPokemonOwner(self, newOwner):
         self.pokemonOwner = newOwner
+    
+    def getPokemonDefeatEXP(self):
+        return self.pokemonDefeatEXP

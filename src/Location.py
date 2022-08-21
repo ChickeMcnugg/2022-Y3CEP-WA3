@@ -11,6 +11,8 @@ class Location():
         self.locationPokemonDict = {}
         self.locationPokemonLevelMinimum = 5
         self.locationPokemonLevelMaximum = 10
+
+        self.locationMart = None
     
     def __repr__(self):
         return "This is the " + self.locationName + "."
@@ -63,3 +65,9 @@ class Location():
     def setLocationPokemonLevelRange(self, newMinimum, newMaximum):
         self.locationPokemonLevelMinimum = newMinimum
         self.locationPokemonLevelMaximum = newMaximum
+    
+    def getLocationMart(self):
+        return self.locationMart
+
+    def setLocationMart(self, newMart):
+        self.locationMart = newMart

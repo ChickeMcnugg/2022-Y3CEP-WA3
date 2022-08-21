@@ -247,157 +247,157 @@ def setupPokemon():
     global flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo
     global mew
 
-    bulbasaur       = Pokemon("Bulbasaur",          grassType,      45,     49,     49,     45)
-    ivysaur         = Pokemon("Ivysaur",            grassType,      60,     62,     63,     45)
-    venusaur        = Pokemon("Venusaur",           grassType,      80,     82,     83,     45)
-    charmander      = Pokemon("Charmander",         fireType,       39,     52,     43,     45)
-    charmeleon      = Pokemon("Charmeleon",         fireType,       58,     64,     58,     45)
-    charizard       = Pokemon("Charizard",          fireType,       78,     84,     78,     45)
-    squirtle        = Pokemon("Squirtle",           waterType,      44,     48,     65,     45)
-    wartortle       = Pokemon("Wartortle",          waterType,      59,     63,     80,     45)
-    blastoise       = Pokemon("Blastoise",          waterType,      79,     83,     100,    45)
-    caterpie        = Pokemon("Caterpie",           bugType,        45,     30,     35,     255)
-    metapod         = Pokemon("Metapod",            bugType,        50,     20,     55,     120)
-    butterfree      = Pokemon("Butterfree",         bugType,        60,     45,     50,     45)
-    weedle          = Pokemon("Weedle",             bugType,        40,     35,     30,     255)
-    kakuna          = Pokemon("Kakuna",             bugType,        65,     25,     50,     120)
-    beedrill        = Pokemon("Beedrill",           bugType,        65,     80,     40,     45)
-    pidgey          = Pokemon("Pidgey",             normalType,     40,     45,     40,     255)
-    pidgeotto       = Pokemon("Pidgeotto",          normalType,     63,     60,     55,     120)
-    pidgeot         = Pokemon("Pidgeot",            normalType,     83,     80,     75,     45)
-    rattata         = Pokemon("Rattata",            normalType,     30,     56,     35,     255)
-    raticate        = Pokemon("Raticate",           normalType,     55,     81,     60,     127)
-    spearow         = Pokemon("Spearow",            normalType,     40,     60,     30,     255)
-    fearow          = Pokemon("Fearow",             normalType,     65,     90,     65,     90)
-    ekans           = Pokemon("Ekans",              poisonType,     35,     60,     44,     255)
-    arbok           = Pokemon("Arbok",              poisonType,     60,     85,     69,     90)
-    pikachu         = Pokemon("Pikachu",            electricType,   35,     55,     30,     190)
-    raichu          = Pokemon("Raichu",             electricType,   60,     90,     55,     75)
-    sandshrew       = Pokemon("Sandshrew",          groundType,     50,     75,     85,     255)
-    sandslash       = Pokemon("Sandslash",          groundType,     75,     100,    110,    90)
-    nidoranFemale   = Pokemon("Nidoran Female",     poisonType,     55,     47,     52,     235)
-    nidorina        = Pokemon("Nidorina",           poisonType,     70,     62,     67,     120)
-    nidoqueen       = Pokemon("Nidoqueen",          poisonType,     90,     82,     87,     45)
-    nidoranMale     = Pokemon("Nidoran Male",       poisonType,     46,     57,     40,     235)
-    nidorino        = Pokemon("Nidorino",           poisonType,     61,     72,     57,     120)
-    nidoking        = Pokemon("Nidoking",           poisonType,     81,     92,     77,     45)
-    clefairy        = Pokemon("Clefairy",           normalType,     70,     45,     48,     150)
-    clefable        = Pokemon("Clefable",           normalType,     95,     70,     73,     25)
-    vulpix          = Pokemon("Vulpix",             fireType,       38,     41,     40,     190)
-    ninetales       = Pokemon("Ninetales",          fireType,       73,     76,     75,     75)
-    jigglypuff      = Pokemon("Jigglypuff",         normalType,     115,    45,     20,     170)
-    wigglytuff      = Pokemon("Wigglytuff",         normalType,     140,    70,     45,     50)
-    zubat           = Pokemon("Zubat",              poisonType,     40,     45,     35,     255)
-    golbat          = Pokemon("Golbat",             poisonType,     75,     80,     70,     90)
-    oddish          = Pokemon("Oddish",             grassType,      45,     50,     55,     255)
-    gloom           = Pokemon("Gloom",              grassType,      60,     65,     70,     120)
-    vileplume       = Pokemon("Vileplume",          grassType,      75,     80,     85,     45)
-    paras           = Pokemon("Paras",              bugType,        35,     70,     55,     190)
-    parasect        = Pokemon("Parasect",           bugType,        60,     55,     50,     75)
-    venonat         = Pokemon("Venonat",            bugType,        70,     65,     60,     190)
-    venomoth        = Pokemon("Venomoth",           bugType,        10,     55,     25,     75)
-    diglett         = Pokemon("Diglett",            groundType,     35,     80,     50,     255)
-    dugtrio         = Pokemon("Dugtrio",            groundType,     40,     45,     35,     50)
-    meowth          = Pokemon("Meowth",             normalType,     65,     70,     60,     255)
-    persian         = Pokemon("Persian",            normalType,     50,     52,     48,     90)
-    psyduck         = Pokemon("Psyduck",            waterType,      80,     82,     78,     190)
-    golduck         = Pokemon("Golduck",            waterType,      40,     80,     35,     75)
-    mankey          = Pokemon("Mankey",             fightingType,   65,     105,    60,     190)
-    primeape        = Pokemon("Primape",            fightingType,   55,     70,     45,     75)
-    growlithe       = Pokemon("Growlithe",          fireType,       90,     110,    80,     190)
-    arcanine        = Pokemon("Arcanine",           fireType,       40,     50,     40,     75)
-    poliwag         = Pokemon("Poliwag",            waterType,      65,     65,     65,     255)
-    poliwhirl       = Pokemon("Poliwhirl",          waterType,      90,     85,     95,     120)
-    poliwrath       = Pokemon("Poliwrath",          waterType,      25,     20,     15,     45)
-    abra            = Pokemon("Abra",               psychicType,    40,     35,     30,     200)
-    kadabra         = Pokemon("Kadabra",            psychicType,    55,     50,     45,     100)
-    alakazam        = Pokemon("Alakazam",           psychicType,    70,     80,     50,     50)
-    machop          = Pokemon("Machop",             fightingType,   80,     100,    70,     180)
-    machoke         = Pokemon("Machoke",            fightingType,   90,     130,    80,     90)
-    machamp         = Pokemon("Machamp",            fightingType,   50,     75,     35,     45)
-    bellsprout      = Pokemon("Bellsprout",         grassType,      65,     90,     50,     255)
-    weepinbell      = Pokemon("Weepinbell",         grassType,      80,     105,    65,     120)
-    victreebel      = Pokemon("Victreebel",         grassType,      40,     40,     35,     45)
-    tentacool       = Pokemon("Tentacool",          waterType,      80,     105,    65,     190)
-    tentacruel      = Pokemon("Tentacruel",         waterType,      40,     80,     100,    60)
-    geodude         = Pokemon("Geodude",            rockType,       55,     95,     115,    255)
-    graveler        = Pokemon("Graveler",           rockType,       80,     110,    130,    120)
-    golem           = Pokemon("Golem",              rockType,       50,     85,     55,     45)
-    ponyta          = Pokemon("Ponyta",             fireType,       65,     100,    70,     190)
-    rapidash        = Pokemon("Rapidash",           fireType,       90,     65,     65,     60)
-    slowpoke        = Pokemon("Slowpoke",           waterType,      95,     49,     49,     190)
-    slowbro         = Pokemon("Slowbro",            waterType,      25,     35,     70,     70)
-    magnemite       = Pokemon("Magnemite",          electricType,   50,     60,     95,     190)
-    magneton        = Pokemon("Magneton",           electricType,   52,     65,     55,     60)
-    farfetchd       = Pokemon("Farfetch'd",         normalType,     35,     85,     45,     45)
-    doduo           = Pokemon("Duduo",              normalType,     60,     110,    70,     190)
-    dodrio          = Pokemon("Dudrio",             normalType,     65,     45,     55,     45)
-    seel            = Pokemon("Seel",               waterType,      90,     70,     80,     190)
-    dewgong         = Pokemon("Dewgong",            waterType,      80,     80,     50,     75)
-    grimer          = Pokemon("Grimer",             poisonType,     105,    105,    75,     190)
-    muk             = Pokemon("Muk",                poisonType,     30,     65,     100,    75)
-    shellder        = Pokemon("Shellder",           waterType,      50,     95,     180,    190)
-    cloyster        = Pokemon("Cloyster",           waterType,      30,     35,     30,     60)
-    gastly          = Pokemon("Gastly",             ghostType,      30,     35,     30,     190)
-    haunter         = Pokemon("Haunter",            ghostType,      45,     50,     45,     90)
-    gengar          = Pokemon("Gengar",             ghostType,      60,     65,     60,     45)
-    onix            = Pokemon("Onix",               rockType,       35,     45,     160,    45)
-    drowzee         = Pokemon("Drowzee",            psychicType,    60,     48,     45,     190)
-    hypno           = Pokemon("Hypno",              psychicType,    85,     73,     70,     75)
-    krabby          = Pokemon("Krabby",             waterType,      30,     105,    90,     225)
-    kingler         = Pokemon("Kingler",            waterType,      55,     130,    115,    60)
-    voltorb         = Pokemon("Voltorb",            electricType,   40,     30,     50,     190)
-    electrode       = Pokemon("Electrode",          electricType,   60,     50,     70,     60)
-    exeggcute       = Pokemon("Exeggcute",          grassType,      60,     40,     80,     90)
-    exeggutor       = Pokemon("Exeggutor",          grassType,      95,     95,     85,     45)
-    cubone          = Pokemon("Cubone",             groundType,     50,     50,     95,     190)
-    marowak         = Pokemon("Marowak",            groundType,     60,     80,     110,    75)
-    hitmonlee       = Pokemon("Hitmonlee",          fightingType,   50,     120,    53,     45)
-    hitmonchan      = Pokemon("Hitmonchan",         fightingType,   50,     105,    79,     45)
-    lickitung       = Pokemon("Lickitung",          normalType,     90,     55,     75,     45)
-    koffing         = Pokemon("Koffing",            poisonType,     40,     65,     95,     190)
-    weezing         = Pokemon("Weezing",            poisonType,     65,     90,     120,    60)
-    rhyhorn         = Pokemon("Rhyhorn",            groundType,     80,     85,     95,     120)
-    rhydon          = Pokemon("Rhydon",             groundType,     105,    130,    120,    60)
-    chansey         = Pokemon("Chansey",            normalType,     250,    5,      5,      30)
-    tangela         = Pokemon("Tangela",            grassType,      65,     55,     115,    45)
-    kangaskhan      = Pokemon("Kangaskhan",         groundType,     105,    95,     80,     45)
-    horsea          = Pokemon("Horsea",             waterType,      30,     40,     70,     225)
-    seadra          = Pokemon("Seadra",             waterType,      55,     65,     95,     60)
-    goldeen         = Pokemon("Goldeen",            waterType,      45,     67,     60,     225)
-    seaking         = Pokemon("Seaking",            waterType,      80,     92,     65,     60)
-    staryu          = Pokemon("Staryu",             waterType,      30,     45,     55,     225)
-    starmie         = Pokemon("Starmie",            waterType,      60,     75,     85,     60)
-    mrmime          = Pokemon("Mr Mime",            psychicType,    40,     45,     65,     45)
-    scyther         = Pokemon("Scyther",            bugType,        70,     110,    80,     45)
-    jynx            = Pokemon("Jynx",               iceType,        65,     50,     35,     45)
-    electabuzz      = Pokemon("Electabuzz",         electricType,   65,     50,     35,     45)
-    magmar          = Pokemon("Magmar",             fireType,       65,     83,     57,     45)
-    pinsir          = Pokemon("Pinsir",             bugType,        65,     95,     57,     45)
-    tauros          = Pokemon("Tauros",             normalType,     75,     100,    95,     45)
-    magikarp        = Pokemon("Magikarp",           waterType,      20,     10,     55,     255)
-    gyrados         = Pokemon("Gyrados",            waterType,      95,     125,    79,     45)
-    lapras          = Pokemon("Lapras",             waterType,      130,    85,     80,     45)
-    ditto           = Pokemon("Ditto",              normalType,     48,     48,     48,     35)
-    eevee           = Pokemon("Eevee",              normalType,     55,     55,     50,     45)
-    vaporean        = Pokemon("Vaporean",           waterType,      130,    65,     60,     45)
-    jolteon         = Pokemon("Jolteon",            electricType,   65,     65,     65,     45)
-    flareon         = Pokemon("Flareon",            fireType,       65,     130,    65,     45)
-    porygon         = Pokemon("Porygon",            normalType,     65,     60,     70,     45)
-    omanyte         = Pokemon("Omanyte",            rockType,       35,     40,     100,    45)
-    omastar         = Pokemon("Omastar",            rockType,       70,     60,     125,    45)
-    kabuto          = Pokemon("Kabuto",             rockType,       30,     80,     90,     45)
-    kabutops        = Pokemon("Kabutops",           rockType,       60,     115,    105,    45)
-    aerodactyl      = Pokemon("Aerodactyl",         rockType,       80,     105,    65,     45)
-    snorlax         = Pokemon("Snorlax",            normalType,     160,    110,    65,     25)
-    articuno        = Pokemon("Articuno",           iceType,        90,     85,     100,    3)
-    zapdos          = Pokemon("Zapdos",             electricType,   90,     90,     85,     3)
-    moltres         = Pokemon("Moltres",            fireType,       90,     100,    90,     3)
-    dratini         = Pokemon("Dratini",            dragonType,     41,     64,     45,     45)
-    dragonair       = Pokemon("Dragonair",          dragonType,     61,     84,     65,     45)
-    dragonite       = Pokemon("Dragonite",          dragonType,     91,     134,    95,     45)
-    mewtwo          = Pokemon("Mewtwo",             psychicType,    106,    110,    90,     3)
-    mew             = Pokemon("Mew",                psychicType,    100,    100,    100,    45)
+    bulbasaur       = Pokemon("Bulbasaur",          grassType,      45,     49,     49,     45,     64)
+    ivysaur         = Pokemon("Ivysaur",            grassType,      60,     62,     63,     45,     142)
+    venusaur        = Pokemon("Venusaur",           grassType,      80,     82,     83,     45,     263)
+    charmander      = Pokemon("Charmander",         fireType,       39,     52,     43,     45,     62)
+    charmeleon      = Pokemon("Charmeleon",         fireType,       58,     64,     58,     45,     142)
+    charizard       = Pokemon("Charizard",          fireType,       78,     84,     78,     45,     267)
+    squirtle        = Pokemon("Squirtle",           waterType,      44,     48,     65,     45,     63)
+    wartortle       = Pokemon("Wartortle",          waterType,      59,     63,     80,     45,     142)
+    blastoise       = Pokemon("Blastoise",          waterType,      79,     83,     100,    45,     265)
+    caterpie        = Pokemon("Caterpie",           bugType,        45,     30,     35,     255,    39)
+    metapod         = Pokemon("Metapod",            bugType,        50,     20,     55,     120,    72)
+    butterfree      = Pokemon("Butterfree",         bugType,        60,     45,     50,     45,     198)
+    weedle          = Pokemon("Weedle",             bugType,        40,     35,     30,     255,    39)
+    kakuna          = Pokemon("Kakuna",             bugType,        65,     25,     50,     120,    72)
+    beedrill        = Pokemon("Beedrill",           bugType,        65,     80,     40,     45,     198)
+    pidgey          = Pokemon("Pidgey",             normalType,     40,     45,     40,     255,    50)
+    pidgeotto       = Pokemon("Pidgeotto",          normalType,     63,     60,     55,     120,    122)
+    pidgeot         = Pokemon("Pidgeot",            normalType,     83,     80,     75,     45,     290)
+    rattata         = Pokemon("Rattata",            normalType,     30,     56,     35,     255,    51)
+    raticate        = Pokemon("Raticate",           normalType,     55,     81,     60,     127,    145)
+    spearow         = Pokemon("Spearow",            normalType,     40,     60,     30,     255,    52)
+    fearow          = Pokemon("Fearow",             normalType,     65,     90,     65,     90,     155)
+    ekans           = Pokemon("Ekans",              poisonType,     35,     60,     44,     255,    58)
+    arbok           = Pokemon("Arbok",              poisonType,     60,     85,     69,     90,     157)
+    pikachu         = Pokemon("Pikachu",            electricType,   35,     55,     30,     190,    112)
+    raichu          = Pokemon("Raichu",             electricType,   60,     90,     55,     75,     243)
+    sandshrew       = Pokemon("Sandshrew",          groundType,     50,     75,     85,     255,    60)
+    sandslash       = Pokemon("Sandslash",          groundType,     75,     100,    110,    90,     158)
+    nidoranFemale   = Pokemon("Nidoran Female",     poisonType,     55,     47,     52,     235,    55)
+    nidorina        = Pokemon("Nidorina",           poisonType,     70,     62,     67,     120,    128)
+    nidoqueen       = Pokemon("Nidoqueen",          poisonType,     90,     82,     87,     45,     253)
+    nidoranMale     = Pokemon("Nidoran Male",       poisonType,     46,     57,     40,     235,    55)
+    nidorino        = Pokemon("Nidorino",           poisonType,     61,     72,     57,     120,    128)
+    nidoking        = Pokemon("Nidoking",           poisonType,     81,     92,     77,     45,     253)
+    clefairy        = Pokemon("Clefairy",           normalType,     70,     45,     48,     150,    113)
+    clefable        = Pokemon("Clefable",           normalType,     95,     70,     73,     25,     242)
+    vulpix          = Pokemon("Vulpix",             fireType,       38,     41,     40,     190,    60)
+    ninetales       = Pokemon("Ninetales",          fireType,       73,     76,     75,     75,     177)
+    jigglypuff      = Pokemon("Jigglypuff",         normalType,     115,    45,     20,     170,    95)
+    wigglytuff      = Pokemon("Wigglytuff",         normalType,     140,    70,     45,     50,     218)
+    zubat           = Pokemon("Zubat",              poisonType,     40,     45,     35,     255,    49)
+    golbat          = Pokemon("Golbat",             poisonType,     75,     80,     70,     90,     159)
+    oddish          = Pokemon("Oddish",             grassType,      45,     50,     55,     255,    64)
+    gloom           = Pokemon("Gloom",              grassType,      60,     65,     70,     120,    138)
+    vileplume       = Pokemon("Vileplume",          grassType,      75,     80,     85,     45,     245)
+    paras           = Pokemon("Paras",              bugType,        35,     70,     55,     190,    57)
+    parasect        = Pokemon("Parasect",           bugType,        60,     55,     50,     75,     142)
+    venonat         = Pokemon("Venonat",            bugType,        70,     65,     60,     190,    61)
+    venomoth        = Pokemon("Venomoth",           bugType,        10,     55,     25,     75,     158)
+    diglett         = Pokemon("Diglett",            groundType,     35,     80,     50,     255,    53)
+    dugtrio         = Pokemon("Dugtrio",            groundType,     40,     45,     35,     50,     149)
+    meowth          = Pokemon("Meowth",             normalType,     65,     70,     60,     255,    58)
+    persian         = Pokemon("Persian",            normalType,     50,     52,     48,     90,     154)
+    psyduck         = Pokemon("Psyduck",            waterType,      80,     82,     78,     190,    64)
+    golduck         = Pokemon("Golduck",            waterType,      40,     80,     35,     75,     175)
+    mankey          = Pokemon("Mankey",             fightingType,   65,     105,    60,     190,    61)
+    primeape        = Pokemon("Primape",            fightingType,   55,     70,     45,     75,     159)
+    growlithe       = Pokemon("Growlithe",          fireType,       90,     110,    80,     190,    70)
+    arcanine        = Pokemon("Arcanine",           fireType,       40,     50,     40,     75,     194)
+    poliwag         = Pokemon("Poliwag",            waterType,      65,     65,     65,     255,    60)
+    poliwhirl       = Pokemon("Poliwhirl",          waterType,      90,     85,     95,     120,    135)
+    poliwrath       = Pokemon("Poliwrath",          waterType,      25,     20,     15,     45,     255)
+    abra            = Pokemon("Abra",               psychicType,    40,     35,     30,     200,    62)
+    kadabra         = Pokemon("Kadabra",            psychicType,    55,     50,     45,     100,    140)
+    alakazam        = Pokemon("Alakazam",           psychicType,    70,     80,     50,     50,     250)
+    machop          = Pokemon("Machop",             fightingType,   80,     100,    70,     180,    61)
+    machoke         = Pokemon("Machoke",            fightingType,   90,     130,    80,     90,     142)
+    machamp         = Pokemon("Machamp",            fightingType,   50,     75,     35,     45,     253)
+    bellsprout      = Pokemon("Bellsprout",         grassType,      65,     90,     50,     255,    60)
+    weepinbell      = Pokemon("Weepinbell",         grassType,      80,     105,    65,     120,    137)
+    victreebel      = Pokemon("Victreebel",         grassType,      40,     40,     35,     45,     245)
+    tentacool       = Pokemon("Tentacool",          waterType,      80,     105,    65,     190,    67)
+    tentacruel      = Pokemon("Tentacruel",         waterType,      40,     80,     100,    60,     180)
+    geodude         = Pokemon("Geodude",            rockType,       55,     95,     115,    255,    60)
+    graveler        = Pokemon("Graveler",           rockType,       80,     110,    130,    120,    137)
+    golem           = Pokemon("Golem",              rockType,       50,     85,     55,     45,     248)
+    ponyta          = Pokemon("Ponyta",             fireType,       65,     100,    70,     190,    82)
+    rapidash        = Pokemon("Rapidash",           fireType,       90,     65,     65,     60,     175)
+    slowpoke        = Pokemon("Slowpoke",           waterType,      95,     49,     49,     190,    63)
+    slowbro         = Pokemon("Slowbro",            waterType,      25,     35,     70,     70,     172)
+    magnemite       = Pokemon("Magnemite",          electricType,   50,     60,     95,     190,    65)
+    magneton        = Pokemon("Magneton",           electricType,   52,     65,     55,     60,     163)
+    farfetchd       = Pokemon("Farfetch'd",         normalType,     35,     85,     45,     45,     132)
+    doduo           = Pokemon("Duduo",              normalType,     60,     110,    70,     190,    62)
+    dodrio          = Pokemon("Dudrio",             normalType,     65,     45,     55,     45,     165)
+    seel            = Pokemon("Seel",               waterType,      90,     70,     80,     190,    65)
+    dewgong         = Pokemon("Dewgong",            waterType,      80,     80,     50,     75,     166)
+    grimer          = Pokemon("Grimer",             poisonType,     105,    105,    75,     190,    65)
+    muk             = Pokemon("Muk",                poisonType,     30,     65,     100,    75,     175)
+    shellder        = Pokemon("Shellder",           waterType,      50,     95,     180,    190,    61)
+    cloyster        = Pokemon("Cloyster",           waterType,      30,     35,     30,     60,     184)
+    gastly          = Pokemon("Gastly",             ghostType,      30,     35,     30,     190,    62)
+    haunter         = Pokemon("Haunter",            ghostType,      45,     50,     45,     90,     142)
+    gengar          = Pokemon("Gengar",             ghostType,      60,     65,     60,     45,     250)
+    onix            = Pokemon("Onix",               rockType,       35,     45,     160,    45,     77)
+    drowzee         = Pokemon("Drowzee",            psychicType,    60,     48,     45,     190,    66)
+    hypno           = Pokemon("Hypno",              psychicType,    85,     73,     70,     75,     169)
+    krabby          = Pokemon("Krabby",             waterType,      30,     105,    90,     225,    65)
+    kingler         = Pokemon("Kingler",            waterType,      55,     130,    115,    60,     166)
+    voltorb         = Pokemon("Voltorb",            electricType,   40,     30,     50,     190,    66)
+    electrode       = Pokemon("Electrode",          electricType,   60,     50,     70,     60,     172)
+    exeggcute       = Pokemon("Exeggcute",          grassType,      60,     40,     80,     90,     65)
+    exeggutor       = Pokemon("Exeggutor",          grassType,      95,     95,     85,     45,     186)
+    cubone          = Pokemon("Cubone",             groundType,     50,     50,     95,     190,    64)
+    marowak         = Pokemon("Marowak",            groundType,     60,     80,     110,    75,     149)
+    hitmonlee       = Pokemon("Hitmonlee",          fightingType,   50,     120,    53,     45,     159)
+    hitmonchan      = Pokemon("Hitmonchan",         fightingType,   50,     105,    79,     45,     159)
+    lickitung       = Pokemon("Lickitung",          normalType,     90,     55,     75,     45,     77)
+    koffing         = Pokemon("Koffing",            poisonType,     40,     65,     95,     190,    68)
+    weezing         = Pokemon("Weezing",            poisonType,     65,     90,     120,    60,     172)
+    rhyhorn         = Pokemon("Rhyhorn",            groundType,     80,     85,     95,     120,    69)
+    rhydon          = Pokemon("Rhydon",             groundType,     105,    130,    120,    60,     170)
+    chansey         = Pokemon("Chansey",            normalType,     250,    5,      5,      30,     395)
+    tangela         = Pokemon("Tangela",            grassType,      65,     55,     115,    45,     87)
+    kangaskhan      = Pokemon("Kangaskhan",         groundType,     105,    95,     80,     45,     172)
+    horsea          = Pokemon("Horsea",             waterType,      30,     40,     70,     225,    59)
+    seadra          = Pokemon("Seadra",             waterType,      55,     65,     95,     60,     154)
+    goldeen         = Pokemon("Goldeen",            waterType,      45,     67,     60,     225,    64)
+    seaking         = Pokemon("Seaking",            waterType,      80,     92,     65,     60,     158)
+    staryu          = Pokemon("Staryu",             waterType,      30,     45,     55,     225,    68)
+    starmie         = Pokemon("Starmie",            waterType,      60,     75,     85,     60,     182)
+    mrmime          = Pokemon("Mr Mime",            psychicType,    40,     45,     65,     45,     161)
+    scyther         = Pokemon("Scyther",            bugType,        70,     110,    80,     45,     100)
+    jynx            = Pokemon("Jynx",               iceType,        65,     50,     35,     45,     159)
+    electabuzz      = Pokemon("Electabuzz",         electricType,   65,     50,     35,     45,     172)
+    magmar          = Pokemon("Magmar",             fireType,       65,     83,     57,     45,     173)
+    pinsir          = Pokemon("Pinsir",             bugType,        65,     95,     57,     45,     175)
+    tauros          = Pokemon("Tauros",             normalType,     75,     100,    95,     45,     172)
+    magikarp        = Pokemon("Magikarp",           waterType,      20,     10,     55,     255,    40)
+    gyrados         = Pokemon("Gyrados",            waterType,      95,     125,    79,     45,     189)
+    lapras          = Pokemon("Lapras",             waterType,      130,    85,     80,     45,     187)
+    ditto           = Pokemon("Ditto",              normalType,     48,     48,     48,     35,     101)
+    eevee           = Pokemon("Eevee",              normalType,     55,     55,     50,     45,     65)
+    vaporean        = Pokemon("Vaporean",           waterType,      130,    65,     60,     45,     184)
+    jolteon         = Pokemon("Jolteon",            electricType,   65,     65,     65,     45,     184)
+    flareon         = Pokemon("Flareon",            fireType,       65,     130,    65,     45,     184)
+    porygon         = Pokemon("Porygon",            normalType,     65,     60,     70,     45,     79)
+    omanyte         = Pokemon("Omanyte",            rockType,       35,     40,     100,    45,     71)
+    omastar         = Pokemon("Omastar",            rockType,       70,     60,     125,    45,     173)
+    kabuto          = Pokemon("Kabuto",             rockType,       30,     80,     90,     45,     71)
+    kabutops        = Pokemon("Kabutops",           rockType,       60,     115,    105,    45,     173)
+    aerodactyl      = Pokemon("Aerodactyl",         rockType,       80,     105,    65,     45,     180)
+    snorlax         = Pokemon("Snorlax",            normalType,     160,    110,    65,     25,     189)
+    articuno        = Pokemon("Articuno",           iceType,        90,     85,     100,    3,      290)
+    zapdos          = Pokemon("Zapdos",             electricType,   90,     90,     85,     3,      290)
+    moltres         = Pokemon("Moltres",            fireType,       90,     100,    90,     3,      290)
+    dratini         = Pokemon("Dratini",            dragonType,     41,     64,     45,     45,     60)
+    dragonair       = Pokemon("Dragonair",          dragonType,     61,     84,     65,     45,     147)
+    dragonite       = Pokemon("Dragonite",          dragonType,     91,     134,    95,     45,     300)
+    mewtwo          = Pokemon("Mewtwo",             psychicType,    106,    110,    90,     3,      340)
+    mew             = Pokemon("Mew",                psychicType,    100,    100,    100,    45,     300)
 
     pokemons = [bulbasaur, ivysaur, venusaur, charmander, charmeleon, charizard, squirtle, wartortle, blastoise, caterpie, metapod, butterfree, weedle, kakuna, beedrill, pidgey, pidgeotto, pidgeot, rattata, raticate, spearow, fearow, ekans, arbok, pikachu, raichu, sandshrew, sandslash, nidoranFemale, nidorina, nidoqueen, nidoranMale, nidorino, nidoking, clefairy, clefable, vulpix, ninetales, jigglypuff, wigglytuff, zubat, golbat, oddish, gloom, vileplume, paras, parasect, venonat, venomoth, diglett, dugtrio, meowth, persian, psyduck, golduck, mankey, primeape, growlithe, arcanine, poliwag, poliwhirl, poliwrath, abra, kadabra, alakazam, machop, machoke, machamp, bellsprout, weepinbell, victreebel, tentacool, tentacruel, geodude, graveler, golem, ponyta, rapidash, slowpoke, slowbro, magnemite, magneton, farfetchd, doduo, dodrio, seel, dewgong, grimer, muk, shellder, cloyster, gastly, haunter, gengar, onix, drowzee, hypno, krabby, kingler, voltorb, electrode, exeggcute, exeggutor, cubone, marowak, hitmonlee, hitmonchan, lickitung, koffing, weezing, rhyhorn, rhydon, chansey, tangela, kangaskhan, horsea, seadra, goldeen, seaking, staryu, starmie, mrmime, scyther, jynx, electabuzz, magmar, pinsir, tauros, magikarp, gyrados, lapras, ditto, eevee, vaporean, jolteon, flareon, porygon, omanyte, omastar, kabuto, kabutops, aerodactyl, snorlax, articuno, zapdos, moltres, dratini, dragonair, dragonite, mewtwo, mew]
 
@@ -649,7 +649,7 @@ def setupMap():
     route25.addLocationPokemon(         [[caterpie, 8],         [metapod, 7, 9],        [weedle, 8],            [kakuna, 7, 9],         [pidgey, 13],           [oddish, 12, 14],       [abra, 10, 12],         [bellsprout, 12, 14],   [magikarp, 5],          [poliwag, 10],      [goldeen, 10, 15],  [psyduck, 15],      [krabby, 15]])
 
 def setupShops():
-    viridianCityMart    = Mart("Viridian City Mart",    viridianCity,   {})
+    viridianCityMart    = Mart("Viridian City Mart",    viridianCity,   {"Poke Ball": pokeBall})
     pewterCityMart      = Mart("Pewter City Mart",      pewterCity,     {})
     ceruleanCityMart    = Mart("Cerulean City Mart",    ceruleanCity,   {})
     vermilionCityMart   = Mart("Vermilion City Mart",   vermilionCity,  {})
@@ -857,50 +857,65 @@ def introduction():
 setup()
 introduction()
 while True:
-    #UI
-    directionMessage = "Direction to move ("
-    for dir in protagonist.getTrainerLocation().getLocationNeighboursDict().keys():
-        directionMessage += dir + ", "
-    directionMessage = directionMessage[:-2] + ") : "
+    availableActions = ["Travel"]
+    actionMessage = "What do you want to do? (Travel"
+    if protagonist.getTrainerLocation().getLocationMart() != None:
+        actionMessage += ", Shop"
+        availableActions.append("Shop")
+    if len(protagonist.getTrainerLivePokemonsDict()) != 0:
+        actionMessage += ", Walk Around"
+        availableActions.append("Walk Around")
+    actionMessage += ") : "
 
-    direction = ""
+    actionInput = ""
+    while actionInput not in availableActions:
+        actionInput = input(actionMessage)
+    
+    if actionInput == "Travel":
+        #UI
+        directionMessage = "Direction to move ("
+        for dir in protagonist.getTrainerLocation().getLocationNeighboursDict().keys():
+            directionMessage += dir + ", "
+        directionMessage = directionMessage[:-2] + ") : "
 
-    #Wait until user's input is valid
-    while direction not in protagonist.getTrainerLocation().getLocationNeighboursDict().keys():
-        direction = input(directionMessage)
+        direction = ""
+
+        #Wait until user's input is valid
+        while direction not in protagonist.getTrainerLocation().getLocationNeighboursDict().keys():
+            direction = input(directionMessage)
+        else:
+            protagonist.moveToLocation(direction)
+    elif actionInput == "Shop":
+        protagonist.getTrainerLocation().getLocationMart().openShop(protagonist)
     else:
-        protagonist.moveToLocation(direction)
+        #Check if there are trainers to fight
+        trainers = deepcopy(protagonist.getTrainerLocation().getLocationTrainersDict())
+        del(trainers[protagonist.getTrainerName()])
         
-        #Check if the player can fight with pokemon
-        if len(protagonist.getTrainerLivePokemonsDict()) != 0:
-            #Check if there are trainers to fight
-            trainers = protagonist.getTrainerLocation().getLocationTrainersDict()
-            del(trainers[protagonist.getTrainerName()])
+        #Randomly pick a trainer from those in the current location
+        if len(trainers) != 0:
+            opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
             
-            #Randomly pick a trainer from those in the current location
-            if len(trainers) != 0:
-                opponent = trainers[list(trainers.keys())[randint(0, len(trainers) - 1)]]
-                
-                #Check if the opponent has available pokemon to fight
-                if opponent.getTrainerActivePokemon() != "":
-                    #Start battle
-                    battle = Encounter(protagonist, opponent)
-                    battle.startBattle()
-            else:
-                #Roll chance for random encounter
-                if randint(1, 100) > randomEncounterChancePercentage:
-                    availablePokemon = protagonist.getTrainerLocation().getLocationPokemonDict()
-                    availablePokemonNames = list(availablePokemon.keys())
+            #Check if the opponent has available pokemon to fight
+            if opponent.getTrainerActivePokemon() != "":
+                #Start battle
+                battle = Encounter(protagonist, opponent)
+                battle.startBattle()
+        else:
+            #Roll chance for random encounter
+            if randint(1, 100) > randomEncounterChancePercentage:
+                availablePokemon = protagonist.getTrainerLocation().getLocationPokemonDict()
+                availablePokemonNames = list(availablePokemon.keys())
 
-                    #Check if there spawnable pokemon to fight
-                    if len(availablePokemon) != 0:
-                        randomPokemonSet = availablePokemon[availablePokemonNames[randint(0, len(availablePokemon) - 1)]]
-                        randomPokemon = deepcopy(randomPokemonSet[0])
-                        
-                        if len(randomPokemonSet) == 2:
-                            randomPokemon.setPokemonLevel(randomPokemonSet[1])
-                        else:
-                            randomPokemon.setPokemonLevel(randint(randomPokemonSet[1], randomPokemonSet[2]))
-                        
-                        randomEncounter = Encounter(protagonist, randomPokemon)
-                        randomEncounter.startBattle()
+                #Check if there spawnable pokemon to fight
+                if len(availablePokemon) != 0:
+                    randomPokemonSet = availablePokemon[availablePokemonNames[randint(0, len(availablePokemon) - 1)]]
+                    randomPokemon = deepcopy(randomPokemonSet[0])
+                    
+                    if len(randomPokemonSet) == 2:
+                        randomPokemon.setPokemonLevel(randomPokemonSet[1])
+                    else:
+                        randomPokemon.setPokemonLevel(randint(randomPokemonSet[1], randomPokemonSet[2]))
+                    
+                    randomEncounter = Encounter(protagonist, randomPokemon)
+                    randomEncounter.startBattle()

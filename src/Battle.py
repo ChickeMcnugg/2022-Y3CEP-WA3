@@ -336,9 +336,16 @@ class Encounter:
 
                     #Check if winner is encounterProtagonist
                     if self.getEncounterProtagonist() == pokemonProtagonist.getPokemonOwner():
+                        pokemonProtagonist.getPokemonOwner().addTrainerMoney(50 * pokemonOpponent.getPokemonLevel())
+
+                        gainedEXP = pokemonOpponent.getPokemonDefeatEXP() * pokemonOpponent.getPokemonLevel()
+                        if pokemonOpponent.getPokemonOwner() != None:
+                            gainedEXP *= 1.5
+                        gainedEXP = int(gainedEXP // 7)
+
                         #Check if "EXP All" has been used during the battle
                         if not self.getHasEXPAll():
-                            pokemonProtagonist.addPokemonEXP(30)
+                            pokemonProtagonist.addPokemonEXP(gainedEXP)
                         else:
                             for pokemon in list(pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict().keys()):
-                                pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(30)
+                                pokemonProtagonist.getPokemonOwner().getTrainerLivePokemonsDict()[pokemon].addPokemonEXP(gainedEXP)
