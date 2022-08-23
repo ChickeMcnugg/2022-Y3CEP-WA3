@@ -242,6 +242,10 @@
 >           -   Clean up comments in code
 >           -   UI in general, especially intro UI to the game
 >   -   19/8
+>       -   Implemented logic for capturing wild pokemon following the original capture rules
+>       -   Pokemon Evasion and Accuracy are now hidden and are only changed by code during and after battles
+>       -   Catch rate for every pokemon has been added
+>       -   Method to set pokemon level added in Pokemon class to allow for random pokemon levels for random pokemon encounters
 >       -   TODO
 >           -   Items: Capturing with pokeball
 >           -   Battle: Fix range of levels of random encounter pokemon depending on location
@@ -251,6 +255,27 @@
 >           -   Clean up comments in code
 >           -   UI in general, especially intro UI to the game
 >   -   20/8
+>       -   Fixed bug of pokemon receiving damage and faintign on opponent's turn, and not updating until after its own turn
+>           -   Apply checkOutcome both ways after pokemon has used a move
+>       -   Allow player to rename pokemon to a valid name after capturng the pokemon
+>           -   Pokemon runs away and encounter ends if player misses capture
+>       -   Fixed bug of condition of pokemon being caught being switched
+>       -   Fixed typo of damage always being 0, by changing min() to max()
+>       -   Fixed bug of move effect still being applied although it does not hit
+>       -   Fixed bug of pokemon stats not updating when levelling up, by calling updateAttackDefense() when levelling up
+>       -   Set default pokemon level to 5, for player start pokemon and random pokemon encounters
+>       -   Made direction input clearer for user by providing options similar to choosing pokemon and moves during battle
+>       -   Organised code by sectioning code and commenting
+>           -   Logic to use an item became its own function under the Battle class to read the main logic of startBattle() easier
+>           -   Logic to end battle, including adding EXP and printing UI, becomes independent, so that the method does not need to return a boolean signalling end of battle
+>           -   Removed redundant checks if input is valid from various functions
+>       -   Included Gym leaders and the Elite 4 battles
+>       -   Implemented rough starting screen giving player choice to choose starter pokemon
+>       -   Implemeneted fixed ranges of levels pokemon could be at for random pokemon encounters at specific locations
+>           -   Included Route 23 as a new location because it was not included previously for unknown reasons
+>       -   Included Mart class to start working on Poke Marts (Item shops where the player can buy items)
+>           -   Marts are found at specific locations
+>           -   Each item has a buy price and a sell price (unless they are not meant to be bought or sold, in which they are marked with 0)
 >       -   TODO
 >           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
 >           -   Battles: Fix order of Elite 4 Trainers and include Blue
