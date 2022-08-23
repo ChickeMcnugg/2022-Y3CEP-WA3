@@ -832,22 +832,8 @@ def setup():
 
     randomEncounterChancePercentage = 60
 
-def intro():
-    print("------------------- POKEMON\u2122 Red Version -------------------")
-    print("----------------- By Tan Teng Fong, Christopher -----------------")
-
-    print("Hello there! Welcome to the world of Pokemon!")
-    print("My name is OAK! People call me the Pokemon Prof!")
-    print("This world is inhabited by creatures called Pokemon.")
-    print("For some people, Pokemon are pets. Others use them to fight.")
-    print("Myself...")
-    print("I study Pokemon as a profession.")
-
 def setupPlayer():
-    playerName = input("First, what is your name? : ")
-    print("Right, so your name is " + playerName + ".")
-    print(playerName + "! Your very own Pokemon legend is about to unfold!")
-    print("A world of dreams and adventures awaits! Let's go!")
+    playerName = Game().intro()
     
     global protagonist
 
@@ -872,8 +858,6 @@ def setupPlayer():
 ####################################################################################################
 
 setup()
-game = Game()
-game.intro()
 setupPlayer()
 while True:
     availableActions = ["Travel"]
@@ -922,7 +906,9 @@ while True:
                 battle.startBattle()
         else:
             #Roll chance for random encounter
-            if randint(1, 100) > randomEncounterChancePercentage:
+            if randint(1, 100) < randomEncounterChancePercentage:
+                print("Nothing interesting has happened.")
+            else:
                 availablePokemon = protagonist.getTrainerLocation().getLocationPokemonDict()
                 availablePokemonNames = list(availablePokemon.keys())
 
