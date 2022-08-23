@@ -5,6 +5,7 @@ from random import randint
 from copy import deepcopy
 from Battle import *
 from Effect import *
+from Game import *
 from Pokemon import *
 from Trainer import *
 from Item import *
@@ -12,7 +13,6 @@ from Type import *
 from Location import *
 from Move import *
 from Mart import *
-from Game import *
 
 def setupTypes():
     global bugType, dragonType, electricType, fightingType, fireType, flyingType, ghostType, grassType, groundType, iceType, normalType, poisonType, psychicType, rockType, waterType

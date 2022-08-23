@@ -4,6 +4,9 @@ class Game:
     def __init__(self):
         pass
 
+    def __repr__(self):
+        return "Pokemon - the game."
+
     def intro(self):
         print("------------------- POKEMON\u2122 Red Version -------------------")
         print("----------------- By Tan Teng Fong, Christopher -----------------")
