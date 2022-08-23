@@ -115,8 +115,9 @@ class Trainer:
 
     def moveToLocation(self, newDirection):
         sleep(1)
-        self.trainerLocation.removeLocationTrainer(self)
-        self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
+        currentLocation = self.trainerLocation
+        currentLocation.removeLocationTrainer(self)
+        self.setTrainerLocation(currentLocation.getLocationNeighboursDict()[newDirection])
     
     def checkFainted(self):
         if len(self.trainerLivePokemonsDict) == 0:

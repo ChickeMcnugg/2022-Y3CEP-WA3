@@ -12,6 +12,7 @@ from Type import *
 from Location import *
 from Move import *
 from Mart import *
+from Game import *
 
 def setupTypes():
     global bugType, dragonType, electricType, fightingType, fireType, flyingType, ghostType, grassType, groundType, iceType, normalType, poisonType, psychicType, rockType, waterType
@@ -871,7 +872,8 @@ def setupPlayer():
 ####################################################################################################
 
 setup()
-intro()
+game = Game()
+game.intro()
 setupPlayer()
 while True:
     availableActions = ["Travel"]
