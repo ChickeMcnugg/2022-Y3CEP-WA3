@@ -650,15 +650,15 @@ def setupMap():
     route25.addLocationPokemon(         [[caterpie, 8],         [metapod, 7, 9],        [weedle, 8],            [kakuna, 7, 9],         [pidgey, 13],           [oddish, 12, 14],       [abra, 10, 12],         [bellsprout, 12, 14],   [magikarp, 5],          [poliwag, 10],      [goldeen, 10, 15],  [psyduck, 15],      [krabby, 15]])
 
 def setupShops():
-    viridianCityMart    = Mart("Viridian City Mart",    viridianCity,   {"Poke Ball": pokeBall})
-    pewterCityMart      = Mart("Pewter City Mart",      pewterCity,     {})
-    ceruleanCityMart    = Mart("Cerulean City Mart",    ceruleanCity,   {})
-    vermilionCityMart   = Mart("Vermilion City Mart",   vermilionCity,  {})
-    lavendarTownMart    = Mart("Lavendar Town Mart",    lavendarCity,   {})
-    saffronCityMart     = Mart("Saffron City Mart",     saffronCity,    {})
-    fuchsiaCityMart     = Mart("Fuchsia City Mart",     fuchsiaCity,    {})
-    cinnibarIslandMart  = Mart("Cinnibar Island Mart",  cinnibarIsland, {})
-    indigoPlateauMart   = Mart("Indigo Plateau Mart",   indigoPlateau,  {})
+    viridianCityMart    = Mart("Viridian City Mart",    viridianCity,   {"Poke Ball": pokeBall, "Antidote": antidote, "Burn Heal": burnHeal, "Potion": potion, "Paralyse Heal": paralyseHeal})
+    pewterCityMart      = Mart("Pewter City Mart",      pewterCity,     {"Poke Ball": pokeBall, "Antidote": antidote, "Burn Heal": burnHeal, "Potion": potion, "Paralyse Heal": paralyseHeal, "Awakening": awakening})
+    ceruleanCityMart    = Mart("Cerulean City Mart",    ceruleanCity,   {"Poke Ball": pokeBall, "Antidote": antidote, "Burn Heal": burnHeal, "Potion": potion, "Paralyse Heal": paralyseHeal, "Awakening": awakening})
+    vermilionCityMart   = Mart("Vermilion City Mart",   vermilionCity,  {"Poke Ball": pokeBall, "Ice Heal": iceHeal, "Paralyse Heal": paralyseHeal, "Super Potion": superPotion, "Awakening": awakening})
+    lavendarTownMart    = Mart("Lavendar Town Mart",    lavendarCity,   {"Great Ball": greatBall, "Revive": revive, "Burn Heal": burnHeal, "Paralyse Heal": paralyseHeal, "Super Potion": superPotion, "Antidote": antidote, "Ice Heal": iceHeal})
+    saffronCityMart     = Mart("Saffron City Mart",     saffronCity,    {"Great Ball": greatBall, "Full Heal": fullHeal, "Hyper Potion": hyperPotion, "Revive": revive})
+    fuchsiaCityMart     = Mart("Fuchsia City Mart",     fuchsiaCity,    {"Ultra Ball": ultraBall, "Great Ball": greatBall, "Super Potion": superPotion, "Hyper Potion": hyperPotion, "Revive": revive, "Full Heal": fullHeal})
+    cinnibarIslandMart  = Mart("Cinnibar Island Mart",  cinnibarIsland, {"Ultra Ball": ultraBall, "Great Ball": greatBall, "Hyper Potion": hyperPotion, "Revive": revive, "Full Heal": fullHeal})
+    indigoPlateauMart   = Mart("Indigo Plateau Mart",   indigoPlateau,  {"Ultra Ball": ultraBall, "Great Ball": greatBall, "Full Restore": fullRestore, "Max Potion": maxPotion, "Revive": revive, "Full Heal": fullHeal})
 
 def setupTrainers():
     global brock
@@ -835,25 +835,21 @@ def setup():
 def setupPlayer():
     playerName = Game().intro()
     
-    global protagonist
-
-    starterInput = ""
-    while starterInput not in ["Bulbasaur", "Charmander", "Squirtle"]:
-        starterInput = input("Choose you starter Pokemon (Bulbasaur, Charmander, Squirtle) : ")
-
-    nameInput = ""
-    while nameInput == "":
-        nameInput = input("What is your Pokemon's name? : ").strip()
+    starterInput, nameInput = Game().starter()
 
     if starterInput == "Bulbasaur":
-        starterPokemon = deepcopy(bulbasaur)    
+        starterPokemon = deepcopy(bulbasaur)
     elif starterInput == "Charmander":
         starterPokemon = deepcopy(charmander)
     else:
         starterPokemon = deepcopy(squirtle)
-    
+
     starterPokemon.changePokemonName(nameInput)
-    protagonist = Trainer(playerName, {f"{nameInput}": starterPokemon}, {}, palletTown)
+    starterPokemon.setPokemonLevel(7)
+
+    global protagonist
+
+    protagonist = Trainer(playerName, {f"{nameInput}": starterPokemon}, {}, route1)
 
 ####################################################################################################
 

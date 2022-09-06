@@ -1,4 +1,5 @@
 from time import sleep
+from copy import deepcopy
 
 class Game:
     def __init__(self):
@@ -11,7 +12,7 @@ class Game:
         print("------------------- POKEMON\u2122 Red Version -------------------")
         print("--------------- By Tan Teng Fong, Christopher --------------")
 
-        sleep(5)
+        sleep(3)
 
         print("Hello there! Welcome to the world of Pokemon!")
         sleep(1)
@@ -33,5 +34,21 @@ class Game:
         print(playerName + "! Your very own Pokemon legend is about to unfold!")
         sleep(1)
         print("A world of dreams and adventures awaits! Let's go!")
+        sleep(1)
 
         return playerName
+    
+    def starter(self):
+        starterInput = ""
+        while starterInput not in ["Bulbasaur", "Charmander", "Squirtle"]:
+            starterInput = input("Choose you starter Pokemon (Bulbasaur, Charmander, Squirtle) : ")
+
+        sleep(1)
+
+        nameInput = ""
+        while nameInput == "":
+            nameInput = input("What is your Pokemon's name? : ").strip()
+        
+        sleep(1)
+
+        return starterInput, nameInput

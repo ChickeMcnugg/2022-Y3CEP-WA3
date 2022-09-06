@@ -57,8 +57,6 @@ class Encounter:
             #UI
             print("A wild " + opponentActivePokemon.getPokemonName() + " appeared.")
             sleep(1)
-            print(opponentActivePokemon)
-            sleep(1)
         else:
             opponent = self.encounterOpponent
             opponentActivePokemon = opponent.getTrainerLivePokemonsDict()[opponent.getTrainerActivePokemon()]
@@ -68,6 +66,9 @@ class Encounter:
             sleep(1)
             print(opponent.getTrainerName() + " chooses " + opponentActivePokemon.getPokemonName() + ".")
             sleep(1)
+        
+        print(opponentActivePokemon)
+        sleep(1)
 
         protagonist = self.encounterProtagonist
         protagonistActivePokemon = protagonist.getTrainerLivePokemonsDict()[protagonist.getTrainerActivePokemon()]

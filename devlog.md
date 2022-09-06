@@ -289,7 +289,12 @@
 >           -   Battles: Fix order of Elite 4 Trainers and include Blue
 
 ## Week 9 (23 Aug - 29 Aug)
+>   -   Stopping progress to focus on exams
 
 ## Week 10 (30 Aug - 5 Sep)
 
 ## Sep Holiday (5 Sep - 10 Sep) **Submission date is 10 Sep**
+>   -   6/9
+>       -   TODO
+>           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
+>           -   Battles: Fix order of Elite 4 Trainers and include Blue

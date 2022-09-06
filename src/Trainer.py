@@ -52,7 +52,7 @@ class Trainer:
         if newMoney >= 0:
             print(self.trainerName + " gained " + str(newMoney) + " Poke Dollars.")
         else:
-            print(self.trainerName + " spent " + str(newMoney) + " Poke Dollars.")
+            print(self.trainerName + " spent " + str(-newMoney) + " Poke Dollars.")
 
     def getTrainerLivePokemonsDict(self):
         return self.trainerLivePokemonsDict
