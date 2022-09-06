@@ -284,17 +284,40 @@
 >           -   Shop: Implement currency
 >           -   UI in general, especially intro UI to the game
 >   -   21/8
+>       -   Made moving to another location an option, to provide options to "Shop" and "Walk Around" for random encounters
+>       -   Implemented currency
+>           -   Player starts game with set amount and can gain money throughw inning battles, and spend money at Poke Marts
+>       -   Implemneted shop system (Poke Marts)
+>           -   Player can either buy items from the shop or sell items in their inventory
+>       -   EXP gained from winning battles is now determined by pokemonOpponent level and individual defeatEXP value
+>       -   Intro UI has been included to start polishing the game
+>       -   TODO
+>           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
+>           -   Battles: Fix order of Elite 4 Trainers and include Blue
+>   -   23/8
+>       -   Fixed bug of not removing trainer from previous location when changing locations by instantiating a temporary variable storing the previous location
+>       -   Moved code for intro UI to separate file to have the ability to include sleep()
+>           -   I stupidly made named the variable for the slept effect, "sleep", which messes with the sleep() function, but I am too lazy to change it
+>       -   I am considering stopping work to focus on EYEs first
 >       -   TODO
 >           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
 >           -   Battles: Fix order of Elite 4 Trainers and include Blue
 
 ## Week 9 (23 Aug - 29 Aug)
->   -   Stopping progress to focus on exams
 
 ## Week 10 (30 Aug - 5 Sep)
 
 ## Sep Holiday (5 Sep - 10 Sep) **Submission date is 10 Sep**
 >   -   6/9
->       -   TODO
->           -   Battles: Reset Checkpoint Trainer's stats and pokemon if player loses encounter
->           -   Battles: Fix order of Elite 4 Trainers and include Blue
+>       -   Included all shop items
+>       -   Made receiving start pokemon into function under Game class
+>       -   Things not completed that are in the original game (but game is still playable):
+>           -   Trainers' stats are not reset when player leaves during battle
+>           -   There is no end game after defeating all of Elite 4
+>           -   Player faces Elite 4 in random order
+>           -   Some items are impossible to get because they are found when walking around in the actual game (not implemented in this version)
+>           -   Items that should not be sold can be sold (No check implemented to prevent this)
+>           -   Player can spend more money than they have (No check implemenetd beforehand when loading menu options)
+>           -   There is no end game if player loses all their pokemon and is unable to catch more pokemon
+>           -   All moves a pokemon can make is displayed
+>           -   Player can catch and carry an infinite number of pokemon
