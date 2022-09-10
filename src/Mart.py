@@ -83,4 +83,4 @@ class Mart:
 
             solditem = protagonist.getTrainerItemsDict()[sellInput][0]
             protagonist.useTrainerItem(solditem, counterInput)
-            protagonist.addTrainerMoney(counterInput * boughtitem.getItemSellPrice())
+            protagonist.addTrainerMoney(counterInput * solditem.getItemSellPrice())
