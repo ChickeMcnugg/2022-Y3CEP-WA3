@@ -1,6 +1,8 @@
 class Effect:
     def __init__(self, effectName, effectAttribute, effectPower):
         self.effectName = effectName
+
+        #Attribute and Power depend on properties of the effect (refer to main.py for more info)
         self.effectAttribute = effectAttribute
         self.effectPower = effectPower
     

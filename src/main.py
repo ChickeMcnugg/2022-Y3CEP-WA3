@@ -650,6 +650,7 @@ def setupMap():
     route25.addLocationPokemon(         [[caterpie, 8],         [metapod, 7, 9],        [weedle, 8],            [kakuna, 7, 9],         [pidgey, 13],           [oddish, 12, 14],       [abra, 10, 12],         [bellsprout, 12, 14],   [magikarp, 5],          [poliwag, 10],      [goldeen, 10, 15],  [psyduck, 15],      [krabby, 15]])
 
 def setupShops():
+    global viridianCityMart, pewterCityMart, ceruleanCityMart, vermilionCityMart, lavendarTownMart, saffronCityMart, fuchsiaCityMart, cinnibarIslandMart, indigoPlateauMart
     viridianCityMart    = Mart("Viridian City Mart",    viridianCity,   {"Poke Ball": pokeBall, "Antidote": antidote, "Burn Heal": burnHeal, "Potion": potion, "Paralyse Heal": paralyseHeal})
     pewterCityMart      = Mart("Pewter City Mart",      pewterCity,     {"Poke Ball": pokeBall, "Antidote": antidote, "Burn Heal": burnHeal, "Potion": potion, "Paralyse Heal": paralyseHeal, "Awakening": awakening})
     ceruleanCityMart    = Mart("Cerulean City Mart",    ceruleanCity,   {"Poke Ball": pokeBall, "Antidote": antidote, "Burn Heal": burnHeal, "Potion": potion, "Paralyse Heal": paralyseHeal, "Awakening": awakening})
@@ -803,38 +804,11 @@ def setupTrainers():
     lanceDragonite.setPokemonLevel(62)
     lance = Trainer("Lance", {"Gyrados": lanceGyrados, "Dragonair": lanceDragonair, "Dragonair2": lanceDragonair2, "Aerodactyl": lanceAerodactyl, "Dragonite": lanceDragonite}, {}, indigoPlateau)
 
-def setup():
-    #Creates types and type advantages for use in battles
-    setupTypes()
-
-    #Creates effects for use in battles
-    setupEffects()
-
-    #Creates and assigns moves with the corresponding pokemon types for use in battles
-    setupMoves()
-
-    #Creates pokemons to be referenced for encounters
-    setupPokemon()
-
-    #Creates items to be referenced for encounters
-    setupItems()
-
-    #Creates and orders locations
-    setupMap()
-
-    #Creates and places shops in locations around the map
-    setupShops()
-
-    #Creates trainers that can be played against, and the player protagonist
-    setupTrainers()
-
-    global randomEncounterChancePercentage
-
-    randomEncounterChancePercentage = 60
-
 def setupPlayer():
+    #Play game intro before asking for player name
     playerName = Game().intro()
     
+    #Ask player for choice of starter pokemon
     starterInput, nameInput = Game().starter()
 
     if starterInput == "Bulbasaur":
@@ -844,28 +818,80 @@ def setupPlayer():
     else:
         starterPokemon = deepcopy(squirtle)
 
+    #Create starter pokemon
     starterPokemon.changePokemonName(nameInput)
     starterPokemon.setPokemonLevel(7)
 
+    #Create player
     global protagonist
-
     protagonist = Trainer(playerName, {f"{nameInput}": starterPokemon}, {}, route1)
+
+def setup():
+    #Creates types and type advantages for use in battles
+    #Bug, Dragon, Electric, Fighting, Fire, Flying, Ghost, Grass, Ground, Ice, Normal, Poison, Psychic, Rock, Water
+    setupTypes()
+
+    #Creates effects for use in battles
+    #Burn, Freeze, Paralysis, Poison, Sleep
+    setupEffects()
+
+    #Creates and assigns moves with the corresponding pokemon types for use in battles
+    #Move list is too long, see above
+    setupMoves()
+
+    #Creates pokemons to be referenced for encounters
+    #Move list is too long, see above
+    setupPokemon()
+
+    #Creates items to be referenced for encounters
+    #Move list is too long, see above
+    setupItems()
+
+    #Creates and orders locations
+    #Move list is too long, see above
+    setupMap()
+
+    #Creates and places shops in locations around the map
+    #Viridian City Mart, Pewter City Mart, Cerulean City Mart, Vermilion City Mart, Lavendar Town Mart, Saffron City Mart, Fuchsia City Mart, Cinnibar Island Mart, Indigo Plateau Mart
+    setupShops()
+
+    #Creates trainers that can be played against
+    #Brock, Misty, Lt Surge, Erika, Koga, Sabrina, Blaine, Giovanni, Lorelei, Bruno, Agatha, Lance
+    setupTrainers()
+
+    #Create player
+    setupPlayer()
+
+    #Variables used in this file
+    global randomEncounterChancePercentage
+    randomEncounterChancePercentage = 70
 
 ####################################################################################################
 
+#Anything that only happens once at the start of the game
 setup()
-setupPlayer()
+
+#Loop for the whole game (essentially the game code)
 while True:
+    #Provide options for actions player can take at a given location, with the pokemon and items they have
+    
+    #Travelling is the default option
     availableActions = ["Travel"]
     actionMessage = "What do you want to do? (Travel"
+    
+    #If location has Poke Mart, shopping is an option
     if protagonist.getTrainerLocation().getLocationMart() != None:
         actionMessage += ", Shop"
         availableActions.append("Shop")
+    
+    #If player has pokemon, battling is an option
     if len(protagonist.getTrainerLivePokemonsDict()) != 0:
         actionMessage += ", Walk Around"
         availableActions.append("Walk Around")
+
     actionMessage += ") : "
 
+    #Wait for valid user input
     actionInput = ""
     while actionInput not in availableActions:
         actionInput = input(actionMessage)
@@ -882,8 +908,8 @@ while True:
         #Wait until user's input is valid
         while direction not in protagonist.getTrainerLocation().getLocationNeighboursDict().keys():
             direction = input(directionMessage)
-        else:
-            protagonist.moveToLocation(direction)
+
+        protagonist.moveToLocation(direction)
     elif actionInput == "Shop":
         protagonist.getTrainerLocation().getLocationMart().openShop(protagonist)
     else:
@@ -913,10 +939,12 @@ while True:
                     randomPokemonSet = availablePokemon[availablePokemonNames[randint(0, len(availablePokemon) - 1)]]
                     randomPokemon = deepcopy(randomPokemonSet[0])
                     
+                    #Check if pokemon always spawn with one constant level, or can have varying levels
                     if len(randomPokemonSet) == 2:
                         randomPokemon.setPokemonLevel(randomPokemonSet[1])
                     else:
                         randomPokemon.setPokemonLevel(randint(randomPokemonSet[1], randomPokemonSet[2]))
                     
+                    #Initialise and start the battle
                     randomEncounter = Encounter(protagonist, randomPokemon)
                     randomEncounter.startBattle()

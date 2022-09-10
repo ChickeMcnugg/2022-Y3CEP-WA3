@@ -51,6 +51,7 @@ class Encounter:
         self.hasEXPAll = hasEXPAll
     
     def startBattle(self):
+        #UI, based on whether opponent is a pokemon or trainer (Pokemon encounter or Trainer encounter)
         if self.isPokemonEncounter:
             opponentActivePokemon = self.encounterOpponent
 
@@ -129,6 +130,7 @@ class Encounter:
 
                         self.useMove(move, protagonistActivePokemon, opponentActivePokemon)
 
+                        #Check both participants in case user damages itself with its own move
                         self.checkOutcome(protagonistActivePokemon, opponentActivePokemon)
                         self.checkOutcome(opponentActivePokemon, protagonistActivePokemon)
                     elif action == "Switch":
@@ -161,7 +163,7 @@ class Encounter:
                     print(opponentActivePokemon.getPokemonName() + " cannot move.")
                     opponentActivePokemon.addCannotMoveTurns(-1)
                 else:
-                    #Randomyl pick a move from opponentActivePOkemon's move dictionary
+                    #Randomly pick a move from opponentActivePOkemon's move dictionary
                     availableMoves = list(opponentActivePokemon.getPokemonMovesDict().keys())
 
                     if len(availableMoves) == 1:
@@ -171,6 +173,7 @@ class Encounter:
 
                     self.useMove(move, opponentActivePokemon, protagonistActivePokemon)
 
+                    #Check both participants in case user damages itself with its own move
                     self.checkOutcome(opponentActivePokemon, protagonistActivePokemon)
                     self.checkOutcome(protagonistActivePokemon, opponentActivePokemon)
                 
@@ -181,16 +184,20 @@ class Encounter:
         print(pokemonProtagonist.getPokemonName() + " uses " + move.getMoveName() + ".")
         sleep(1)
 
+        #Account for move attribute that affects opponent
         if move.getMoveAttribute() == "Lower Defense":
             pokemonOpponent.addPokemonDefense(-move.getMovePower())
         elif move.getMoveAttribute() == "Lower Accuracy":
             pokemonOpponent.addPokemonAccuracy(-move.getMovePower())
+        
+        #Account for move attribute that affects user
         if move.getMoveAttribute() == "Gain Defense":
             pokemonProtagonist.addPokemonDefense(move.getMovePower())
         elif move.getMoveAttribute() == "Gain Attack":
             pokemonProtagonist.addPokemonAttack(move.getMovePower())
         elif move.getMoveAttribute() == "Gain Evasiveness":
             pokemonProtagonist.addPokemonEvasion(-move.getMovePower())
+        #If user is not affected, deal damage (including if opponent is affected)
         else:
             move.damage(pokemonProtagonist, pokemonOpponent)
 
@@ -207,6 +214,7 @@ class Encounter:
                 
                 for effect in pokemonOpponent.getPokemonEffects():
                     if not isCaught:
+                        #Different effects have different impacts on catch rate
                         if effect.getEffectAttribute() == "Move":
                             if randomChance < 25 or randomChance - 25 <= pokemonOpponent.getPokemonCatchRate():
                                 isCaught = True

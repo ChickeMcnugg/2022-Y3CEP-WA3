@@ -3,6 +3,8 @@ class Item:
         self.itemName = itemName
         self.itemBuyPrice = itemBuyPrice
         self.itemSellPrice = itemSellPrice
+
+        #Attribute and Power depends on the properties of the item (refer to main.py for more info)
         self.itemAttribute = itemAttribute
         self.itemPower = itemPower
     

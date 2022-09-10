@@ -9,6 +9,7 @@ class Game:
         return "Pokemon - the game."
 
     def intro(self):
+        #Start the game
         print("------------------- POKEMON\u2122 Red Version -------------------")
         print("--------------- By Tan Teng Fong, Christopher --------------")
 
@@ -27,8 +28,10 @@ class Game:
         print("I study Pokemon as a profession.")
         sleep(1)
 
+        #Player only has one try at inputting their name with no confirmation screen
         playerName = input("First, what is your name? : ")
         sleep(1)
+        
         print("Right, so your name is " + playerName + ".")
         sleep(1)
         print(playerName + "! Your very own Pokemon legend is about to unfold!")
@@ -39,12 +42,14 @@ class Game:
         return playerName
     
     def starter(self):
+        #Provide options and wait for valid user input
         starterInput = ""
         while starterInput not in ["Bulbasaur", "Charmander", "Squirtle"]:
             starterInput = input("Choose you starter Pokemon (Bulbasaur, Charmander, Squirtle) : ")
 
         sleep(1)
 
+        #Wait for valid user input
         nameInput = ""
         while nameInput == "":
             nameInput = input("What is your Pokemon's name? : ").strip()

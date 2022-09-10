@@ -11,6 +11,7 @@ class Move:
         self.moveName = moveName
         self.moveType = moveType
 
+        #Attribute and Power depend on the properties of the move (refer to main.py for more info)
         self.moveAttribute = moveAttribute
         self.movePower = movePower
         
@@ -59,7 +60,7 @@ class Move:
         #Bound damage to be non-negative
         damage = max(int(damage), 0)
         
-        #Calculate accuracy
+        #Calculate accuracy, with minimum value of 1 (very small chance of hitting) and maximum of 100 (guarantee hit)
         accuracy = ((self.moveAccuracy / 100) * (pokemonProtagonist.getPokemonAccuracy() / 100) * (pokemonOpponent.getPokemonEvasion() / 100)) * 100
         accuracy = max(min(accuracy, 100), 1)
         randomChance = randint(0, 100)
@@ -70,16 +71,20 @@ class Move:
             print(pokemonProtagonist.getPokemonName() + " missed.")
             sleep(1)
 
+            #Acount for moves that damage user if user misses
             if self.getMoveAttribute() == "MissHit":
                 pokemonProtagonist.addPokemonHealth(-(damage // 8))
         else:
+            #Account for moves that are one shot knock out
             if self.getMoveAttribute() == "KO":
                 pokemonOpponent.addPokemonHealth(-pokemonOpponent.getPokemonHealth())
+            #Account for moves that always deal a constant amount of damage regardless of user and victim stats
             elif self.getMoveAttribute() == "Constant Attack":
                 pokemonOpponent.addPokemonHealth(-self.getMovePower())
             else:
                 totalDamage = 0
 
+                #Account for moves that deal damage multiple times
                 if self.getMoveAttribute() == "Multiple Hits":
                     for _ in range(0, randint(2, 5)):
                         pokemonOpponent.addPokemonHealth(-damage)
@@ -88,9 +93,11 @@ class Move:
                     pokemonOpponent.addPokemonHealth(-damage)
                     totalDamage += damage
                 
+                #Account for moves that give user health if move lands
                 if self.getMoveAttribute() == "Leech" and totalDamage != 0:
                     pokemonProtagonist.addPokemonHealth(totalDamage // 2)
                 
+                #Account for moves that cause user to faint if move lands
                 if self.getMoveAttribute() == "Faint":
                     pokemonProtagonist.addPokemonHealth(-pokemonProtagonist.getPokemonHealth())
             

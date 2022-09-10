@@ -97,6 +97,7 @@ class Pokemon:
         sleep(1)
 
     def updateAttackDefense(self, newLevel):
+        #Update based on actual game equation
         self.pokemonAttack = int(self.pokemonBaseAttack + (newLevel / 50 * self.pokemonBaseAttack))
         self.pokemonDefense = int(self.pokemonBaseDefense + (newLevel / 50 * self.pokemonBaseDefense))
 
@@ -136,12 +137,13 @@ class Pokemon:
         self.pokemonEvasion = 100
 
     def addPokemonEXP(self, newEXP):
-        self.pokemonEXP += newEXP
+        self.pokemonEXP = max(self.pokemonEXP + newEXP, 0)
 
         #UI
         print(self.pokemonName + " has gained " + str(newEXP) + " EXP.")
         sleep(1)
 
+        #Check if pokemon has levelled up by checking if there is a difference between the previous level and the new level
         tempLevel = self.pokemonLevel
         self.pokemonLevel = floor(self.pokemonEXP ** (1/3))
         if self.pokemonLevel > tempLevel:
@@ -152,7 +154,8 @@ class Pokemon:
         return self.pokemonLevel
     
     def addPokemonLevel(self, newLevel):
-        self.pokemonLevel += newLevel
+        #Updating levels affects minimum EXP and stats
+        self.pokemonLevel = max(self.pokemonLevel + newLevel, 0)
         self.pokemonEXP = self.pokemonLevel ** 3
         self.updateAttackDefense(self.pokemonLevel)
 
@@ -160,7 +163,8 @@ class Pokemon:
         print(self.pokemonName + " gained " + str(newLevel) + " levels.")
     
     def setPokemonLevel(self, newLevel):
-        self.pokemonLevel = newLevel
+        #Prevent any chance that newLevel is negative, which should not be possible in the first place
+        self.pokemonLevel = max(newLevel, 0)
         self.pokemonEXP = self.pokemonLevel ** 3
         self.updateAttackDefense(self.pokemonLevel)
     
@@ -174,6 +178,7 @@ class Pokemon:
         return self.pokemonEffects
     
     def removePokemonEffects(self, effects):
+        #effects is a list in case multiple effects are added at once by certain moves
         for effect in effects:
             if effect in self.pokemonEffects:
                 self.pokemonEffects.remove(effect)
@@ -182,6 +187,7 @@ class Pokemon:
                 print(self.pokemonName + "is no longer " + effect.getEffectName().lower() + ".")
     
     def addPokemonEffects(self, effects):
+        #effects is a list in case multiple effects are added at once by certain moves
         for effect in effects:
             if effect not in self.pokemonEffects:
                 self.pokemonEffects.append(effect)
@@ -196,6 +202,7 @@ class Pokemon:
         self.cannotMoveTurns += newCannotMoveTurns
 
     def chooseMove(self):
+        #Provide move options
         availableMoves = list(self.pokemonMovesDict.keys())
 
         #UI
@@ -226,6 +233,7 @@ class Pokemon:
             elif effect.getEffectAttribute() == "Move":
                 #Check if the effect is "Paralysed" or "Frozen"
                 if effect.getEffectPower() <= 1:
+                    #Check if "Paralysed" takes effect
                     if randint(0, 100) > (1 - effect.getEffectPower()) * 100:
                         self.addCannotMoveTurns(1)
                 else:

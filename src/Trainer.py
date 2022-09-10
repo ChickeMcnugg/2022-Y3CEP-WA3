@@ -47,8 +47,10 @@ class Trainer:
         return self.trainerMoney
     
     def addTrainerMoney(self, newMoney):
+        #newMoney can be negative if money is spent
         self.trainerMoney += newMoney
 
+        #Different output messages depending on whetehr money was spent or gained
         if newMoney >= 0:
             print(self.trainerName + " gained " + str(newMoney) + " Poke Dollars.")
         else:
@@ -58,7 +60,10 @@ class Trainer:
         return self.trainerLivePokemonsDict
     
     def addTrainerLivePokemonsDict(self, newPokemon):
+        #Stores the new pokemon with its name as the key so that same pokemon can be stored, as long as they have different names
         self.trainerLivePokemonsDict[newPokemon.getPokemonName()] = newPokemon
+
+        #Pokemon stores information on trainer to be accessed during battles
         newPokemon.setPokemonOwner(self)
     
     def getTrainerFaintedPokemonsDict(self):
@@ -73,6 +78,7 @@ class Trainer:
         self.trainerActivePokemon = ""
     
     def revivePokemon(self, newPokemon):
+        #Move the fainted pokemon from the fainted dictionary to live dictionary
         self.trainerLivePokemonDict[newPokemon.getPokemonName().capitalize()] = newPokemon
         del(self.trainerFaintedPokemonsDict[newPokemon.getPokemonName().capitalize()])
     
@@ -80,6 +86,7 @@ class Trainer:
         return self.trainerActivePokemon
     
     def setTrainerActivePokemon(self, newPokemon):
+        #Used when initialising battles or when previous pokemon in battle has fainted
         self.trainerActivePokemon = newPokemon.getPokemonName().capitalize()
         print(self.trainerName + " chooses " + newPokemon.getPokemonName() + ".")
         sleep(1)
@@ -88,6 +95,7 @@ class Trainer:
         return self.trainerItemsDict
     
     def addTrainerItem(self, newItem, itemCounter):
+        #If the item is already in inventory, add one to the inventory counter, else make a new key to store the new item
         if newItem.getItemName() not in list(self.trainerItemsDict.keys()):
             self.trainerItemsDict[newItem.getItemName()] = [newItem, itemCounter]
         else:
@@ -98,6 +106,7 @@ class Trainer:
     def useTrainerItem(self, newItem, itemCounter):
         self.trainerItemsDict[newItem.getItemName()][1] -= itemCounter
 
+        #Check if there are still items, else remove the key as there are no more items
         if self.trainerItemsDict[newItem.getItemName()][1] <= 0:
             del(self.trainerItemsDict[newItem.getItemName()])
         
@@ -114,11 +123,13 @@ class Trainer:
         sleep(1)
 
     def moveToLocation(self, newDirection):
+        #Remove the location reference in Trainer, and the trainer reference in Location
         sleep(1)
         self.trainerLocation.removeLocationTrainer(self)
         self.setTrainerLocation(self.trainerLocation.getLocationNeighboursDict()[newDirection])
     
     def checkFainted(self):
+        #Used duriung battles to check if a trainer has pokemon left to continue battling
         if len(self.trainerLivePokemonsDict) == 0:
             print(self.trainerName + " has no more pokemon able to participate in battle.")
             sleep(1)
@@ -143,21 +154,25 @@ class Trainer:
         #Wait until user's input is valid
         while pokemonInput not in self.trainerLivePokemonsDict:
             pokemonInput = input(pokemonMessage)
-        else:
-            self.trainerActivePokemon = pokemonInput
-            sleep(1)
-            print(self.trainerName + " chooses " + pokemonInput)
-            print(self.getTrainerLivePokemonsDict()[self.trainerActivePokemon])
+
+        self.trainerActivePokemon = pokemonInput
+        sleep(1)
+        print(self.trainerName + " chooses " + pokemonInput)
+        print(self.getTrainerLivePokemonsDict()[self.trainerActivePokemon])
     
     def chooseItem(self):
+        #Provide item options
         availableItems = list(self.trainerItemsDict.keys())
         
+        #UI
         itemMessage = "Choose an item to use ("
         for item in availableItems:
             itemMessage += item + ", "
         itemMessage = itemMessage[:-2] + ") : "
 
         itemInput = ""
+        
+        #Wait until user's input is valid
         while itemInput not in availableItems:
             itemInput = input(itemMessage)
         
