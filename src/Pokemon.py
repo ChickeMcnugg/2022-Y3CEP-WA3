@@ -70,8 +70,8 @@ class Pokemon:
         return self.pokemonAttack
     
     def addPokemonAttack(self, newAttack):
-        #Bound pokemon's attack to be non-negative
-        self.pokemonAttack = max(self.pokemonAttack + newAttack, 0)
+        #Bound pokemon's attack to be positive
+        self.pokemonAttack = max(self.pokemonAttack + newAttack, 1)
 
         #UI
         if newAttack >= 0:
@@ -85,8 +85,8 @@ class Pokemon:
         return self.pokemonDefense
     
     def addPokemonDefense(self, newDefense):
-        #Bound pokemon's defense to be non-negative
-        self.pokemonDefense = max(self.pokemonDefense + newDefense, 0)
+        #Bound pokemon's defense to be positive
+        self.pokemonDefense = max(self.pokemonDefense + newDefense, 1)
         
         #UI
         if newDefense >= 0:
@@ -105,8 +105,8 @@ class Pokemon:
         return self.pokemonEvasion
     
     def addPokemonEvasion(self, newEvasion):
-        #Bound pokemon's evasion to be non-negative
-        self.pokemonEvasion = max(self.pokemonEvasion + newEvasion, 0)
+        #Bound pokemon's evasion to be positive
+        self.pokemonEvasion = max(self.pokemonEvasion + newEvasion, 1)
 
         #UI
         if newEvasion >= 0:
@@ -120,8 +120,8 @@ class Pokemon:
         return self.pokemonAccuracy
     
     def addPokemonAccuracy(self, newAccuracy):
-        #Bound pokemon's accuracy to be non-negative
-        self.pokemonAccuracy = max(self.pokemonAccuracy + newAccuracy, 0)
+        #Bound pokemon's accuracy to be positive
+        self.pokemonAccuracy = max(self.pokemonAccuracy + newAccuracy, 1)
 
         #UI
         if newAccuracy >= 0:
