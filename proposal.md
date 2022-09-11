@@ -2,7 +2,7 @@
 -   Recreating mechanics of Pokemon and gameplay
 
 # Goals of project
--   Have fun?
+-   Have fun
 
 # Listing of features
 -   Pokemon trainers
@@ -22,7 +22,7 @@
     -   There is no map to play in for random encounters.
 
 # Listing of Key Use Cases
--   Having fun?
+-   Having fun
 
 # Skills that my project requires me to pick up
 -   Maybe excel sheet processing if I want real in-game stats.

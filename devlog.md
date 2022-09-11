@@ -56,7 +56,7 @@
 
 >   -   31/7
 >       -   Found bug of initiating random encounter regardless of whether protagonist actually changes locations. Fixed.
->       -   Moves seem to be out of the question as each move has its own special cases taht need to be individually implemented. So each mvoe would have to be its own class, or at least have its own method under the Moves class. Might tackle towards teh end when fully developing the game
+>       -   Moves seem to be out of the question as each move has its own special cases taht need to be individually implemented. So each move would have to be its own class, or at least have its own method under the Moves class. Might tackle towards teh end when fully developing the game
 >       -   Turn based battles have been fully implemented functionally. It took much longer than expected because of my indecisiveness on which file to put commands in, and how to implements Moves
 >       -   UI for everything has yet to be done
 >       -   I do not know how I am going to implement wild pokemon and trainer pokemons
@@ -311,13 +311,3 @@
 >   -   6/9
 >       -   Included all shop items
 >       -   Made receiving start pokemon into function under Game class
->       -   Things not completed that are in the original game (but game is still playable):
->           -   Trainers' stats are not reset when player leaves during battle
->           -   There is no end game after defeating all of Elite 4
->           -   Player faces Elite 4 in random order
->           -   Some items are impossible to get because they are found when walking around in the actual game (not implemented in this version)
->           -   Items that should not be sold can be sold (No check implemented to prevent this)
->           -   Player can spend more money than they have (No check implemenetd beforehand when loading menu options)
->           -   There is no end game if player loses all their pokemon and is unable to catch more pokemon
->           -   All moves a pokemon can make is displayed
->           -   Player can catch and carry an infinite number of pokemon
